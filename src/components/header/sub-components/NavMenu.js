@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import clsx from "clsx";
 
 const NavMenu = ({ menuWhiteClass, sidebarMenu }) => {
-
     return (
         <div className={clsx(sidebarMenu ? "sidebar-menu" : `main-menu ${menuWhiteClass ? menuWhiteClass : ""}`)}>
             <nav>
@@ -406,6 +405,9 @@ const NavMenu = ({ menuWhiteClass, sidebarMenu }) => {
                     </li>
                     <li>
                         <Link to={process.env.PUBLIC_URL + "/contact"}>"contact_us"</Link>
+                    </li>
+                    <li>
+                        <Link to={process.env.PUBLIC_URL + "/admin"}>admin</Link>
                     </li>
                 </ul>
             </nav>

@@ -5,28 +5,27 @@ import BreadcrumbWrap from "../breadcrumb/BreadcrumbWrap";
 import NewsSidebar from "./sub-components/NewsSidebar";
 import NewsPagination from "./sub-components/NewsPagination";
 import NewsList from "./sub-components/NewsList";
-import SingleNews from "./sub-components/Article";
 
 const NewsBoard = () => {
     let { pathname } = useLocation();
-    
+
     return (
         <Fragment>
             <SEO
                 title="ProjectNews"
-                titleTemplate="Blog"
+                titleTemplate="NewsBoard"
                 description="Blog of flone react minimalist eCommerce template."
             />
             <BreadcrumbWrap
                 pages={[
                     { label: "Home", path: process.env.PUBLIC_URL + "/" },
-                    { label: "Blog", path: process.env.PUBLIC_URL + pathname },
+                    { label: "NewsBoard", path: process.env.PUBLIC_URL + pathname },
                 ]}
             />
             <div className="blog-area pt-100 pb-100">
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-9">
+                        <div className="col-lg-10">
                             <div className="mr-20">
                                 <div className="row">
                                     {/* blog posts */}
@@ -37,7 +36,7 @@ const NewsBoard = () => {
                                 <NewsPagination />
                             </div>
                         </div>
-                        <div className="col-lg-3">
+                        <div className="col-lg-2">
                             {/* blog sidebar */}
                             <NewsSidebar />
                         </div>

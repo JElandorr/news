@@ -1,16 +1,17 @@
 import React from "react";
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
-import NotFound from "../notfound/NotFound";
+import NewsBoard from "../news/NewsBoard";
+import Article from "../news/sub-components/Article";
 
-const NotFound404 = () => {
+const ArticlePage = () => {
     return (
         <>
             <Header />
-            <NotFound />
+            <Article />
             <Footer />
         </>
     );
 };
 
-export default NotFound404;
+export default ArticlePage;
