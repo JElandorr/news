@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import ArticleMini from "./ArticleMini";
 
-import { articles } from "../../articles";
+import { articles } from "../../dataStructures/examples/articles_example";
 
 const NewsList = () => {
     return (

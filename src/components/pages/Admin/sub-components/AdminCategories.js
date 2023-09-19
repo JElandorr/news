@@ -8,17 +8,31 @@ const AdminCategories = ({ handleArticles, handleUsers }) => {
                 <div className="your-order-wrap gray-bg-4">
                     <div className="your-order-product-info">
                         <div className="your-order-total">
+                            <h3>My Profile</h3>
                             <ul>
                                 <li className="order-total" onClick={handleUsers}>
-                                    Users
+                                    Edit Profile
                                 </li>
                             </ul>
                         </div>
                         <div className="your-order-total">
+                            <h3>Users</h3>
+                            <ul>
+                                <li className="order-total" onClick={handleUsers}>
+                                    View All Users
+                                </li>
+                                <li className="order-total" onClick={handleUsers}>
+                                    Create Users
+                                </li>
+                            </ul>
+                        </div>
+                        <div className="your-order-total">
+                            <h3>Articles</h3>
                             <ul>
                                 <li className="order-total" onClick={handleArticles}>
-                                    Articles
+                                    New Article
                                 </li>
+                                <li className="order-total">My Articles</li>
                             </ul>
                         </div>
                     </div>

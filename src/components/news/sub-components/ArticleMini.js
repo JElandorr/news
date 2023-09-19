@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faComment, faCommentAlt } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 
@@ -13,10 +15,11 @@ const ArticleMini = ({ article }) => {
                 <div className="blog-content-2">
                     <div className="blog-meta-2">
                         <ul>
-                            <li>{article.date}</li>
+                            <li>{article.datePublished}</li>
                             <li>
                                 <Link to={process.env.PUBLIC_URL + "news/" + article.slug}>
-                                    {article.comments} <i className="fa fa-comments-o" />
+                                    {article.comments?.length && article.comments.length}{" "}
+                                    <FontAwesomeIcon icon={faCommentAlt} />
                                 </Link>
                             </li>
                         </ul>

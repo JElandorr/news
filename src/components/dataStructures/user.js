@@ -1,4 +1,5 @@
 export const user = {
+    fullname: "", // string
     username: "", // string
     email: "", // string
     password: "", // string

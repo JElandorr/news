@@ -1,12 +1,12 @@
 import React, { Fragment } from "react";
 import { Link, useParams } from "react-router-dom";
-import { articles } from "../../articles";
+import { articles } from "../../dataStructures/examples/articles_example";
 
 const Article = () => {
     const { article } = useParams();
 
     const articleData = articles.find((singleArticle) => singleArticle.slug === article);
-
+    console.log("articleData", articleData);
     return (
         <Fragment>
             <div className="blog-details-top">
@@ -16,7 +16,7 @@ const Article = () => {
                 <div className="blog-details-content">
                     <div className="blog-meta-2">
                         <ul>
-                            <li>{articleData.date}</li>
+                            <li>{articleData.datePublished}</li>
                             <li>
                                 <Link to={process.env.PUBLIC_URL + "/blog-details-standard"}>
                                     {articleData.comments} <i className="fa fa-comments-o" />

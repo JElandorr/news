@@ -11,7 +11,7 @@ const AdminPanel = () => {
     const [articles, setArticles] = useState(false);
 
     // const user = JSON.parse(localStorage.getItem("user"));
-    const user = false;
+    const user = true;
 
     const handleUsers = () => {
         setUsers(true);

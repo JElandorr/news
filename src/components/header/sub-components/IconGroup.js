@@ -10,7 +10,7 @@ const IconGroup = ({ iconWhiteClass }) => {
     const handleClick = (e) => {
         e.currentTarget.nextSibling.classList.toggle("active");
     };
-    console.log("IconGroup");
+    // console.log("IconGroup");
     const triggerMobileMenu = () => {
         const offcanvasMobileMenu = document.querySelector("#offcanvas-mobile-menu");
         offcanvasMobileMenu.classList.add("active");
@@ -45,6 +45,9 @@ const IconGroup = ({ iconWhiteClass }) => {
                         </li>
                         <li>
                             <Link to={process.env.PUBLIC_URL + "/register"}>Register</Link>
+                        </li>
+                        <li>
+                            <Link to={process.env.PUBLIC_URL + "/admin/create-new-article"}>Create Article</Link>
                         </li>
                         <li>
                             <Link to={process.env.PUBLIC_URL + "/my-account"}>my account</Link>

@@ -6,7 +6,7 @@ import NewsSidebar from "./sub-components/NewsSidebar";
 import NewsPagination from "./sub-components/NewsPagination";
 import NewsList from "./sub-components/NewsList";
 
-const NewsBoard = () => {
+const MainNewsBoard = () => {
     let { pathname } = useLocation();
 
     return (
@@ -47,4 +47,4 @@ const NewsBoard = () => {
     );
 };
 
-export default NewsBoard;
+export default MainNewsBoard;

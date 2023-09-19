@@ -1,13 +1,15 @@
 import React from "react";
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
-import NewsBoard from "../news/NewsBoard";
+import MainNewsBoard from "../news/MainNewsBoard";
+import LatestNewsPanel from "../news/LatestNewsPanel";
 
 const Home = () => {
     return (
         <>
             <Header />
-            <NewsBoard />
+            <LatestNewsPanel />
+            <MainNewsBoard />
             <Footer />
         </>
     );

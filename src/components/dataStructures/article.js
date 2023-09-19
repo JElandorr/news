@@ -1,10 +1,12 @@
 export const article = {
     title: "", // string
+    secondaryTitle: "", // string
     slug: "", // string
     datePublished: "", // date
-    comments: "", // number
+    comments: {}, // array of objects - comments
     categories: [], // array of strings
     image: "", // string
-    description: "", // string
+    summary: "", // string
     text: "", // string
+    author: {}, // object - user
 };
