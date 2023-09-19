@@ -3,5 +3,5 @@ export const user = {
     email: "", // string
     password: "", // string
     role: "", // string
-    articles: [], // array of strings
+    articles: [], // array of objects of type article
 };
