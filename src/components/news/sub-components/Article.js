@@ -7,6 +7,7 @@ const Article = () => {
 
     const articleData = articles.find((singleArticle) => singleArticle.slug === article);
     console.log("articleData", articleData);
+    
     return (
         <Fragment>
             <div className="blog-details-top">

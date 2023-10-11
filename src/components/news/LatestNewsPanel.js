@@ -5,7 +5,7 @@ import LatestNewsSingle from "./sub-components/LatestNewsSingle";
 import SectionTitle from "../common/SectionTitle";
 
 const LatestNewsPanel = ({ spaceTopClass, spaceBottomClass }) => {
-    console.log("articles", articles);
+    // console.log("articles", articles);
 
     const latestNews = articles.sort((a, b) => a.id - b.id).slice(0, 3);
 

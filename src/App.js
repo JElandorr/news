@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import AuthContextProvider from "./components/contexts/AuthContextProvider";
 
 import Home from "./components/pages/Home";
 import NotFound404 from "./components/pages/NotFound";
@@ -11,17 +13,21 @@ import Admin from "./components/pages/Admin/Admin";
 function App() {
     return (
         <>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/admin" element={<Admin />} />
-                    <Route path="/news/:article" element={<ArticlePage />} />
-                    <Route path="/login" element={<LoginRegisterPage />} />
-                    <Route path="/register" element={<LoginRegisterPage />} />
+            <AuthContextProvider>
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/news" element={<Home />} />
+                        <Route path="/admin" element={<Admin />} />
+                        <Route path="/news/:article" element={<ArticlePage />} />
+                        <Route path="/login" element={<LoginRegisterPage />} />
+                        <Route path="/register" element={<LoginRegisterPage />} />
+                        <Route path="/logout" element={<LoginRegisterPage />} />
 
-                    <Route path="*" element={<NotFound404 />} />
-                </Routes>
-            </BrowserRouter>
+                        <Route path="*" element={<NotFound404 />} />
+                    </Routes>
+                </BrowserRouter>
+            </AuthContextProvider>
         </>
     );
 }
