@@ -23,6 +23,7 @@ function App() {
                         <Route path="/login" element={<LoginRegisterPage />} />
                         <Route path="/register" element={<LoginRegisterPage />} />
                         <Route path="/logout" element={<LoginRegisterPage />} />
+                        <Route path="/forgotten-password" element={<LoginRegisterPage />} />
 
                         <Route path="*" element={<NotFound404 />} />
                     </Routes>

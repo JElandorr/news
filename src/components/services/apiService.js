@@ -1,5 +1,6 @@
 export const requester = async (url, method, data) => {
-    const token = localStorage.getItem("accessToken");
+    const UserDataJSON = localStorage.getItem("userData");
+    const token = UserDataJSON ? JSON.parse(UserDataJSON).accessToken : null;
 
     let options;
 
@@ -48,9 +49,8 @@ export const requester = async (url, method, data) => {
 
     try {
         const response = await fetch(url, options);
-
         if (!response.ok) {
-            throw new Error(response);
+            throw new Error("Error: " + response.status + ". " + "Message: " + response.statusText);
         }
 
         if (response.status === 204) {

@@ -21081,6 +21081,9 @@ h3.cart-page-title {
   margin-bottom: 30px;
   padding: 0 15px;
 }
+.login-register-wrapper .login-form-container .login-register-form form .danger {
+  border: 1px solid red;
+}
 .login-register-wrapper .login-form-container .login-register-form form input[type=checkbox] {
   height: 15px;
   margin: 0;

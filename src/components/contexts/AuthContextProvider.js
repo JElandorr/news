@@ -11,7 +11,9 @@ const AuthContextProvider = ({ children }) => {
             const user = await AuthService.login(userData);
             if (user) {
                 setUser({ ...user });
-                localStorage.removeItem("userData");
+                if (localStorage.getItem("userData")) {
+                    localStorage.removeItem("userData");
+                }
                 localStorage.setItem("userData", JSON.stringify(user));
                 return user;
             }
@@ -20,17 +22,45 @@ const AuthContextProvider = ({ children }) => {
         }
     };
 
-    const register = (userData) => {
-        // Implement your register logic here
-        setUser(userData);
+    const register = async (userData) => {
+        try {
+            const user = await AuthService.register(userData);
+            if (user) {
+                setUser({ ...user });
+                if (localStorage.getItem("userData")) {
+                    localStorage.removeItem("userData");
+                }
+                localStorage.setItem("userData", JSON.stringify(user));
+                return user;
+            }
+        } catch (error) {
+            console.log(error);
+        }
     };
 
-    const logout = () => {
-        // Implement your logout logic here
-        setUser(null);
+    const getUser = async () => {
+        try {
+            const user = await AuthService.getUser();
+            if (user) {
+                return user;
+            }
+        } catch (error) {
+            console.log(error);
+        }
     };
 
-    return <AuthContext.Provider value={{ user, login, register, logout }}>{children}</AuthContext.Provider>;
+    const logout = async () => {
+        try {
+            const result = await AuthService.logout();
+            console.log(result);
+            setUser(null);
+            localStorage.removeItem("userData");
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    return <AuthContext.Provider value={{ user, login, register, logout, getUser }}>{children}</AuthContext.Provider>;
 };
 
 export default AuthContextProvider;

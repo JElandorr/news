@@ -10,3 +10,7 @@ export const register = async (data) =>
 
 export const logout = async () =>
   await api.requester(`${baseUrl}/logout`, "get");
+
+export const getUser = async () =>
+    await api.requester(`${baseUrl}/me`, "get");
+    

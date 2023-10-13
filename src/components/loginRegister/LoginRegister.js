@@ -5,15 +5,22 @@ import AuthContext from "../contexts/AuthContext";
 
 import SEO from "../seo";
 import Breadcrumb from "../breadcrumb/BreadcrumbWrap";
+import Login from "./Login";
+import Register from "./Register";
+import Logout from "./Logout";
+import ForgottenPassword from "./ForgottenPassword";
 
 const LoginRegister = () => {
-    const { user, login, register } = useContext(AuthContext);
+    const { user, login, register, logout, getUser } = useContext(AuthContext);
 
     const [userInputData, setUserInputData] = useState({
         username: "",
         password: "",
+        rePass: "",
         email: "",
     });
+
+    const [userInputDataError, setUserInputDataError] = useState({});
 
     let { pathname } = useLocation();
     // console.log("pathname", pathname);
@@ -21,7 +28,16 @@ const LoginRegister = () => {
     let navigate = useNavigate();
 
     const handleUserInputDataChange = (e) => {
-        setUserInputData({ ...userInputData, [e.target.name]: e.target.value });
+        const targetName = e.target.name;
+        const targetValue = e.target.value;
+        if (targetValue !== "") {
+            setUserInputDataError({ ...userInputDataError, [targetName]: false });
+        }
+        setUserInputData({ ...userInputData, [targetName]: targetValue });
+    };
+
+    const handleUserInputDataErrorChange = (e) => {
+        setUserInputDataError({ ...userInputDataError, [e.target.name]: e.target.value });
     };
 
     const handleUserInputDataReset = (e) => {
@@ -36,27 +52,107 @@ const LoginRegister = () => {
 
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
-        console.log("handleLoginSubmit");
+        const isValid = verifyLoginInputData();
+        if (!isValid) {
+            alert("All fields are required!");
+            return;
+        }
         const user = await login({ email: userInputData.username, password: userInputData.password });
+
         const userData = JSON.parse(localStorage.getItem("userData"));
-        console.log("userData", userData);
+        if (userData) {
+            navigate(process.env.PUBLIC_URL + "/");
+        } else {
+            alert("Invalid username or password!");
+            return;
+        }
+    };
+
+    const handleForgottenPasswordSubmit = async (e) => {
+        e.preventDefault();
+        console.log("handleForgottenPasswordSubmit");
         navigate(process.env.PUBLIC_URL + "/");
     };
 
     const handleRegisterSubmit = async (e) => {
         e.preventDefault();
         console.log("handleRegisterSubmit");
+        const isValid = verifyRegisterInputData();
+        if (!isValid) {
+            alert("All fields are required!");
+            return;
+        }
         const user = await register({ email: userInputData.username, password: userInputData.password });
+
         const userData = JSON.parse(localStorage.getItem("userData"));
+        if (userData) {
+            navigate(process.env.PUBLIC_URL + "/");
+        } else {
+            alert("Unsuccessful registration! Try again later! Or maybe you are already registered? Try to login!");
+            return;
+        }
+    };
+
+    const handleLogoutSubmit = async (e) => {
+        e.preventDefault();
+        console.log("handleLogoutSubmit");
+        const result = await logout();
+        console.log("result", result);
         navigate(process.env.PUBLIC_URL + "/");
     };
 
-    const handleLogoutSubmit = (e) => {
-        e.preventDefault();
-        console.log("handleLogoutSubmit");
-    };
+    function verifyLoginInputData() {
+        if (userInputData.username === "") {
+            return false;
+        }
+        if (userInputData.password === "") {
+            return false;
+        }
+        return true;
+    }
 
-    // console.log("userInputData", userInputData);
+    function verifyRegisterInputData() {
+        if (userInputData.username === "") {
+            return false;
+        }
+        if (userInputData.password === "") {
+            return false;
+        }
+        if (userInputData.rePass === "") {
+            return false;
+        }
+
+        if (userInputData.password !== userInputData.rePass) {
+            return false;
+        }
+
+        if (userInputData.email === "") {
+            return false;
+        }
+        return true;
+    }
+
+    function validateNewUserInput(e) {
+        e.preventDefault();
+
+        if (userInputData[e.target.name] === "") {
+            setUserInputDataError({ ...userInputDataError, [e.target.name]: true });
+        } else {
+            setUserInputDataError({ ...userInputDataError, [e.target.name]: false });
+        }
+    }
+
+    console.log("userInputData", userInputData);
+    console.log("userInputDataError", userInputDataError);
+
+    const breadcrumbLabel =
+        pathname === "/login"
+            ? "Login"
+            : pathname === "/register"
+            ? "Register"
+            : pathname === "/forgotten-password"
+            ? "Forgotten Password"
+            : "Logout";
 
     return (
         <Fragment>
@@ -69,7 +165,7 @@ const LoginRegister = () => {
             <Breadcrumb
                 pages={[
                     { label: "Home", path: process.env.PUBLIC_URL + "/" },
-                    { label: "Login | Register", path: process.env.PUBLIC_URL + pathname },
+                    { label: breadcrumbLabel, path: process.env.PUBLIC_URL + pathname },
                 ]}
             />
             <div className="login-register-area pt-100 pb-100">
@@ -78,143 +174,27 @@ const LoginRegister = () => {
                         <div className="col-lg-7 col-md-12 ms-auto me-auto">
                             <div className="login-register-wrapper">
                                 {pathname === "/login" && (
-                                    <>
-                                        <div className="login-register-tab-list nav nav-pills">
-                                            <div className="nav-item">
-                                                <Link
-                                                    to={process.env.PUBLIC_URL + "/login"}
-                                                    className="nav-link active"
-                                                >
-                                                    <h4>Login</h4>
-                                                </Link>
-                                            </div>
-                                        </div>
-                                        <div className="tab-content">
-                                            <div className="fade tab-pane active show">
-                                                <div className="login-form-container">
-                                                    <div className="login-register-form">
-                                                        <form onSubmit={handleLoginSubmit}>
-                                                            <input
-                                                                type="text"
-                                                                name="username"
-                                                                placeholder="Username"
-                                                                value={userInputData.username}
-                                                                onChange={handleUserInputDataChange}
-                                                            />
-                                                            <input
-                                                                type="password"
-                                                                name="password"
-                                                                placeholder="Password"
-                                                                value={userInputData.password}
-                                                                onChange={handleUserInputDataChange}
-                                                            />
-                                                            <div className="button-box">
-                                                                <div className="login-toggle-btn">
-                                                                    <input type="checkbox" />
-                                                                    <label className="ml-10">Remember me</label>
-                                                                    <Link to={process.env.PUBLIC_URL + "/"}>
-                                                                        Forgot Password?
-                                                                    </Link>
-                                                                </div>
-                                                                <button type="submit">
-                                                                    <span>Login</span>
-                                                                </button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </>
+                                    <Login
+                                        handleLoginSubmit={handleLoginSubmit}
+                                        userInputData={userInputData}
+                                        handleUserInputDataChange={handleUserInputDataChange}
+                                        userInputDataError={userInputDataError}
+                                        validateNewUserInput={validateNewUserInput}
+                                    />
                                 )}
 
                                 {pathname === "/register" && (
-                                    <>
-                                        <div className="login-register-tab-list nav nav-pills">
-                                            <div className="nav-item">
-                                                <Link
-                                                    to={process.env.PUBLIC_URL + "/register"}
-                                                    className="nav-link active"
-                                                >
-                                                    <h4>Register</h4>
-                                                </Link>
-                                            </div>
-                                        </div>
-                                        <div className="tab-content">
-                                            <div className="fade tab-pane active show">
-                                                <div className="login-form-container">
-                                                    <div className="login-register-form">
-                                                        <form onSubmit={handleRegisterSubmit}>
-                                                            <input
-                                                                type="text"
-                                                                name="username"
-                                                                placeholder="Username"
-                                                                value={userInputData.username}
-                                                                onChange={handleUserInputDataChange}
-                                                            />
-                                                            <input
-                                                                type="password"
-                                                                name="password"
-                                                                placeholder="Password"
-                                                                value={userInputData.password}
-                                                                onChange={handleUserInputDataChange}
-                                                            />
-                                                            <input
-                                                                name="email"
-                                                                placeholder="Email"
-                                                                type="email"
-                                                                value={userInputData.email}
-                                                                onChange={handleUserInputDataChange}
-                                                            />
-                                                            <div className="button-box">
-                                                                <button type="submit">
-                                                                    <span>Register</span>
-                                                                </button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </>
+                                    <Register
+                                        handleRegisterSubmit={handleRegisterSubmit}
+                                        userInputData={userInputData}
+                                        handleUserInputDataChange={handleUserInputDataChange}
+                                        userInputDataError={userInputDataError}
+                                        validateNewUserInput={validateNewUserInput}
+                                    />
                                 )}
-                                {pathname === "/logout" && (
-                                    <>
-                                        <div className="login-register-tab-list nav nav-pills">
-                                            <div className="nav-item">
-                                                <Link
-                                                    to={process.env.PUBLIC_URL + "/logout"}
-                                                    className="nav-link active"
-                                                >
-                                                    <h4>Logout</h4>
-                                                </Link>
-                                            </div>
-                                        </div>
-                                        <div className="tab-content">
-                                            <div className="fade tab-pane active show">
-                                                <div className="login-form-container" style={{ textAlign: "center" }}>
-                                                    <h4>Are you sure you want to logout?</h4>
-                                                    <div className="mtb-50"></div>
-                                                    <div className="login-register-form">
-                                                        <form
-                                                            style={{ display: "flex", justifyContent: "space-between" }}
-                                                        >
-                                                            <div className="button-box yes">
-                                                                <button>
-                                                                    <span>Yes, logout!</span>
-                                                                </button>
-                                                            </div>
-                                                            <div className="button-box no">
-                                                                <button>
-                                                                    <span>No, stay onsite!</span>
-                                                                </button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </>
+                                {pathname === "/logout" && <Logout handleLogoutSubmit={handleLogoutSubmit} />}
+                                {pathname === "/forgotten-password" && (
+                                    <ForgottenPassword handleForgottenPasswordSubmit={handleForgottenPasswordSubmit} />
                                 )}
                             </div>
                         </div>
