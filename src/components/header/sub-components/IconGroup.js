@@ -69,9 +69,7 @@ const IconGroup = ({ iconWhiteClass }) => {
                                     <Link to={process.env.PUBLIC_URL + "/my-account"}>my account</Link>
                                 </li>
                                 <li>
-                                    <Link to={process.env.PUBLIC_URL + "/admin/create-new-article"}>
-                                        Create Article
-                                    </Link>
+                                    <Link to={process.env.PUBLIC_URL + "/create-new-article"}>Create Article</Link>
                                 </li>
                                 <li>
                                     <Link to={process.env.PUBLIC_URL + "/logout"}>logout</Link>
