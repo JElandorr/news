@@ -1,13 +1,17 @@
 import React, { Fragment, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import SEO from "../seo";
 import BreadcrumbWrap from "../breadcrumb/BreadcrumbWrap";
 
-import { userIni } from "../dateStructures/userIni";
+import { articleIni } from "../dateStructures/articleIni";
+import { categoriesIni } from "../dateStructures/categoriesIni";
 
 const CreateArticle = () => {
-    const [article, setArticle] = useState(userIni);
-    const [image, setImage] = useState("");
+    const [article, setArticle] = useState(articleIni);
+    const [categories, setCategories] = useState(categoriesIni);
+    const [selectedCategories, setSelectedCategories] = useState([]);
+    const [newImageUrl, setNewImageUrl] = useState("");
+    const navigate = useNavigate();
 
     let { pathname } = useLocation();
 
@@ -18,13 +22,31 @@ const CreateArticle = () => {
 
     const handleImageChange = (e) => {
         const image = e.target.value;
-        setImage(image);
+        setNewImageUrl(image);
     };
 
     const handleImageSubmit = (e) => {
         e.preventDefault();
-        console.log(image);
+        console.log(newImageUrl);
+        setArticle({ ...article, images: [...article.images, newImageUrl] });
+        setNewImageUrl("");
     };
+
+    const handleImageDelete = (e) => {
+        e.preventDefault();
+        console.log(newImageUrl);
+    };
+
+    const toggleSelectCategory = (category) => {
+        const isCategorySelected = selectedCategories.includes(category);
+        if (isCategorySelected) {
+            setSelectedCategories(selectedCategories.filter((selectedCategory) => selectedCategory !== category));
+        } else {
+            setSelectedCategories([...selectedCategories, category]);
+        }
+    };
+
+    console.log(selectedCategories);
 
     return (
         <Fragment>
@@ -79,24 +101,74 @@ const CreateArticle = () => {
                                             />
                                         </div>
                                     </div>
-                                    <div className="col-lg-12">
+                                    <div className="col-12">
                                         <div className="billing-info mb-20">
-                                            <label>Article Pictures</label>
-                                            {article?.images && (
+                                            <label>Article Categories</label>
+                                            {categories && (
                                                 <div className="row">
-                                                    {article?.images?.map((image, key) => {
+                                                    {categories?.map((category, key) => {
+                                                        const isSelected = selectedCategories.includes(category);
+                                                        console.log(category);
                                                         return (
                                                             <div
-                                                                className={`col-lg-3 col-md-4 col-sm-6 col-xxs-12`}
+                                                                className={`col-lg-3 col-md-4 col-sm-6 col-xxs-12 category-holder`}
+                                                                style={isSelected ? { backgroundColor: "#b3b3b3" } : {}}
                                                                 key={key}
+                                                                onClick={() => toggleSelectCategory(category)}
                                                             >
-                                                                <img src={image} alt="article" />
+                                                                {isSelected ? (
+                                                                    <>
+                                                                        <div>
+                                                                            <i className="fa-regular fa-square-check"></i>
+                                                                        </div>
+                                                                    </>
+                                                                ) : (
+                                                                    <>
+                                                                        <div>
+                                                                            <i className="fa-regular fa-square"></i>
+                                                                        </div>
+                                                                    </>
+                                                                )}
+                                                                <div className={`col-8`}>{category}</div>
                                                             </div>
                                                         );
                                                     })}
                                                 </div>
                                             )}
-                                            <div className="row">
+                                        </div>
+                                        <div className="billing-info mb-20">
+                                            <label>Article Pictures</label>
+                                            {article?.images && (
+                                                <div className="row">
+                                                    {article?.images?.map((image, key) => {
+                                                        console.log(image);
+                                                        console.log(key);
+                                                        return (
+                                                            <div
+                                                                className={`col-lg-3 col-md-4 col-sm-6 col-xxs-12 image-holder`}
+                                                                key={key}
+                                                                style={{ backgroundImage: `url(${image})` }}
+                                                            >
+                                                                {/* <img src={image} alt="article" /> */}
+                                                                <div
+                                                                    className={`img-delete-btn`}
+                                                                    onClick={handleImageDelete}
+                                                                >
+                                                                    <i className="fa-solid fa-xmark"></i>
+                                                                </div>
+                                                                <Link
+                                                                    to={`${image}`}
+                                                                    className={`img-show-btn`}
+                                                                    target="_blank"
+                                                                >
+                                                                    <i className="fa-solid fa-arrow-up-right-from-square"></i>
+                                                                </Link>
+                                                            </div>
+                                                        );
+                                                    })}
+                                                </div>
+                                            )}
+                                            {/* <div className="row">
                                                 <div className={`col-lg-3 col-md-4 col-sm-6 col-xxs-12`}>
                                                     <Link
                                                         to={`https://euphoriatravel.bg/wp-content/uploads/2022/10/bridge-6320235_1280-e1668595627741-750x440.jpg`}
@@ -176,16 +248,27 @@ const CreateArticle = () => {
                                                             alt="article"
                                                         />
                                                     </Link>
+                                                </div>
+                                            </div> */}
+                                            <div className="row add-image">
+                                                <div className="col-lg-10 col-md-10">
+                                                    <input
+                                                        className="add-image-input"
+                                                        id="images"
+                                                        type="text"
+                                                        name="images"
+                                                        placeholder="Article Images"
+                                                        value={newImageUrl}
+                                                        onChange={handleImageChange}
+                                                    />
+                                                </div>
+                                                <div
+                                                    className="col-lg-2 col-md-2 add-image-btn"
+                                                    onClick={handleImageSubmit}
+                                                >
+                                                    Add Image
                                                 </div>
                                             </div>
-                                            <input
-                                                id="images"
-                                                type="text"
-                                                name="images"
-                                                placeholder="Article Images"
-                                                value={article.subtitle}
-                                                onChange={handleImageChange}
-                                            />
                                         </div>
                                     </div>
                                     <div className="col-lg-12">

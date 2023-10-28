@@ -20310,6 +20310,17 @@ h3.cart-page-title {
 .billing-info-wrap .billing-select input.billing-address {
   margin-bottom: 10px;
 }
+.billing-info-wrap .billing-info a,
+.billing-info-wrap .billing-select a {
+  width: 100%;
+}
+.billing-info-wrap .billing-info img,
+.billing-info-wrap .billing-select img {
+  margin-bottom: 20px;
+  max-width: 100%;
+  max-height: 100px;
+  cursor: pointer;
+}
 .billing-info-wrap .billing-select select {
   font-size: 14px;
   height: 45px;

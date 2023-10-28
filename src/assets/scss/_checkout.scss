@@ -16,6 +16,7 @@
 
             color: #000;
         }
+
         input {
             font-size: 14px;
 
@@ -26,6 +27,37 @@
             border: 1px solid #e6e6e6;
             background: transparent none repeat scroll 0 0;
         }
+
+        .add-image {
+            margin: 0;
+            border: 1px solid #e6e6e6;
+            background: transparent none repeat scroll 0 0;
+        }
+
+        input.add-image-input {
+            font-size: 14px;
+
+            color: #333;
+            border: none;
+            background: transparent none repeat scroll 0 0;
+        }
+
+        .add-image-btn {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            cursor: pointer;
+            border: 2px solid #e6e6e6;
+            background-color: #e6e6e6;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-image-btn:hover {
+            color: #fff;
+            background-color: $theme-color;
+        }
+
         input.billing-address {
             margin-bottom: 10px;
         }
@@ -34,11 +66,88 @@
             width: 100%;
         }
 
-        img {
+        .image-holder {
             margin-bottom: 20px;
-            max-width: 100%;
-            max-height: 100px;
-            cursor: pointer;
+            // the image is set as background image of the div
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            height: 200px;
+            border: 1px solid #e6e6e6;
+            background-color: #e6e6e6;
+            transition: background-color 0.3s ease;
+
+            .img-delete-btn {
+                position: absolute;
+                top: 0;
+                right: 0;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                width: 15%;
+                height: 15%;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+            .img-delete-btn:hover {
+                color: red;
+            }
+
+            .img-show-btn {
+                position: absolute;
+                top: 0;
+                left: 0;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                width: 15%;
+                height: 15%;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                transition: color 0.3s ease;
+            }
+
+            .img-show-btn:hover {
+                color: greenyellow;
+            }
+        }
+
+        .category-holder {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            // the image is set as background image of the div
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            height: 50px;
+            border: 1px solid #e6e6e6;
+            background-color: #e6e6e6;
+            transition: background-color 0.3s ease;
+
+            div {
+                margin: 5px;
+            }
+        }
+
+        .category-holder .selected {
+            color: #fff;
+            background-color: $theme-color;
+        }
+
+        .category-holder:hover {
+            color: #fff;
+            background-color: $theme-color;
         }
     }
     .billing-select {
