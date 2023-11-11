@@ -20306,6 +20306,35 @@ h3.cart-page-title {
   border: 1px solid #e6e6e6;
   background: transparent none repeat scroll 0 0;
 }
+.billing-info-wrap .billing-info .add-image,
+.billing-info-wrap .billing-select .add-image {
+  margin: 0;
+  border: 1px solid #e6e6e6;
+  background: transparent none repeat scroll 0 0;
+}
+.billing-info-wrap .billing-info input.add-image-input,
+.billing-info-wrap .billing-select input.add-image-input {
+  font-size: 14px;
+  color: #333;
+  border: none;
+  background: transparent none repeat scroll 0 0;
+}
+.billing-info-wrap .billing-info .add-image-btn,
+.billing-info-wrap .billing-select .add-image-btn {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  border: 2px solid #e6e6e6;
+  background-color: #e6e6e6;
+  transition: background-color 0.3s ease;
+}
+.billing-info-wrap .billing-info .add-image-btn:hover,
+.billing-info-wrap .billing-select .add-image-btn:hover {
+  color: #fff;
+  background-color: #3d34b8;
+}
 .billing-info-wrap .billing-info input.billing-address,
 .billing-info-wrap .billing-select input.billing-address {
   margin-bottom: 10px;
@@ -20314,12 +20343,83 @@ h3.cart-page-title {
 .billing-info-wrap .billing-select a {
   width: 100%;
 }
-.billing-info-wrap .billing-info img,
-.billing-info-wrap .billing-select img {
+.billing-info-wrap .billing-info .image-holder,
+.billing-info-wrap .billing-select .image-holder {
   margin-bottom: 20px;
-  max-width: 100%;
-  max-height: 100px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  height: 200px;
+  border: 1px solid #e6e6e6;
+  background-color: #e6e6e6;
+  transition: background-color 0.3s ease;
+}
+.billing-info-wrap .billing-info .image-holder .img-delete-btn,
+.billing-info-wrap .billing-select .image-holder .img-delete-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 15%;
+  height: 15%;
+  background-color: transparent;
+  border: none;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.billing-info-wrap .billing-info .image-holder .img-delete-btn:hover,
+.billing-info-wrap .billing-select .image-holder .img-delete-btn:hover {
+  color: red;
+}
+.billing-info-wrap .billing-info .image-holder .img-show-btn,
+.billing-info-wrap .billing-select .image-holder .img-show-btn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 15%;
+  height: 15%;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+.billing-info-wrap .billing-info .image-holder .img-show-btn:hover,
+.billing-info-wrap .billing-select .image-holder .img-show-btn:hover {
+  color: greenyellow;
+}
+.billing-info-wrap .billing-info .category-holder,
+.billing-info-wrap .billing-select .category-holder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  height: 50px;
+  border: 1px solid #e6e6e6;
+  background-color: #e6e6e6;
+  transition: background-color 0.3s ease;
+}
+.billing-info-wrap .billing-info .category-holder div,
+.billing-info-wrap .billing-select .category-holder div {
+  margin: 5px;
+}
+.billing-info-wrap .billing-info .category-holder .selected,
+.billing-info-wrap .billing-select .category-holder .selected {
+  color: #fff;
+  background-color: #3d34b8;
+}
+.billing-info-wrap .billing-info .category-holder:hover,
+.billing-info-wrap .billing-select .category-holder:hover {
+  color: #fff;
+  background-color: #3d34b8;
 }
 .billing-info-wrap .billing-select select {
   font-size: 14px;

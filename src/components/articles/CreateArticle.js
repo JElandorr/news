@@ -9,7 +9,7 @@ import { categoriesIni } from "../dateStructures/categoriesIni";
 const CreateArticle = () => {
     const [article, setArticle] = useState(articleIni);
     const [categories, setCategories] = useState(categoriesIni);
-    const [selectedCategories, setSelectedCategories] = useState([]);
+    // const [selectedCategories, setSelectedCategories] = useState([]);
     const [newImageUrl, setNewImageUrl] = useState("");
     const navigate = useNavigate();
 
@@ -32,21 +32,28 @@ const CreateArticle = () => {
         setNewImageUrl("");
     };
 
-    const handleImageDelete = (e) => {
+    const handleImageDelete = (e, image) => {
         e.preventDefault();
-        console.log(newImageUrl);
+        console.log(image);
+        setArticle({ ...article, images: article.images.filter((img) => img !== image) });
     };
 
     const toggleSelectCategory = (category) => {
-        const isCategorySelected = selectedCategories.includes(category);
+        const isCategorySelected = article.categories.includes(category);
         if (isCategorySelected) {
-            setSelectedCategories(selectedCategories.filter((selectedCategory) => selectedCategory !== category));
+            // setSelectedCategories(selectedCategories.filter((selectedCategory) => selectedCategory !== category));
+            setArticle({
+                ...article,
+                categories: article.categories.filter((selectedCategory) => selectedCategory !== category),
+            });
         } else {
-            setSelectedCategories([...selectedCategories, category]);
+            // setSelectedCategories([...selectedCategories, category]);
+            setArticle({ ...article, categories: [...article.categories, category] });
         }
     };
 
-    console.log(selectedCategories);
+    // console.log(selectedCategories);
+    console.log(article);
 
     return (
         <Fragment>
@@ -156,21 +163,13 @@ const CreateArticle = () => {
                                             {categories && (
                                                 <div className="row">
                                                     {categories?.map((category, key) => {
-                                                        const isSelected = selectedCategories.includes(category);
-                                                        console.log(category);
+                                                        const isSelected = article.categories.includes(category);
+                                                        // console.log(category);
                                                         return (
                                                             <div
-                                                                className={`col-lg-3 col-md-4 col-sm-6 col-xxs-12 category-holder`}
-                                                                style={
-                                                                    isSelected
-                                                                        ? {
-                                                                              backgroundColor: "#b3b3b3",
-                                                                              userSelect: "none",
-                                                                          }
-                                                                        : {
-                                                                              userSelect: "none",
-                                                                          }
-                                                                }
+                                                                className={`col-lg-3 col-md-4 col-sm-6 col-xxs-12 category-holder ${
+                                                                    isSelected ? "selected" : ""
+                                                                }`}
                                                                 key={key}
                                                                 onClick={() => toggleSelectCategory(category)}
                                                             >
@@ -199,8 +198,8 @@ const CreateArticle = () => {
                                             {article?.images && (
                                                 <div className="row">
                                                     {article?.images?.map((image, key) => {
-                                                        console.log(image);
-                                                        console.log(key);
+                                                        // console.log(image);
+                                                        // console.log(key);
                                                         return (
                                                             <div
                                                                 className={`col-lg-3 col-md-4 col-sm-6 col-xxs-12 image-holder`}
@@ -210,7 +209,7 @@ const CreateArticle = () => {
                                                                 {/* <img src={image} alt="article" /> */}
                                                                 <div
                                                                     className={`img-delete-btn`}
-                                                                    onClick={handleImageDelete}
+                                                                    onClick={(e) => handleImageDelete(e, image)}
                                                                 >
                                                                     <i className="fa-solid fa-xmark"></i>
                                                                 </div>

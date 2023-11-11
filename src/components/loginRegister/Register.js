@@ -32,6 +32,15 @@ const Register = ({
                                     onBlur={validateNewUserInput}
                                 />
                                 <input
+                                    className={`${userInputDataError["email"] ? "danger" : ""}`}
+                                    onBlur={validateNewUserInput}
+                                    name="email"
+                                    placeholder="Email"
+                                    type="email"
+                                    value={userInputData.email}
+                                    onChange={handleUserInputDataChange}
+                                />
+                                <input
                                     className={`${userInputDataError["password"] ? "danger" : ""}`}
                                     onBlur={validateNewUserInput}
                                     type="password"
@@ -47,15 +56,6 @@ const Register = ({
                                     name="rePass"
                                     placeholder="Repeat Password"
                                     value={userInputData.rePass}
-                                    onChange={handleUserInputDataChange}
-                                />
-                                <input
-                                    className={`${userInputDataError["email"] ? "danger" : ""}`}
-                                    onBlur={validateNewUserInput}
-                                    name="email"
-                                    placeholder="Email"
-                                    type="email"
-                                    value={userInputData.email}
                                     onChange={handleUserInputDataChange}
                                 />
                                 <div className="button-box">

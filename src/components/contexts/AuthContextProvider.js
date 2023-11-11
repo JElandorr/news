@@ -49,18 +49,20 @@ const AuthContextProvider = ({ children }) => {
         }
     };
 
-    const logout = async () => {
+    const logOut = async () => {
         try {
+            // console.log("logOut");
             const result = await AuthService.logout();
-            console.log(result);
+            // console.log(result);
             setUser(null);
             localStorage.removeItem("userData");
+            return result;
         } catch (error) {
             console.log(error);
         }
     };
 
-    return <AuthContext.Provider value={{ user, login, register, logout, getUser }}>{children}</AuthContext.Provider>;
+    return <AuthContext.Provider value={{ user, login, register, logOut, getUser }}>{children}</AuthContext.Provider>;
 };
 
 export default AuthContextProvider;

@@ -11,7 +11,7 @@ import Logout from "./Logout";
 import ForgottenPassword from "./ForgottenPassword";
 
 const LoginRegister = () => {
-    const { user, login, register, logout, getUser } = useContext(AuthContext);
+    const { user, login, register, logOut, getUser } = useContext(AuthContext);
 
     const [userInputData, setUserInputData] = useState({
         username: "",
@@ -58,7 +58,7 @@ const LoginRegister = () => {
             return;
         }
         const user = await login({ email: userInputData.username, password: userInputData.password });
-
+        console.log("user", user);
         const userData = JSON.parse(localStorage.getItem("userData"));
         if (userData) {
             navigate(process.env.PUBLIC_URL + "/");
@@ -96,8 +96,8 @@ const LoginRegister = () => {
     const handleLogoutSubmit = async (e) => {
         e.preventDefault();
         console.log("handleLogoutSubmit");
-        const result = await logout();
-        console.log("result", result);
+        const result = await logOut();
+        // console.log("result", result);
         navigate(process.env.PUBLIC_URL + "/");
     };
 
@@ -142,8 +142,8 @@ const LoginRegister = () => {
         }
     }
 
-    console.log("userInputData", userInputData);
-    console.log("userInputDataError", userInputDataError);
+    // console.log("userInputData", userInputData);
+    // console.log("userInputDataError", userInputDataError);
 
     const breadcrumbLabel =
         pathname === "/login"

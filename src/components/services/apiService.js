@@ -49,6 +49,9 @@ export const requester = async (url, method, data) => {
 
     try {
         const response = await fetch(url, options);
+
+        console.log(response);
+
         if (!response.ok) {
             throw new Error("Error: " + response.status + ". " + "Message: " + response.statusText);
         }
@@ -57,7 +60,13 @@ export const requester = async (url, method, data) => {
             return response;
         }
 
+        if (response.url === "http://localhost:3030/users/logout" && response.status === 200) {
+            return response;
+        }
+
         const result = await response.json();
+
+        // console.log(result);
 
         return result;
     } catch (error) {
