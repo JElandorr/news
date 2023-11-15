@@ -1,5 +1,5 @@
 import React, { useState, Fragment, useContext } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, Navigate } from "react-router-dom";
 
 import AuthContext from "../contexts/AuthContext";
 
@@ -11,8 +11,9 @@ import Logout from "./Logout";
 import ForgottenPassword from "./ForgottenPassword";
 
 const LoginRegister = () => {
-    const { user, login, register, logOut, getUser } = useContext(AuthContext);
-
+    const { user, login, register, logOut, isLogged } = useContext(AuthContext);
+    const current = useContext(AuthContext);
+    console.log("current", current);
     const [userInputData, setUserInputData] = useState({
         username: "",
         password: "",
@@ -22,10 +23,31 @@ const LoginRegister = () => {
 
     const [userInputDataError, setUserInputDataError] = useState({});
 
-    let { pathname } = useLocation();
-    // console.log("pathname", pathname);
+    const { pathname } = useLocation();
+    console.log("pathname", pathname);
 
-    let navigate = useNavigate();
+    const navigate = useNavigate();
+
+    console.log("user", user);
+    console.log("isLogged", isLogged);
+
+    if (isLogged) {
+        switch (pathname) {
+            case "/login":
+            case "/register":
+            case "/forgotten-password":
+                return <Navigate to="/" />;
+            default:
+                break;
+        }
+    } else {
+        switch (pathname) {
+            case "/logout":
+                return <Navigate to="/" />;
+            default:
+                break;
+        }
+    }
 
     const handleUserInputDataChange = (e) => {
         const targetName = e.target.name;
@@ -59,13 +81,6 @@ const LoginRegister = () => {
         }
         const user = await login({ email: userInputData.username, password: userInputData.password });
         console.log("user", user);
-        const userData = JSON.parse(localStorage.getItem("userData"));
-        if (userData) {
-            navigate(process.env.PUBLIC_URL + "/");
-        } else {
-            alert("Invalid username or password!");
-            return;
-        }
     };
 
     const handleForgottenPasswordSubmit = async (e) => {

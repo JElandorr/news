@@ -20403,7 +20403,7 @@ h3.cart-page-title {
   background-repeat: no-repeat;
   position: relative;
   height: 50px;
-  border: 1px solid #e6e6e6;
+  border: 2px solid #fff;
   background-color: #e6e6e6;
   transition: background-color 0.3s ease;
 }
@@ -20411,10 +20411,10 @@ h3.cart-page-title {
 .billing-info-wrap .billing-select .category-holder div {
   margin: 5px;
 }
-.billing-info-wrap .billing-info .category-holder .selected,
-.billing-info-wrap .billing-select .category-holder .selected {
+.billing-info-wrap .billing-info .selected,
+.billing-info-wrap .billing-select .selected {
   color: #fff;
-  background-color: #3d34b8;
+  background-color: #828282;
 }
 .billing-info-wrap .billing-info .category-holder:hover,
 .billing-info-wrap .billing-select .category-holder:hover {

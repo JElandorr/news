@@ -8,8 +8,7 @@ import AuthContext from "../../contexts/AuthContext";
 import clsx from "clsx";
 
 const IconGroup = ({ iconWhiteClass }) => {
-    const { getUser } = useContext(AuthContext);
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem("userData")));
+    const { user, getUser } = useContext(AuthContext);
 
     const handleUserIconClick = (e) => {
         e.currentTarget.nextSibling.classList.toggle("active");

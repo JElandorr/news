@@ -62,6 +62,24 @@
             margin-bottom: 10px;
         }
 
+        .add-article-btn{
+            height: 80px;
+            margin-top: 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            cursor: pointer;
+            border: 2px solid #efefef;
+            background-color: #e6e6e6;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-article-btn:hover {
+            color: #fff;
+            background-color: $theme-color;
+        }
+
         a {
             width: 100%;
         }

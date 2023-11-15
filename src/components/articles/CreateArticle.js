@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import SEO from "../seo";
 import BreadcrumbWrap from "../breadcrumb/BreadcrumbWrap";
@@ -6,12 +6,25 @@ import BreadcrumbWrap from "../breadcrumb/BreadcrumbWrap";
 import { articleIni } from "../dateStructures/articleIni";
 import { categoriesIni } from "../dateStructures/categoriesIni";
 
+import AuthContext from "../contexts/AuthContext";
+
+import { create, getAll } from "../services/articlesUtilService.js";
+
+import { addArticle, getArticles } from "../dateStructures/articlesExampleList.js";
+
 const CreateArticle = () => {
     const [article, setArticle] = useState(articleIni);
     const [categories, setCategories] = useState(categoriesIni);
     // const [selectedCategories, setSelectedCategories] = useState([]);
     const [newImageUrl, setNewImageUrl] = useState("");
+
+    const [warnings, setWarnings] = useState({}); // ["warning1", "warning2"
+    const { user } = useContext(AuthContext);
     const navigate = useNavigate();
+
+    if (!user) {
+        navigate("/login");
+    }
 
     let { pathname } = useLocation();
 
@@ -27,7 +40,8 @@ const CreateArticle = () => {
 
     const handleImageSubmit = (e) => {
         e.preventDefault();
-        console.log(newImageUrl);
+        // console.log(newImageUrl);
+        if (newImageUrl === "") return;
         setArticle({ ...article, images: [...article.images, newImageUrl] });
         setNewImageUrl("");
     };
@@ -52,7 +66,28 @@ const CreateArticle = () => {
         }
     };
 
-    // console.log(selectedCategories);
+    const createArticle = async () => {
+        const createdArticle = await create(article);
+        console.log(createdArticle);
+        addArticle(createdArticle);
+        setArticle({ ...articleIni });
+        // navigate("/");
+    };
+
+    // let articles;
+
+    // const getArticles = async () => {
+    //     articles = await getAll();
+    //     // console.log(articles);
+    //     return articles;
+    // };
+
+    // getArticles();
+
+    // console.log(articles);
+
+    console.log(JSON.stringify(getArticles()));
+    console.log(getArticles());
     console.log(article);
 
     return (
@@ -86,9 +121,9 @@ const CreateArticle = () => {
                                     <div className="col-lg-12 col-md-12">
                                         <div className="billing-info mb-20">
                                             <input
-                                                id="sub-title"
+                                                id="subtitle"
                                                 type="text"
-                                                name="sub-title"
+                                                name="subtitle"
                                                 placeholder="Article Sub-Title"
                                                 value={article.subtitle}
                                                 onChange={handleChange}
@@ -96,20 +131,20 @@ const CreateArticle = () => {
                                         </div>
                                     </div>
                                     <div className="additional-info-wrap">
-                                        <h4>Article Main Body</h4>
+                                        <label>Article Main Body</label>
                                         <div className="additional-info">
                                             <textarea
                                                 id="text"
                                                 type="text"
                                                 name="text"
                                                 placeholder="Article Text"
-                                                value={article.subtitle}
+                                                value={article.text}
                                                 onChange={handleChange}
                                             />
                                         </div>
                                     </div>
                                     <div className="col-12">
-                                        <div className="billing-info mb-20">
+                                        {/* <div className="billing-info mb-20">
                                             <label>Tags</label>
                                             {article?.tags && (
                                                 <div className="row">
@@ -157,7 +192,7 @@ const CreateArticle = () => {
                                                     Add Image
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> */}
                                         <div className="billing-info mb-20">
                                             <label>Article Categories</label>
                                             {categories && (
@@ -198,7 +233,7 @@ const CreateArticle = () => {
                                             {article?.images && (
                                                 <div className="row">
                                                     {article?.images?.map((image, key) => {
-                                                        // console.log(image);
+                                                        console.log(image);
                                                         // console.log(key);
                                                         return (
                                                             <div
@@ -245,48 +280,22 @@ const CreateArticle = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="col-lg-12">
-                                        <div className="billing-info mb-20">
-                                            <label>Town / City</label>
-                                            <input type="text" />
+                                        <div className="row billing-info">
+                                            {/* <div className="col-lg-10 col-md-10">
+                                                <input
+                                                    className="add-image-input"
+                                                    id="images"
+                                                    type="text"
+                                                    name="images"
+                                                    placeholder="Article Images"
+                                                    value={newImageUrl}
+                                                    onChange={handleImageChange}
+                                                />
+                                            </div> */}
+                                            <div className="col-lg-2 col-md-2 add-article-btn" onClick={createArticle}>
+                                                Add Article
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="col-lg-6 col-md-6">
-                                        <div className="billing-info mb-20">
-                                            <label>State / County</label>
-                                            <input type="text" />
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-6 col-md-6">
-                                        <div className="billing-info mb-20">
-                                            <label>Postcode / ZIP</label>
-                                            <input type="text" />
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-6 col-md-6">
-                                        <div className="billing-info mb-20">
-                                            <label>Phone</label>
-                                            <input type="text" />
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-6 col-md-6">
-                                        <div className="billing-info mb-20">
-                                            <label>Email Address</label>
-                                            <input type="text" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="additional-info-wrap">
-                                    <h4>Additional information</h4>
-                                    <div className="additional-info">
-                                        <label>Order notes</label>
-                                        <textarea
-                                            placeholder="Notes about your order, e.g. special notes for delivery. "
-                                            name="message"
-                                            defaultValue={""}
-                                        />
                                     </div>
                                 </div>
                             </div>

@@ -5,17 +5,20 @@ import * as AuthService from "../services/authUtilService";
 
 const AuthContextProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+    const [isLogged, setIsLogged] = useState(false);
 
     const login = async (userData) => {
         try {
-            const user = await AuthService.login(userData);
-            if (user) {
-                setUser({ ...user });
-                if (localStorage.getItem("userData")) {
-                    localStorage.removeItem("userData");
-                }
-                localStorage.setItem("userData", JSON.stringify(user));
-                return user;
+            const loggedUser = await AuthService.login(userData);
+            console.log("loggedUser", loggedUser);
+            if (loggedUser) {
+                setUser(loggedUser);
+                setIsLogged(true);
+                // if (localStorage.getItem("userData")) {
+                //     localStorage.removeItem("userData");
+                // }
+                // localStorage.setItem("userData", JSON.stringify(loggedUser));
+                return loggedUser;
             }
         } catch (error) {
             console.log(error);
@@ -24,14 +27,15 @@ const AuthContextProvider = ({ children }) => {
 
     const register = async (userData) => {
         try {
-            const user = await AuthService.register(userData);
-            if (user) {
-                setUser({ ...user });
+            const registeredUser = await AuthService.register(userData);
+            if (registeredUser) {
+                setUser({ ...registeredUser });
+                setIsLogged(true);
                 if (localStorage.getItem("userData")) {
                     localStorage.removeItem("userData");
                 }
-                localStorage.setItem("userData", JSON.stringify(user));
-                return user;
+                localStorage.setItem("userData", JSON.stringify(registeredUser));
+                return registeredUser;
             }
         } catch (error) {
             console.log(error);
@@ -40,9 +44,9 @@ const AuthContextProvider = ({ children }) => {
 
     const getUser = async () => {
         try {
-            const user = await AuthService.getUser();
-            if (user) {
-                return user;
+            const userData = await AuthService.getUser();
+            if (userData) {
+                return userData;
             }
         } catch (error) {
             console.log(error);
@@ -55,6 +59,7 @@ const AuthContextProvider = ({ children }) => {
             const result = await AuthService.logout();
             // console.log(result);
             setUser(null);
+            setIsLogged(false);
             localStorage.removeItem("userData");
             return result;
         } catch (error) {
@@ -62,7 +67,11 @@ const AuthContextProvider = ({ children }) => {
         }
     };
 
-    return <AuthContext.Provider value={{ user, login, register, logOut, getUser }}>{children}</AuthContext.Provider>;
+    return (
+        <AuthContext.Provider value={{ user, login, register, logOut, getUser, isLogged }}>
+            {children}
+        </AuthContext.Provider>
+    );
 };
 
 export default AuthContextProvider;
