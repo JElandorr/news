@@ -1,13 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
+import { useRegister } from "../../hooks/useRegister";
+
 const Register = ({
-    handleRegisterSubmit,
     userInputData,
     handleUserInputDataChange,
     userInputDataError,
     validateNewUserInput,
+    verifyRegisterInputData,
+    clearInputData,
 }) => {
+    const { register, registerError, isLoading } = useRegister();
+    const [errors, setErrors] = useState(registerError);
+
+    // console.log("errors", errors);
+    // console.log("registerError", registerError);
+
+    const handleRegisterSubmit = async (e) => {
+        e.preventDefault();
+        // console.log("handleRegisterSubmit");
+        const isValid = verifyRegisterInputData();
+
+        if (!isValid) {
+            setErrors((state) => "Invalid input data! Check the form for errors!");
+            return;
+        } else {
+            setErrors((state) => null);
+        }
+
+        const registeredUser = await register(userInputData.email, userInputData.password, userInputData.username);
+        console.log("registeredUser", registeredUser);
+        clearInputData();
+    };
+
     return (
         <>
             <div className="login-register-tab-list nav nav-pills">
@@ -22,6 +48,11 @@ const Register = ({
                     <div className="login-form-container">
                         <div className="login-register-form">
                             <form onSubmit={handleRegisterSubmit}>
+                                {/* {errors ? (
+                                    <p className="error">{errors} </p>
+                                ) : registerError ? (
+                                    <p className="error">{registerError}</p>
+                                ) : null} */}
                                 <input
                                     className={`${userInputDataError["username"] ? "danger" : ""}`}
                                     type="text"
@@ -59,10 +90,21 @@ const Register = ({
                                     onChange={handleUserInputDataChange}
                                 />
                                 <div className="button-box">
-                                    <button type="submit">
-                                        <span>Register</span>
-                                    </button>
+                                    {isLoading ? (
+                                        <button type="submit" disabled>
+                                            <span>Registering in process...</span>
+                                        </button>
+                                    ) : (
+                                        <button type="submit">
+                                            <span>Register</span>
+                                        </button>
+                                    )}
                                 </div>
+                                {errors ? (
+                                    <p className="error">{errors} </p>
+                                ) : registerError ? (
+                                    <p className="error">{registerError}</p>
+                                ) : null}
                             </form>
                         </div>
                     </div>

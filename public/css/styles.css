@@ -20339,6 +20339,24 @@ h3.cart-page-title {
 .billing-info-wrap .billing-select input.billing-address {
   margin-bottom: 10px;
 }
+.billing-info-wrap .billing-info .add-article-btn,
+.billing-info-wrap .billing-select .add-article-btn {
+  height: 80px;
+  margin-top: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  border: 2px solid #efefef;
+  background-color: #e6e6e6;
+  transition: background-color 0.3s ease;
+}
+.billing-info-wrap .billing-info .add-article-btn:hover,
+.billing-info-wrap .billing-select .add-article-btn:hover {
+  color: #fff;
+  background-color: #3d34b8;
+}
 .billing-info-wrap .billing-info a,
 .billing-info-wrap .billing-select a {
   width: 100%;
@@ -21276,6 +21294,12 @@ h3.cart-page-title {
 .login-register-wrapper .login-form-container .login-register-form form .button-box.no button:hover {
   background-color: green;
   color: #fff;
+}
+.login-register-wrapper .login-form-container .login-register-form form .error {
+  color: red;
+  font-size: 18px;
+  font-weight: 400;
+  margin-top: 5px;
 }
 
 @media only screen and (max-width: 767px) {

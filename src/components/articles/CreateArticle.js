@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useContext } from "react";
+import React, { Fragment, useState, useContext, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import SEO from "../seo";
 import BreadcrumbWrap from "../breadcrumb/BreadcrumbWrap";
@@ -6,7 +6,7 @@ import BreadcrumbWrap from "../breadcrumb/BreadcrumbWrap";
 import { articleIni } from "../dateStructures/articleIni";
 import { categoriesIni } from "../dateStructures/categoriesIni";
 
-import AuthContext from "../contexts/AuthContext";
+// import AuthContext from "../contexts/AuthContext";
 
 import { create, getAll } from "../services/articlesUtilService.js";
 
@@ -19,12 +19,14 @@ const CreateArticle = () => {
     const [newImageUrl, setNewImageUrl] = useState("");
 
     const [warnings, setWarnings] = useState({}); // ["warning1", "warning2"
-    const { user } = useContext(AuthContext);
+    // const { user } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    if (!user) {
-        navigate("/login");
-    }
+    // useEffect(() => {
+    //     if (!user) {
+    //         navigate("/login");
+    //     }
+    // }, [user]);
 
     let { pathname } = useLocation();
 

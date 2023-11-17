@@ -1,7 +1,7 @@
 import React, { useState, Fragment, useContext } from "react";
 import { Link, useLocation, useNavigate, Navigate } from "react-router-dom";
 
-import AuthContext from "../contexts/AuthContext";
+// import AuthContext from "../contexts/AuthContext";
 
 import SEO from "../seo";
 import Breadcrumb from "../breadcrumb/BreadcrumbWrap";
@@ -11,43 +11,48 @@ import Logout from "./Logout";
 import ForgottenPassword from "./ForgottenPassword";
 
 const LoginRegister = () => {
-    const { user, login, register, logOut, isLogged } = useContext(AuthContext);
-    const current = useContext(AuthContext);
-    console.log("current", current);
+    // const {
+    //     user,
+    //     login,
+    //     // register,
+    //     logOut,
+    //     isLogged,
+    // } = useContext(AuthContext);
+    // const current = useContext(AuthContext);
+    // console.log("current", current);
     const [userInputData, setUserInputData] = useState({
         username: "",
         password: "",
         rePass: "",
         email: "",
     });
-
     const [userInputDataError, setUserInputDataError] = useState({});
-
     const { pathname } = useLocation();
-    console.log("pathname", pathname);
+
+    // console.log("pathname", pathname);
 
     const navigate = useNavigate();
 
-    console.log("user", user);
-    console.log("isLogged", isLogged);
+    // console.log("user", user);
+    // console.log("isLogged", isLogged);
 
-    if (isLogged) {
-        switch (pathname) {
-            case "/login":
-            case "/register":
-            case "/forgotten-password":
-                return <Navigate to="/" />;
-            default:
-                break;
-        }
-    } else {
-        switch (pathname) {
-            case "/logout":
-                return <Navigate to="/" />;
-            default:
-                break;
-        }
-    }
+    // if (isLogged) {
+    //     switch (pathname) {
+    //         case "/login":
+    //         case "/register":
+    //         case "/forgotten-password":
+    //             return <Navigate to="/" />;
+    //         default:
+    //             break;
+    //     }
+    // } else {
+    //     switch (pathname) {
+    //         case "/logout":
+    //             return <Navigate to="/" />;
+    //         default:
+    //             break;
+    //     }
+    // }
 
     const handleUserInputDataChange = (e) => {
         const targetName = e.target.name;
@@ -72,52 +77,14 @@ const LoginRegister = () => {
         navigate(process.env.PUBLIC_URL + `/${e.target.innerText.toLowerCase()}`);
     };
 
-    const handleLoginSubmit = async (e) => {
-        e.preventDefault();
-        const isValid = verifyLoginInputData();
-        if (!isValid) {
-            alert("All fields are required!");
-            return;
-        }
-        const user = await login({ email: userInputData.username, password: userInputData.password });
-        console.log("user", user);
-    };
-
     const handleForgottenPasswordSubmit = async (e) => {
         e.preventDefault();
         console.log("handleForgottenPasswordSubmit");
         navigate(process.env.PUBLIC_URL + "/");
     };
 
-    const handleRegisterSubmit = async (e) => {
-        e.preventDefault();
-        console.log("handleRegisterSubmit");
-        const isValid = verifyRegisterInputData();
-        if (!isValid) {
-            alert("All fields are required!");
-            return;
-        }
-        const user = await register({ email: userInputData.username, password: userInputData.password });
-
-        const userData = JSON.parse(localStorage.getItem("userData"));
-        if (userData) {
-            navigate(process.env.PUBLIC_URL + "/");
-        } else {
-            alert("Unsuccessful registration! Try again later! Or maybe you are already registered? Try to login!");
-            return;
-        }
-    };
-
-    const handleLogoutSubmit = async (e) => {
-        e.preventDefault();
-        console.log("handleLogoutSubmit");
-        const result = await logOut();
-        // console.log("result", result);
-        navigate(process.env.PUBLIC_URL + "/");
-    };
-
     function verifyLoginInputData() {
-        if (userInputData.username === "") {
+        if (userInputData.email === "") {
             return false;
         }
         if (userInputData.password === "") {
@@ -157,6 +124,15 @@ const LoginRegister = () => {
         }
     }
 
+    function clearInputData() {
+        setUserInputData({
+            username: "",
+            password: "",
+            rePass: "",
+            email: "",
+        });
+    }
+
     // console.log("userInputData", userInputData);
     // console.log("userInputDataError", userInputDataError);
 
@@ -190,24 +166,26 @@ const LoginRegister = () => {
                             <div className="login-register-wrapper">
                                 {pathname === "/login" && (
                                     <Login
-                                        handleLoginSubmit={handleLoginSubmit}
                                         userInputData={userInputData}
                                         handleUserInputDataChange={handleUserInputDataChange}
                                         userInputDataError={userInputDataError}
                                         validateNewUserInput={validateNewUserInput}
+                                        verifyLoginInputData={verifyLoginInputData}
+                                        clearInputData={clearInputData}
                                     />
                                 )}
 
                                 {pathname === "/register" && (
                                     <Register
-                                        handleRegisterSubmit={handleRegisterSubmit}
                                         userInputData={userInputData}
                                         handleUserInputDataChange={handleUserInputDataChange}
                                         userInputDataError={userInputDataError}
                                         validateNewUserInput={validateNewUserInput}
+                                        verifyRegisterInputData={verifyRegisterInputData}
+                                        clearInputData={clearInputData}
                                     />
                                 )}
-                                {pathname === "/logout" && <Logout handleLogoutSubmit={handleLogoutSubmit} />}
+                                {pathname === "/logout" && <Logout />}
                                 {pathname === "/forgotten-password" && (
                                     <ForgottenPassword handleForgottenPasswordSubmit={handleForgottenPasswordSubmit} />
                                 )}

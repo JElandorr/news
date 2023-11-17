@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 // import { useSelector } from "react-redux";
 
-import AuthContext from "../../contexts/AuthContext";
+// import AuthContext from "../../contexts/AuthContext";
 
 import clsx from "clsx";
 
 const IconGroup = ({ iconWhiteClass }) => {
-    const { user, getUser } = useContext(AuthContext);
+    // const { user, getUser } = useContext(AuthContext);
 
     const handleUserIconClick = (e) => {
         e.currentTarget.nextSibling.classList.toggle("active");
@@ -36,8 +36,8 @@ const IconGroup = ({ iconWhiteClass }) => {
     const handleGetUser = async (e) => {
         e.preventDefault();
         console.log("handleGetUser");
-        const user = await getUser();
-        console.log("user", user);
+        // const user = await getUser();
+        // console.log("user", user);
     };
 
     return (
@@ -57,33 +57,35 @@ const IconGroup = ({ iconWhiteClass }) => {
             </div>
             <div className="same-style account-setting d-none d-lg-block">
                 <button className="account-setting-active" onClick={(e) => handleUserIconClick(e)}>
-                    {user ? <i className="fa-solid fa-user"></i> : <i className="fa-regular fa-user"></i>}
+                    {/* {user ? <i className="fa-solid fa-user"></i> : <i className="fa-regular fa-user"></i>} */}
+                    <i className="fa-regular fa-user"></i>
                 </button>
                 <div className="account-dropdown">
                     <ul>
-                        {user ? (
-                            <>
-                                <p onClick={handleGetUser}>Hello, {user.email}</p>
-                                <li>
-                                    <Link to={process.env.PUBLIC_URL + "/my-account"}>my account</Link>
-                                </li>
-                                <li>
-                                    <Link to={process.env.PUBLIC_URL + "/create-new-article"}>Create Article</Link>
-                                </li>
-                                <li>
-                                    <Link to={process.env.PUBLIC_URL + "/logout"}>logout</Link>
-                                </li>
-                            </>
-                        ) : (
-                            <>
-                                <li>
-                                    <Link to={process.env.PUBLIC_URL + "/login"}>Login</Link>
-                                </li>
-                                <li>
-                                    <Link to={process.env.PUBLIC_URL + "/register"}>Register</Link>
-                                </li>
-                            </>
-                        )}
+                        {/* {user ? ( */}
+                        <>
+                            <p onClick={handleGetUser}>Hello, </p>
+                            {/* <p onClick={handleGetUser}>Hello, {user.email}</p> */}
+                            <li>
+                                <Link to={process.env.PUBLIC_URL + "/my-account"}>my account</Link>
+                            </li>
+                            <li>
+                                <Link to={process.env.PUBLIC_URL + "/create-new-article"}>Create Article</Link>
+                            </li>
+                            <li>
+                                <Link to={process.env.PUBLIC_URL + "/logout"}>logout</Link>
+                            </li>
+                        </>
+                        {/* ) : ( */}
+                        <>
+                            <li>
+                                <Link to={process.env.PUBLIC_URL + "/login"}>Login</Link>
+                            </li>
+                            <li>
+                                <Link to={process.env.PUBLIC_URL + "/register"}>Register</Link>
+                            </li>
+                        </>
+                        {/* )} */}
                     </ul>
                 </div>
             </div>

@@ -53,7 +53,8 @@ export const requester = async (url, method, data) => {
         console.log(response);
 
         if (!response.ok) {
-            throw new Error("Error: " + response.status + ". " + "Message: " + response.statusText);
+            throw new Error(response);
+            // throw new Error("Error: " + response.status + ". " + "Message: " + response.statusText);
         }
 
         if (response.status === 204) {
