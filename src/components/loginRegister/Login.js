@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useLogin } from "../../hooks/useLogin";
 
@@ -13,6 +13,26 @@ const Login = ({
 }) => {
     const { login, loginError, isLoading } = useLogin();
     const [errors, setErrors] = useState(loginError);
+    const navigate = useNavigate();
+
+    const handleUserInputDataChange = (e) => {
+        const targetName = e.target.name;
+        const targetValue = e.target.value;
+        if (targetValue !== "") {
+            setUserInputDataError({ ...userInputDataError, [targetName]: false });
+        }
+        setUserInputData({ ...userInputData, [targetName]: targetValue });
+    };
+
+    function verifyLoginInputData() {
+        if (userInputData.email === "") {
+            return false;
+        }
+        if (userInputData.password === "") {
+            return false;
+        }
+        return true;
+    }
 
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
@@ -27,6 +47,7 @@ const Login = ({
         const loggedUser = await login(userInputData.email, userInputData.password);
         console.log("loggedUser", loggedUser);
         clearInputData();
+        navigate("/");
     };
 
     console.log("userInputData", userInputData);
@@ -67,7 +88,7 @@ const Login = ({
                                 <div className="button-box">
                                     {isLoading ? (
                                         <button type="submit" disabled>
-                                            <span>Logging in progress...</span>
+                                            <span>Logging in...</span>
                                         </button>
                                     ) : (
                                         <button type="submit">

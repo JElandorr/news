@@ -27,16 +27,15 @@ export const useLogin = () => {
                 // console.log("Firebase error object: ", err);
 
                 const errorCode = err.code;
-                let errorMessage = "An error occurred during login. ";
+                let errorMessage = ["An error occurred during login. "];
 
                 switch (errorCode) {
                     case "auth/invalid-email":
                         errorMessage += "Invalid email.";
                         break;
-                    case "auth/user-not-found":
-                        errorMessage += "User not found.";
+                    case "auth/invalid-login-credentials":
+                        errorMessage += "User with the provided credentials does not exist.\n Please register!";
                         break;
-
                     default:
                         errorMessage = err.message;
                         break;

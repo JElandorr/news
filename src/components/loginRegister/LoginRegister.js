@@ -1,25 +1,13 @@
 import React, { useState, Fragment, useContext } from "react";
 import { Link, useLocation, useNavigate, Navigate } from "react-router-dom";
 
-// import AuthContext from "../contexts/AuthContext";
-
 import SEO from "../seo";
 import Breadcrumb from "../breadcrumb/BreadcrumbWrap";
 import Login from "./Login";
 import Register from "./Register";
 import Logout from "./Logout";
-import ForgottenPassword from "./ForgottenPassword";
 
 const LoginRegister = () => {
-    // const {
-    //     user,
-    //     login,
-    //     // register,
-    //     logOut,
-    //     isLogged,
-    // } = useContext(AuthContext);
-    // const current = useContext(AuthContext);
-    // console.log("current", current);
     const [userInputData, setUserInputData] = useState({
         username: "",
         password: "",
@@ -29,30 +17,7 @@ const LoginRegister = () => {
     const [userInputDataError, setUserInputDataError] = useState({});
     const { pathname } = useLocation();
 
-    // console.log("pathname", pathname);
-
     const navigate = useNavigate();
-
-    // console.log("user", user);
-    // console.log("isLogged", isLogged);
-
-    // if (isLogged) {
-    //     switch (pathname) {
-    //         case "/login":
-    //         case "/register":
-    //         case "/forgotten-password":
-    //             return <Navigate to="/" />;
-    //         default:
-    //             break;
-    //     }
-    // } else {
-    //     switch (pathname) {
-    //         case "/logout":
-    //             return <Navigate to="/" />;
-    //         default:
-    //             break;
-    //     }
-    // }
 
     const handleUserInputDataChange = (e) => {
         const targetName = e.target.name;
@@ -61,26 +26,6 @@ const LoginRegister = () => {
             setUserInputDataError({ ...userInputDataError, [targetName]: false });
         }
         setUserInputData({ ...userInputData, [targetName]: targetValue });
-    };
-
-    const handleUserInputDataErrorChange = (e) => {
-        setUserInputDataError({ ...userInputDataError, [e.target.name]: e.target.value });
-    };
-
-    const handleUserInputDataReset = (e) => {
-        e.preventDefault();
-        setUserInputData({
-            username: "",
-            password: "",
-            email: "",
-        });
-        navigate(process.env.PUBLIC_URL + `/${e.target.innerText.toLowerCase()}`);
-    };
-
-    const handleForgottenPasswordSubmit = async (e) => {
-        e.preventDefault();
-        console.log("handleForgottenPasswordSubmit");
-        navigate(process.env.PUBLIC_URL + "/");
     };
 
     function verifyLoginInputData() {
@@ -133,9 +78,6 @@ const LoginRegister = () => {
         });
     }
 
-    // console.log("userInputData", userInputData);
-    // console.log("userInputDataError", userInputDataError);
-
     const breadcrumbLabel =
         pathname === "/login"
             ? "Login"
@@ -186,9 +128,6 @@ const LoginRegister = () => {
                                     />
                                 )}
                                 {pathname === "/logout" && <Logout />}
-                                {pathname === "/forgotten-password" && (
-                                    <ForgottenPassword handleForgottenPasswordSubmit={handleForgottenPasswordSubmit} />
-                                )}
                             </div>
                         </div>
                     </div>

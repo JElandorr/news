@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useRegister } from "../../hooks/useRegister";
 
@@ -13,6 +13,7 @@ const Register = ({
 }) => {
     const { register, registerError, isLoading } = useRegister();
     const [errors, setErrors] = useState(registerError);
+    const navigate = useNavigate();
 
     // console.log("errors", errors);
     // console.log("registerError", registerError);
@@ -32,6 +33,7 @@ const Register = ({
         const registeredUser = await register(userInputData.email, userInputData.password, userInputData.username);
         console.log("registeredUser", registeredUser);
         clearInputData();
+        navigate("/");
     };
 
     return (
