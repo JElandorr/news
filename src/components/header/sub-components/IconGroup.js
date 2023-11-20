@@ -55,8 +55,8 @@ const IconGroup = ({ iconWhiteClass }) => {
             </div>
             <div className="same-style account-setting d-none d-lg-block">
                 <button className="account-setting-active" onClick={(e) => handleUserIconClick(e)}>
-                    {/* {user ? <i className="fa-solid fa-user"></i> : <i className="fa-regular fa-user"></i>} */}
-                    <i className="fa-regular fa-user"></i>
+                    {user ? <i className="fa-solid fa-user"></i> : <i className="fa-regular fa-user"></i>}
+                    {/* <i className="fa-regular fa-user"></i> */}
                 </button>
                 <div className="account-dropdown">
                     <ul>

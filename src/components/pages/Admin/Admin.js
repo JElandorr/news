@@ -4,7 +4,7 @@ import SEO from "../../seo";
 import Breadcrumb from "../../breadcrumb/BreadcrumbWrap";
 import AdminCategories from "./sub-components/AdminCategories";
 import AdminContains from "./sub-components/AdminContains";
-import LoginRegister from "../../loginRegister/LoginRegister";
+// import LoginRegister from "../../loginRegister/LoginRegister";
 
 const AdminPanel = () => {
     const [users, setUsers] = useState(false);
@@ -73,9 +73,7 @@ const AdminPanel = () => {
                     </div>
                     {!user && (
                         <div className="row">
-                            <div className="section-title text-center">
-                                <LoginRegister />
-                            </div>
+                            <div className="section-title text-center">{/* <LoginRegister /> */}</div>
                         </div>
                     )}
                     {user && (

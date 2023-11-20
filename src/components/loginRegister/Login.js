@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { useLogin } from "../../hooks/useLogin";
 
-const Login = ({
-    userInputData,
-    handleUserInputDataChange,
-    userInputDataError,
-    validateNewUserInput,
-    verifyLoginInputData,
-    clearInputData,
-}) => {
+import SEO from "../seo";
+import Breadcrumb from "../breadcrumb/BreadcrumbWrap";
+
+const Login = ({ validateNewUserInput, clearInputData }) => {
+    const [userInputData, setUserInputData] = useState({
+        password: "",
+        email: "",
+    });
+    const [userInputDataError, setUserInputDataError] = useState({});
     const { login, loginError, isLoading } = useLogin();
     const [errors, setErrors] = useState(loginError);
     const navigate = useNavigate();
@@ -47,65 +48,103 @@ const Login = ({
         const loggedUser = await login(userInputData.email, userInputData.password);
         console.log("loggedUser", loggedUser);
         clearInputData();
-        navigate("/");
     };
+
+    function validateNewUserInput(e) {
+        e.preventDefault();
+
+        if (userInputData[e.target.name] === "") {
+            setUserInputDataError({ ...userInputDataError, [e.target.name]: true });
+        } else {
+            setUserInputDataError({ ...userInputDataError, [e.target.name]: false });
+        }
+    }
+
+    function clearInputData() {
+        setUserInputData({
+            password: "",
+            email: "",
+        });
+    }
 
     console.log("userInputData", userInputData);
 
     return (
         <>
-            <div className="login-register-tab-list nav nav-pills">
-                <div className="nav-item">
-                    <Link to={process.env.PUBLIC_URL + "/login"} className="nav-link active">
-                        <h4>Login</h4>
-                    </Link>
-                </div>
-            </div>
-            <div className="tab-content">
-                <div className="fade tab-pane active show">
-                    <div className="login-form-container">
-                        <div className="login-register-form">
-                            <form onSubmit={handleLoginSubmit}>
-                                {/* <p className="error">{loginError}</p> */}
-                                <input
-                                    className={`${userInputDataError["email"] ? "danger" : ""}`}
-                                    type="text"
-                                    name="email"
-                                    placeholder="Email"
-                                    value={userInputData.email}
-                                    onChange={handleUserInputDataChange}
-                                    onBlur={validateNewUserInput}
-                                />
-                                <input
-                                    className={`${userInputDataError["password"] ? "danger" : ""}`}
-                                    type="password"
-                                    name="password"
-                                    placeholder="Password"
-                                    value={userInputData.password}
-                                    onChange={handleUserInputDataChange}
-                                    onBlur={validateNewUserInput}
-                                />
-                                <div className="button-box">
-                                    {isLoading ? (
-                                        <button type="submit" disabled>
-                                            <span>Logging in...</span>
-                                        </button>
-                                    ) : (
-                                        <button type="submit">
-                                            <span>Login</span>
-                                        </button>
-                                    )}
+            <Fragment>
+                <SEO title="NewsProject" titleTemplate="Login | Register" description="Login page of Project News." />
+                {/* breadcrumb */}
+                <Breadcrumb
+                    pages={[
+                        { label: "Home", path: process.env.PUBLIC_URL + "/" },
+                        { label: "Login", path: process.env.PUBLIC_URL + "/login" },
+                    ]}
+                />
+                <div className="login-register-area pt-100 pb-100">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-lg-7 col-md-12 ms-auto me-auto">
+                                <div className="login-register-wrapper">
+                                    <div className="login-register-tab-list nav nav-pills">
+                                        <div className="nav-item">
+                                            <Link to={process.env.PUBLIC_URL + "/login"} className="nav-link active">
+                                                <h4>Login</h4>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                    <div className="tab-content">
+                                        <div className="fade tab-pane active show">
+                                            <div className="login-form-container">
+                                                <div className="login-register-form">
+                                                    <form onSubmit={handleLoginSubmit}>
+                                                        {/* <p className="error">{loginError}</p> */}
+                                                        <input
+                                                            className={`${userInputDataError["email"] ? "danger" : ""}`}
+                                                            type="text"
+                                                            name="email"
+                                                            placeholder="Email"
+                                                            value={userInputData.email}
+                                                            onChange={handleUserInputDataChange}
+                                                            onBlur={validateNewUserInput}
+                                                        />
+                                                        <input
+                                                            className={`${
+                                                                userInputDataError["password"] ? "danger" : ""
+                                                            }`}
+                                                            type="password"
+                                                            name="password"
+                                                            placeholder="Password"
+                                                            value={userInputData.password}
+                                                            onChange={handleUserInputDataChange}
+                                                            onBlur={validateNewUserInput}
+                                                        />
+                                                        <div className="button-box">
+                                                            {isLoading ? (
+                                                                <button type="submit" disabled>
+                                                                    <span>Logging in...</span>
+                                                                </button>
+                                                            ) : (
+                                                                <button type="submit">
+                                                                    <span>Login</span>
+                                                                </button>
+                                                            )}
+                                                        </div>
+                                                        {errors ? (
+                                                            <p className="error">{errors} </p>
+                                                        ) : loginError ? (
+                                                            <p className="error">{loginError}</p>
+                                                        ) : null}
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                {errors ? (
-                                    <p className="error">{errors} </p>
-                                ) : loginError ? (
-                                    <p className="error">{loginError}</p>
-                                ) : null}
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </Fragment>
         </>
     );
 };

@@ -2,14 +2,13 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
-import LoginRegister from "../loginRegister/LoginRegister";
+import Logout from "../loginRegister/Logout";
 
 const LoginRegisterPage = () => {
-    
     return (
         <>
             <Header />
-            <LoginRegister />
+            <Logout />
             <Footer />
         </>
     );

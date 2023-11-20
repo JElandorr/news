@@ -1,12 +1,14 @@
 import React, { useContext } from "react";
-import { BrowserRouter, Routes, Route, Redirect } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Redirect, Navigate } from "react-router-dom";
 
 import { useAuthContext } from "./hooks/useAuthContext";
 
 import Home from "./components/pages/Home";
 import NotFound404 from "./components/pages/NotFound";
 import ArticlePage from "./components/pages/ArticlePage";
-import LoginRegisterPage from "./components/pages/LoginRegisterPage";
+import LoginPage from "./components/pages/LoginPage";
+import RegisterPage from "./components/pages/RegisterPage";
+import LogoutPage from "./components/pages/LogoutPage";
 import CreateArticlePage from "./components/pages/CreateArticlePage";
 
 import Admin from "./components/pages/Admin/Admin";
@@ -26,17 +28,13 @@ function App() {
                         <Route path="/news/:article" element={<ArticlePage />} />
 
                         {/* Articles */}
-                        <Route
-                            path="/create-new-article"
-                            element={user ? <CreateArticlePage /> : <Redirect to="/" />}
-                        />
+                        <Route path="/create-new-article" element={user ? <CreateArticlePage /> : <Home />} />
 
                         {/* Login and Register */}
-                        <Route path="/login" element={user ? <Home /> : <Redirect to="/login" />} />
-                        <Route path="/register" element={user ? <Home /> : <Redirect to="/register" />} />
-                        <Route path="/logout" element={user ? <Home /> : <Redirect to="/logout" />} />
+                        <Route path="/login" element={!user ? <LoginPage /> : <Navigate to="/" />} />
+                        <Route path="/register" element={!user ? <RegisterPage /> : <Navigate to="/" />} />
+                        <Route path="/logout" element={user ? <LogoutPage /> : <Navigate to="/" />} />
                         {/* <Route path="/forgotten-password" element={<LoginRegisterPage />} /> */}
-
                         <Route path="*" element={<NotFound404 />} />
                     </Routes>
                 </BrowserRouter>
