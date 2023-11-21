@@ -12,7 +12,7 @@ const LatestNewsPanel = ({ spaceTopClass, spaceBottomClass, articles }) => {
             <div className="container">
                 <SectionTitle titleText="Latest News" positionClass="text-center" spaceClass="mb-55" />
                 <div className="row">
-                    {articles.map((article) => (
+                    {articles?.map((article) => (
                         <div className="col-lg-4 col-xs-6" key={article.id}>
                             <LatestNewsSingle article={article} />
                         </div>

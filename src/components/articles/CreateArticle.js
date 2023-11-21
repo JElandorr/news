@@ -11,6 +11,8 @@ import BreadcrumbWrap from "../breadcrumb/BreadcrumbWrap";
 import { articleIni } from "../dateStructures/articleIni";
 import { categoriesIni } from "../dateStructures/categoriesIni";
 
+import { transliterate } from "transliteration";
+
 // import { create, getAll } from "../services/articlesUtilService.js";
 
 import { addArticle, getArticles } from "../dateStructures/articlesExampleList.js";
@@ -76,7 +78,21 @@ const CreateArticle = () => {
     };
 
     const createArticle = async () => {
-        const addedArticle = await addDocument({ ...article, owner_Id: user.uid });
+        const addedArticle = await addDocument({ ...article, owner_Id: user.uid, slug: createSlug(article.title) });
+        
+    };
+
+    const createSlug = (cyrillicText) => {
+        // Transliterate Cyrillic text to Latin characters
+        const latinText = transliterate(cyrillicText);
+
+        // Replace spaces and special characters to create a slug
+        const slug = latinText
+            .toLowerCase()
+            .replace(/\s+/g, "-") // Replace spaces with hyphens
+            .replace(/[^a-z0-9-]/g, ""); // Remove special characters
+
+        return slug;
     };
 
     // let articles;
@@ -93,7 +109,7 @@ const CreateArticle = () => {
 
     // console.log(JSON.stringify(getArticles()));
     // console.log(getArticles());
-    // console.log(article);
+    console.log(article);
     // console.log(user);
     console.log(response);
 

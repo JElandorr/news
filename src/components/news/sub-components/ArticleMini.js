@@ -4,12 +4,13 @@ import React from "react";
 import { Link, useParams } from "react-router-dom";
 
 const ArticleMini = ({ article }) => {
+    console.log("article", article);
     return (
         <div className="col-lg-4 col-md-6 col-sm-12">
             <div className="blog-wrap-2 mb-30">
                 <div className="blog-img-2">
                     <Link to={process.env.PUBLIC_URL + "news/" + article.slug}>
-                        <img src={process.env.PUBLIC_URL + article.image} alt="" />
+                        <img src={`${article?.images[0]}`} alt="" />
                     </Link>
                 </div>
                 <div className="blog-content-2">

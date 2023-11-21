@@ -13,18 +13,18 @@ import Preloader from "../preloader/Preloader";
 
 const MainNewsBoard = () => {
     let { pathname } = useLocation();
-    const { documents: articles, error, isLoading } = useCollection("articles");
+    const { documents, error, isLoading } = useCollection("articles");
 
     if (error) {
         return <p>{error}</p>;
     }
 
     // let latestNewsArticles = articles.sort((a, b) => b.createdAt - a.createdAt).slice(0, 3);
-    let latestNewsArticles = articles;
+    let latestNewsArticles = documents;
     //the rest of the articles
     // let restOfTheArticles = articles.sort((a, b) => b.createdAt - a.createdAt).slice(3);
 
-    console.log("articles", articles);
+    console.log("documents", documents);
 
     return (
         <>
@@ -39,7 +39,7 @@ const MainNewsBoard = () => {
                             { label: "NewsBoard", path: process.env.PUBLIC_URL + "/news" },
                         ]}
                     />
-                    <LatestNewsPanel articles={latestNewsArticles} />
+                    {/* <LatestNewsPanel articles={latestNewsArticles} /> */}
                     <div className="blog-area pt-100 pb-100">
                         <div className="container">
                             <div className="row">
@@ -47,7 +47,7 @@ const MainNewsBoard = () => {
                                     <div className="mr-20">
                                         <div className="row">
                                             {/* news posts */}
-                                            <NewsList articles={articles} />
+                                            <NewsList articles={documents} />
                                         </div>
 
                                         {/* news pagination */}
