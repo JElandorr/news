@@ -1,5 +1,12 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
+
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+
+// Import Swiper styles
+import "swiper/css";
 
 import { useCollection } from "../../../hooks/useCollection";
 
@@ -11,6 +18,7 @@ const Article = () => {
     const [articleData, setArticleData] = useState(null);
     const { article } = useParams();
     const { documents, error, isLoading } = useCollection("articles");
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (documents) {
@@ -43,7 +51,28 @@ const Article = () => {
                 <Fragment>
                     <div className="blog-details-top">
                         <div className="blog-details-img">
-                            <img alt="" src={`${articleData?.images[0]}`} />
+                            {/* <img alt="" src={`${articleData?.images[0]}`} /> */}
+                            {articleData?.images.length > 0 ? (
+                                <Swiper
+                                    modules={[Autoplay]}
+                                    autoplay={true}
+                                    loop={true}
+                                    spaceBetween={50}
+                                    slidesPerView={1}
+                                    onSlideChange={() => console.log("slide change")}
+                                    onSwiper={(swiper) => console.log(swiper)}
+                                >
+                                    {articleData.images.map((link, index) => (
+                                        <SwiperSlide key={index}>
+                                            <div className="article-image-holder">
+                                                <img src={link} alt={`Slide ${index + 1}`} />
+                                            </div>
+                                        </SwiperSlide>
+                                    ))}
+                                </Swiper>
+                            ) : (
+                                <img src={articleData?.images[0] ? articleData.images[0] : ""} alt={"Article Image"} />
+                            )}
                         </div>
                         <div className="blog-details-content">
                             <div className="blog-meta-2">

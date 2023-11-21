@@ -1,11 +1,21 @@
 /*------ 23. Blog Details Page  -------*/
 
 .blog-details-top {
+    
   .blog-details-img {
     position: relative;
-    img {
-      width: 100%;
+    width: 100%;
+
+    .article-image-holder{
+        display: flex;
+        justify-content: center;
     }
+    img {
+        width: 60%;
+          height: calc(width / 4 * 3);
+          object-fit: cover;
+      }
+
     .video-icon {
       position: absolute;
       top: 50%;
