@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { projectNewsAuth } from "../firebase/config";
-import { signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 import { useAuthContext } from "./useAuthContext";
 

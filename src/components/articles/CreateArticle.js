@@ -1,14 +1,17 @@
 import React, { Fragment, useState, useContext, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+
+import { useFirestore } from "../../hooks/useFirestore.js";
+
+import { useAuthContext } from "../../hooks/useAuthContext.js";
+
 import SEO from "../seo";
 import BreadcrumbWrap from "../breadcrumb/BreadcrumbWrap";
 
 import { articleIni } from "../dateStructures/articleIni";
 import { categoriesIni } from "../dateStructures/categoriesIni";
 
-// import AuthContext from "../contexts/AuthContext";
-
-import { create, getAll } from "../services/articlesUtilService.js";
+// import { create, getAll } from "../services/articlesUtilService.js";
 
 import { addArticle, getArticles } from "../dateStructures/articlesExampleList.js";
 
@@ -18,7 +21,11 @@ const CreateArticle = () => {
     // const [selectedCategories, setSelectedCategories] = useState([]);
     const [newImageUrl, setNewImageUrl] = useState("");
 
-    const [warnings, setWarnings] = useState({}); // ["warning1", "warning2"
+    // const [warnings, setWarnings] = useState({}); // ["warning1", "warning2"
+
+    const { addDocument, response } = useFirestore("articles");
+    const { user } = useAuthContext();
+
     // const { user } = useContext(AuthContext);
     const navigate = useNavigate();
 
@@ -35,7 +42,7 @@ const CreateArticle = () => {
         setArticle({ ...article, [name]: value });
     };
 
-    const handleImageChange = (e) => {
+    const handleImageInputChange = (e) => {
         const image = e.target.value;
         setNewImageUrl(image);
     };
@@ -69,11 +76,7 @@ const CreateArticle = () => {
     };
 
     const createArticle = async () => {
-        const createdArticle = await create(article);
-        console.log(createdArticle);
-        addArticle(createdArticle);
-        setArticle({ ...articleIni });
-        // navigate("/");
+        const addedArticle = await addDocument({ ...article, owner_Id: user.uid });
     };
 
     // let articles;
@@ -88,9 +91,11 @@ const CreateArticle = () => {
 
     // console.log(articles);
 
-    console.log(JSON.stringify(getArticles()));
-    console.log(getArticles());
-    console.log(article);
+    // console.log(JSON.stringify(getArticles()));
+    // console.log(getArticles());
+    // console.log(article);
+    // console.log(user);
+    console.log(response);
 
     return (
         <Fragment>
@@ -184,7 +189,7 @@ const CreateArticle = () => {
                                                         name="images"
                                                         placeholder="Article Tags"
                                                         value={newImageUrl}
-                                                        onChange={handleImageChange}
+                                                        onChange={handleImageInputChange}
                                                     />
                                                 </div>
                                                 <div
@@ -271,7 +276,7 @@ const CreateArticle = () => {
                                                         name="images"
                                                         placeholder="Article Images"
                                                         value={newImageUrl}
-                                                        onChange={handleImageChange}
+                                                        onChange={handleImageInputChange}
                                                     />
                                                 </div>
                                                 <div
@@ -291,7 +296,7 @@ const CreateArticle = () => {
                                                     name="images"
                                                     placeholder="Article Images"
                                                     value={newImageUrl}
-                                                    onChange={handleImageChange}
+                                                    onChange={handleImageInputChange}
                                                 />
                                             </div> */}
                                             <div className="col-lg-2 col-md-2 add-article-btn" onClick={createArticle}>

@@ -6,7 +6,7 @@ const BlogFeaturedSingle = ({ article }) => {
         <div className="blog-wrap mb-30 scroll-zoom">
             <div className="blog-img">
                 <Link to={process.env.PUBLIC_URL + "news/" + article.slug}>
-                    <img src={process.env.PUBLIC_URL + article.image} alt="" />
+                    <img src={process.env.PUBLIC_URL + article.images[0]} alt="" />
                 </Link>
                 {/* <div className="blog-category-names">
                     {article.categories.map((singleCategory, key) => {
@@ -23,12 +23,12 @@ const BlogFeaturedSingle = ({ article }) => {
                     <h3>
                         <Link to={process.env.PUBLIC_URL + "news/" + article.slug}>{article.title}</Link>
                     </h3>
-                    <span>
+                    {/* <span>
                         By <Link to={process.env.PUBLIC_URL + article.authorUrl}>{article.author.fullname}</Link>
-                    </span>
+                    </span> */}
                     {/* <p>{article.summary}</p> */}
                     {/* <span>{article.datePublished}</span> */}
-                    <p>{article.datePublished}</p>
+                    <p>{article.createdAt}</p>
                 </div>
             </div>
         </div>
