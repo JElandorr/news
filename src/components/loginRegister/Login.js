@@ -87,8 +87,13 @@ const Login = ({ validateNewUserInput, clearInputData }) => {
                                 <div className="login-register-wrapper">
                                     <div className="login-register-tab-list nav nav-pills">
                                         <div className="nav-item">
-                                            <Link to={process.env.PUBLIC_URL + "/login"} className="nav-link active">
+                                            <Link to="#" className="nav-link active">
                                                 <h4>Login</h4>
+                                            </Link>
+                                        </div>
+                                        <div className="nav-item">
+                                            <Link to={process.env.PUBLIC_URL + "/register"} className="nav-link">
+                                                <h4>Register</h4>
                                             </Link>
                                         </div>
                                     </div>

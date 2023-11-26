@@ -20821,9 +20821,16 @@ h3.cart-page-title {
 /*------ 23. Blog Details Page  -------*/
 .blog-details-top .blog-details-img {
   position: relative;
+  width: 100%;
+}
+.blog-details-top .blog-details-img .article-image-holder {
+  display: flex;
+  justify-content: center;
 }
 .blog-details-top .blog-details-img img {
-  width: 100%;
+  width: 60%;
+  height: calc(width / 4 * 3);
+  object-fit: cover;
 }
 .blog-details-top .blog-details-img .video-icon {
   position: absolute;

@@ -11,6 +11,7 @@ import "swiper/css";
 import { useCollection } from "../../../hooks/useCollection";
 
 import Preloader from "../../preloader/Preloader";
+import { dateTimeFormatter } from "../../utils/dateFormatter";
 
 // import { articles } from "../../dataStructures/examples/articles_example";
 
@@ -38,9 +39,7 @@ const Article = () => {
     let formattedDate = "";
 
     if (articleData) {
-        const date = new Date(articleData?.createdAt.seconds * 1000);
-        const options = { year: "numeric", month: "long", day: "numeric" };
-        formattedDate = date.toLocaleDateString("bg-BG", options);
+        formattedDate = dateTimeFormatter(articleData.createdAt, true, "long");
     }
 
     return (
@@ -52,15 +51,13 @@ const Article = () => {
                     <div className="blog-details-top">
                         <div className="blog-details-img">
                             {/* <img alt="" src={`${articleData?.images[0]}`} /> */}
-                            {articleData?.images.length > 0 ? (
+                            {articleData?.images.length > 1 ? (
                                 <Swiper
                                     modules={[Autoplay]}
                                     autoplay={true}
-                                    loop={true}
+                                    loop={articleData?.images.length > 0 ? true : false}
                                     spaceBetween={50}
                                     slidesPerView={1}
-                                    onSlideChange={() => console.log("slide change")}
-                                    onSwiper={(swiper) => console.log(swiper)}
                                 >
                                     {articleData.images.map((link, index) => (
                                         <SwiperSlide key={index}>
@@ -71,7 +68,12 @@ const Article = () => {
                                     ))}
                                 </Swiper>
                             ) : (
-                                <img src={articleData?.images[0] ? articleData.images[0] : ""} alt={"Article Image"} />
+                                <div className="article-image-holder">
+                                    <img
+                                        src={articleData?.images[0] ? articleData.images[0] : ""}
+                                        alt={"Article Image"}
+                                    />
+                                </div>
                             )}
                         </div>
                         <div className="blog-details-content">
