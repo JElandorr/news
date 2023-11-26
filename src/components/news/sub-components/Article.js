@@ -104,7 +104,14 @@ const Article = () => {
                                 </div>
                             </div>
                         </div>
-                        <p>{articleData?.text}</p>
+                        {articleData?.text.split("\n").map((item, key) => {
+                            return (
+                                <p key={key}>
+                                    {item}
+                                    <br />
+                                </p>
+                            );
+                        })}
                     </div>
                     <div className="tag-share">
                         <div className="dec-tag">

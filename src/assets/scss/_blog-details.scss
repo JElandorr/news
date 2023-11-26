@@ -52,7 +52,8 @@
     }
   }
   .blog-details-content {
-    margin-top: 30px;
+    margin-left: 20px;
+
     .blog-meta-2 {
       display: flex;
       ul {
@@ -113,8 +114,9 @@
       }
     }
     p {
+        font-size: 20px;
+        font-weight: 500;
       line-height: 26px;
-
       margin: 0;
     }
     blockquote {
@@ -141,7 +143,8 @@
 }
 
 .dec-img-wrapper {
-  margin-top: 50px;
+  margin: 20px;
+  text-align: justify;
   @media #{$xs-layout} {
     margin-top: 30px;
   }
@@ -155,6 +158,10 @@
       }
     }
   }
+
+  p{
+    text-indent: 20px;
+  }
 }
 
 .tag-share {
@@ -162,7 +169,7 @@
   align-items: center;
   justify-content: space-between;
 
-  margin: 30px 0 30px;
+  margin: 30px 20px 30px;
   @media #{$xs-layout} {
     display: block;
 
@@ -207,6 +214,7 @@
 }
 
 .next-previous-post {
+    margin: 0 20px 0;
   display: flex;
   justify-content: space-between;
 

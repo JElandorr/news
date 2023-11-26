@@ -15363,11 +15363,11 @@ button:disabled {
   background-color: transparent;
 }
 .blog-wrap-2 .blog-content-2 .blog-share-comment .blog-share .share-social ul li a.twitter {
-  border: 1px solid #55acee;
-  background-color: #55acee;
+  border: 1px solid #0f1419;
+  background-color: #0f1419;
 }
 .blog-wrap-2 .blog-content-2 .blog-share-comment .blog-share .share-social ul li a.twitter:hover {
-  color: #55acee;
+  color: #0f1419;
   background-color: transparent;
 }
 .blog-wrap-2 .blog-content-2 .blog-share-comment .blog-share .share-social ul li a.instagram {
@@ -20831,6 +20831,21 @@ h3.cart-page-title {
   width: 60%;
   height: calc(width / 4 * 3);
   object-fit: cover;
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .blog-details-top .blog-details-img img {
+    width: 60%;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .blog-details-top .blog-details-img img {
+    width: 75%;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .blog-details-top .blog-details-img img {
+    width: 95%;
+  }
 }
 .blog-details-top .blog-details-img .video-icon {
   position: absolute;
