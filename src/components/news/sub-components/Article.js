@@ -105,9 +105,10 @@ const Article = () => {
                             </div>
                         </div>
                         {articleData?.text.split("\n").map((item, key) => {
+                            const paragraph = item.trim();
                             return (
                                 <p key={key}>
-                                    {item}
+                                    {paragraph.length > 0 ? paragraph : null}
                                     <br />
                                 </p>
                             );
