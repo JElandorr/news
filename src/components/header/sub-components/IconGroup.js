@@ -89,7 +89,7 @@ const IconGroup = ({ iconWhiteClass }) => {
             </div>
             <div className="same-style mobile-off-canvas d-block d-lg-none">
                 <button className="mobile-aside-button" onClick={() => triggerMobileMenu()}>
-                    <i className="pe-7s-menu" />
+                    <i className="fa-solid fa-bars fa-lg"></i>
                 </button>
             </div>
         </div>
