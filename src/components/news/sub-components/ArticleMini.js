@@ -4,20 +4,20 @@ import { faXTwitter } from "@fortawesome/free-brands-svg-icons";
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 
-import { dateTimeFormatter } from "../../utils/dateFormatter";
+import { dateTimeFormatterFromSeconds } from "../../utils/dateFormatter";
 
 const ArticleMini = ({ article }) => {
-    console.log("article", article);
+    // console.log("article", article);
     let formattedDate = "";
 
     if (article) {
-        formattedDate = dateTimeFormatter(article.createdAt, true, "short");
+        formattedDate = dateTimeFormatterFromSeconds(article.createdAt, true, "short");
     }
     return (
         <div className="col-lg-4 col-md-6 col-sm-12">
             <div className="blog-wrap-2 mb-30">
                 <div className="blog-img-2">
-                    <Link to={process.env.PUBLIC_URL + "news/" + article.slug}>
+                    <Link to={process.env.PUBLIC_URL + "/news/" + article.slug}>
                         <img src={`${article?.images[0]}`} alt="" />
                     </Link>
                 </div>

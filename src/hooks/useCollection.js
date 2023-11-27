@@ -4,7 +4,7 @@ import { collection, onSnapshot } from "firebase/firestore";
 
 export const useCollection = (collectionName) => {
     const [documents, setDocuments] = useState(null);
-    const [error, setError] = useState(null);
+    const [collectionError, setCollectionError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
@@ -19,11 +19,11 @@ export const useCollection = (collectionName) => {
                     results.push({ ...doc.data(), id: doc.id });
                 });
                 setDocuments(results);
-                setError(null);
+                setCollectionError(null);
                 setIsLoading(false);
             },
             (error) => {
-                setError(`Could not fetch data! Error: ${error}`);
+                setCollectionError(`Could not fetch data! Error: ${error}`);
                 setIsLoading(false);
             }
         );
@@ -31,5 +31,5 @@ export const useCollection = (collectionName) => {
         return () => unsubscribe();
     }, [collectionName]);
 
-    return { documents, error, isLoading };
+    return { documents, collectionError, isLoading };
 };

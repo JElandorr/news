@@ -7951,6 +7951,9 @@ button:disabled {
 }
 
 .offcanvas-menu-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 30px;
   line-height: 70px;
   position: absolute;
@@ -7965,13 +7968,21 @@ button:disabled {
   border: none;
   background: #343538;
 }
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+  .offcanvas-menu-close {
+    width: 50px;
+    height: 50px;
+    line-height: 55px;
+    left: 10px;
+    font-size: 25px;
+  }
+}
 .offcanvas-menu-close:hover, .offcanvas-menu-close:focus {
   color: #ffffff;
 }
 .offcanvas-menu-close i {
   font-size: 40px;
   line-height: 1;
-  margin-top: 12px;
   transition: 0.3s;
   transform: rotate(0);
 }
@@ -15173,8 +15184,9 @@ button:disabled {
 
 /* blog page */
 .blog-wrap-2 {
+  position: relative;
   box-shadow: 0 3px 5px rgba(85, 85, 85, 0.2);
-  height: 510px;
+  height: 450px;
 }
 .blog-wrap-2 .blog-img-2 {
   position: relative;
@@ -15290,8 +15302,9 @@ button:disabled {
   color: #666;
 }
 .blog-wrap-2 .blog-content-2 .blog-share-comment {
-  display: flex;
-  justify-content: space-between;
+  position: absolute;
+  bottom: 10px; /* Position at the bottom */
+  width: 100%; /* Occupy the full width of the parent */
   margin: 22px 0 0;
 }
 @media only screen and (max-width: 767px) {
@@ -20869,7 +20882,7 @@ h3.cart-page-title {
   background-color: #3d34b8;
 }
 .blog-details-top .blog-details-content {
-  margin-top: 30px;
+  margin-left: 20px;
 }
 .blog-details-top .blog-details-content .blog-meta-2 {
   display: flex;
@@ -20925,6 +20938,8 @@ h3.cart-page-title {
   }
 }
 .blog-details-top .blog-details-content p {
+  font-size: 20px;
+  font-weight: 500;
   line-height: 26px;
   margin: 0;
 }
@@ -20954,7 +20969,8 @@ h3.cart-page-title {
 }
 
 .dec-img-wrapper {
-  margin-top: 50px;
+  margin: 20px;
+  text-align: justify;
 }
 @media only screen and (max-width: 767px) {
   .dec-img-wrapper {
@@ -20969,17 +20985,20 @@ h3.cart-page-title {
     margin-bottom: 30px;
   }
 }
+.dec-img-wrapper p {
+  text-indent: 20px;
+}
 
 .tag-share {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 30px 0 30px;
+  margin: 30px 20px 30px;
 }
 @media only screen and (max-width: 767px) {
   .tag-share {
     display: block;
-    margin: 20px 0 25px;
+    margin: 20px 20px 25px;
   }
 }
 @media only screen and (max-width: 767px) {
@@ -21017,6 +21036,7 @@ h3.cart-page-title {
 }
 
 .next-previous-post {
+  margin: 0 20px 0;
   display: flex;
   justify-content: space-between;
   padding: 18px 0 17px;

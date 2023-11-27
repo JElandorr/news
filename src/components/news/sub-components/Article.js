@@ -11,14 +11,14 @@ import "swiper/css";
 import { useCollection } from "../../../hooks/useCollection";
 
 import Preloader from "../../preloader/Preloader";
-import { dateTimeFormatter } from "../../utils/dateFormatter";
+import { dateTimeFormatterFromSeconds } from "../../utils/dateFormatter";
 
 // import { articles } from "../../dataStructures/examples/articles_example";
 
 const Article = () => {
     const [articleData, setArticleData] = useState(null);
     const { article } = useParams();
-    const { documents, error, isLoading } = useCollection("articles");
+    const { documents, collectionError, isLoading } = useCollection("articles");
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -30,16 +30,16 @@ const Article = () => {
     // console.log("documents", documents);
     // console.log("articleData", articleData);
     // console.log("articleData typeof", typeof articleData);
-    // console.log("error", error);
+    // console.log("collectionError", collectionError);
 
-    if (error) {
-        return <p>{error}</p>;
+    if (collectionError) {
+        return <p>{collectionError}</p>;
     }
 
     let formattedDate = "";
 
     if (articleData) {
-        formattedDate = dateTimeFormatter(articleData.createdAt, true, "long");
+        formattedDate = dateTimeFormatterFromSeconds(articleData.createdAt, true, "long");
     }
 
     return (

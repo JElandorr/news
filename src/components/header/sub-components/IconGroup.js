@@ -22,14 +22,10 @@ const IconGroup = ({ iconWhiteClass }) => {
         }
     };
 
-    // console.log("IconGroup");
     const triggerMobileMenu = () => {
         const offcanvasMobileMenu = document.querySelector("#offcanvas-mobile-menu");
         offcanvasMobileMenu.classList.add("active");
     };
-    //   const { compareItems } = useSelector((state) => state.compare);
-    //   const { wishlistItems } = useSelector((state) => state.wishlist);
-    //   const { cartItems } = useSelector((state) => state.cart);
 
     const handleGetUser = async (e) => {
         e.preventDefault();
@@ -66,6 +62,9 @@ const IconGroup = ({ iconWhiteClass }) => {
                                 {/* <p onClick={handleGetUser}>Hello, {user.email}</p> */}
                                 <li>
                                     <Link to={process.env.PUBLIC_URL + "/my-account"}>My account</Link>
+                                </li>
+                                <li>
+                                    <Link to={process.env.PUBLIC_URL + "/my-articles"}>My articles</Link>
                                 </li>
                                 <li>
                                     <Link to={process.env.PUBLIC_URL + "/create-new-article"}>Create Article</Link>

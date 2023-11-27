@@ -29,6 +29,7 @@ function App() {
 
                         {/* Articles */}
                         <Route path="/create-new-article" element={user ? <CreateArticlePage /> : <LoginPage />} />
+                        <Route path="/my-articles" element={<Home />} />
 
                         {/* Login and Register */}
                         <Route path="/login" element={!user ? <LoginPage /> : <Navigate to="/" />} />

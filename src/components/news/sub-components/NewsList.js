@@ -5,8 +5,15 @@ import ArticleMini from "./ArticleMini";
 // import { articles } from "../../dataStructures/examples/articles_example";
 
 const NewsList = ({ articles }) => {
+    // console.log("articles", articles);
     return (
         <>
+            {articles === null ||
+                (articles.length <= 0 && (
+                    <p className="text-center" style={{ fontSize: "24px" }}>
+                        No articles to display!
+                    </p>
+                ))}
             {articles?.map((article) => (
                 <ArticleMini key={article.id} article={article} />
             ))}
