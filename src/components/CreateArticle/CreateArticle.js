@@ -24,7 +24,6 @@ import CreateArticleTitle from "./CreateArticleTitle.js";
 import CreateArticleSubTitle from "./CreateArticleSubTitle.js";
 import CreateArticleMainBody from "./CreateArticleMainBody.js";
 import CreateArticleCategories from "./CreateArticleCategories.js";
-import CreateArticleImages from "./CreateArticleImages.js";
 
 const CreateArticle = () => {
     const [article, setArticle] = useState(articleIni);

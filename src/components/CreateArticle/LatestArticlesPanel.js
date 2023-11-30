@@ -22,7 +22,7 @@ const LatestArticlesPanel = ({ spaceTopClass, spaceBottomClass }) => {
     const myLastThreeArticles = myArticles?.slice(0, 3);
 
     // console.log("user", user);
-    console.log("myArticles", myArticles);
+    // console.log("myArticles", myArticles);
     // console.log("documents", documents);
 
     return (
