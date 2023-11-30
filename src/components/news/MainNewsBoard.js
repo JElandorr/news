@@ -21,7 +21,7 @@ const MainNewsBoard = () => {
 
     useEffect(() => {
         if (documents) {
-            setArticles(documents);
+            setArticles(documents.sort((a, b) => b.createdAt - a.createdAt));
         }
     }, [documents]);
 
