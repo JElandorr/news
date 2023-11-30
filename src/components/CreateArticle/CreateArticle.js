@@ -70,6 +70,7 @@ const CreateArticle = () => {
         e.preventDefault();
         console.log(image);
         setArticle({ ...article, images: article.images.filter((img) => img !== image) });
+        setNewImageUrl("");
     };
 
     const toggleSelectCategory = (category) => {
@@ -95,6 +96,7 @@ const CreateArticle = () => {
     // console.log(article);
     // console.log(user);
     // console.log(response);
+    // console.log("newImageUrl", newImageUrl);
 
     return (
         <Fragment>
@@ -122,12 +124,58 @@ const CreateArticle = () => {
                                             categories={categories}
                                             toggleSelectCategory={toggleSelectCategory}
                                         />
-                                        <CreateArticleImages
-                                            article={article}
-                                            handleImageDelete={handleImageDelete}
-                                            handleImageInputChange={handleImageInputChange}
-                                            handleImageSubmit={handleImageSubmit}
-                                        />
+                                        <div className="billing-info mb-20">
+                                            <label>Article Pictures</label>
+                                            {article?.images && (
+                                                <div className="row">
+                                                    {article?.images?.map((image, key) => {
+                                                        console.log(image);
+                                                        // console.log(key);
+                                                        return (
+                                                            <div
+                                                                className={`col-lg-3 col-md-4 col-sm-6 col-xxs-12 image-holder`}
+                                                                key={key}
+                                                                style={{ backgroundImage: `url(${image})` }}
+                                                            >
+                                                                {/* <img src={image} alt="article" /> */}
+                                                                <div
+                                                                    className={`img-delete-btn`}
+                                                                    onClick={(e) => handleImageDelete(e, image)}
+                                                                >
+                                                                    <i className="fa-solid fa-xmark"></i>
+                                                                </div>
+                                                                <Link
+                                                                    to={`${image}`}
+                                                                    className={`img-show-btn`}
+                                                                    target="_blank"
+                                                                >
+                                                                    <i className="fa-solid fa-arrow-up-right-from-square"></i>
+                                                                </Link>
+                                                            </div>
+                                                        );
+                                                    })}
+                                                </div>
+                                            )}
+                                            <div className="row add-image">
+                                                <div className="col-lg-10 col-md-10">
+                                                    <input
+                                                        className="add-image-input"
+                                                        id="images"
+                                                        type="text"
+                                                        name="images"
+                                                        placeholder="Article Images"
+                                                        value={newImageUrl}
+                                                        onChange={handleImageInputChange}
+                                                    />
+                                                </div>
+                                                <div
+                                                    className="col-lg-2 col-md-2 add-image-btn"
+                                                    onClick={handleImageSubmit}
+                                                >
+                                                    Add Image
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div className="row billing-info">
                                             {/* <div className="col-lg-10 col-md-10">
                                                 <input

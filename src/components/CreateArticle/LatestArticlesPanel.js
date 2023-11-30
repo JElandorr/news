@@ -22,7 +22,7 @@ const LatestArticlesPanel = ({ spaceTopClass, spaceBottomClass }) => {
     const myLastThreeArticles = myArticles?.slice(0, 3);
 
     // console.log("user", user);
-    // console.log("myArticles", myArticles);
+    console.log("myArticles", myArticles);
     // console.log("documents", documents);
 
     return (
@@ -35,6 +35,11 @@ const LatestArticlesPanel = ({ spaceTopClass, spaceBottomClass }) => {
                             <LatestArticlesSingle article={article} />
                         </div>
                     ))}
+                    {myArticles?.length === 0 && (
+                        <div className="col-lg-12 col-xs-12">
+                            <p className="text-center pb-20 pt20">You have no articles yet.</p>
+                        </div>
+                    )}
                 </div>
                 {/* <div className="pos-rel">
                     <button className="btn btn-primary">&#60;&#60; Prev</button>
