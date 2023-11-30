@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
-import CreateArticle from "../articles/CreateArticle";
+import CreateArticle from "../CreateArticle/CreateArticle";
 
 const CreateArticlePage = () => {
     return (

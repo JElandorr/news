@@ -20939,7 +20939,7 @@ h3.cart-page-title {
 }
 .blog-details-top .blog-details-content p {
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 26px;
   margin: 0;
 }
@@ -20986,6 +20986,7 @@ h3.cart-page-title {
   }
 }
 .dec-img-wrapper p {
+  font-size: 20px;
   text-indent: 20px;
 }
 
