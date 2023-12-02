@@ -48,9 +48,8 @@ const Article = () => {
             } else {
                 setNextArticleSlug(false);
             }
+            window.scrollTo(0, 0);
         }
-
-        window.scrollTo(0, 0);
 
         return () => {
             setArticleData(null);
@@ -73,6 +72,8 @@ const Article = () => {
     if (articleData) {
         formattedDate = dateTimeFormatterFromSeconds(articleData.createdAt, true, "long");
     }
+    
+    window.scrollTo(0, 0);
 
     return (
         <>
@@ -151,9 +152,7 @@ const Article = () => {
                             <ul>
                                 {currentCategories?.map((category) => (
                                     <li key={category.id}>
-                                        <Link to={process.env.PUBLIC_URL + `${category.path}`}>
-                                            {category.name}
-                                        </Link>
+                                        <Link to={process.env.PUBLIC_URL + `${category.path}`}>{category.name}</Link>
                                     </li>
                                 ))}
                                 {/* <li>

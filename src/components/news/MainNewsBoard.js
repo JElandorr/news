@@ -44,6 +44,7 @@ const MainNewsBoard = () => {
                         break;
                     case "/":
                         filteredArticles = [...documents];
+                        filteredArticles = sortArticlesArrayByDate(filteredArticles);
                         break;
                     default:
                         currentCat = categoriesIni.find((category) => category.path === pathname);
@@ -58,6 +59,7 @@ const MainNewsBoard = () => {
                         break;
                     case "/":
                         filteredArticles = [...documents];
+                        filteredArticles = sortArticlesArrayByDate(filteredArticles);
                         break;
                     default:
                         currentCat = categoriesIni.find((category) => category.path === pathname);
@@ -91,7 +93,10 @@ const MainNewsBoard = () => {
     let breadcrumbPages = [];
 
     if (pathname === "/") {
-        breadcrumbPages = [{ label: "NEWS", path: process.env.PUBLIC_URL + "/" }];
+        breadcrumbPages = [
+            { label: "NEWS", path: process.env.PUBLIC_URL + "/" },
+            { label: "ВСИЧКИ", path: process.env.PUBLIC_URL + "/my-articles" },
+        ];
     } else if (pathname === "/my-articles") {
         breadcrumbPages = [
             { label: "NEWS", path: process.env.PUBLIC_URL + "/" },
@@ -100,7 +105,7 @@ const MainNewsBoard = () => {
     } else {
         breadcrumbPages = [
             { label: "NEWS", path: process.env.PUBLIC_URL + "/" },
-            { label: currentCategory?.name, path: process.env.PUBLIC_URL + currentCategory?.path },
+            { label: `${currentCategory?.name}`, path: process.env.PUBLIC_URL + currentCategory?.path },
         ];
     }
 
@@ -110,7 +115,11 @@ const MainNewsBoard = () => {
                 <Preloader />
             ) : (
                 <Fragment>
-                    <SEO title="ProjectNews" titleTemplate="NewsBoard" description="NewsBoard - ProjectNews" />
+                    <SEO
+                        title="ProjectNews"
+                        titleTemplate={currentCategory ? currentCategory.name : "NewsBoard"}
+                        description="NewsBoard - ProjectNews"
+                    />
                     <BreadcrumbWrap pages={breadcrumbPages} />
                     <div className="blog-area pt-100 pb-100">
                         <div className="container">
