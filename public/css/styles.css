@@ -5852,6 +5852,22 @@ button:disabled {
   position: relative;
 }
 
+.pos-rel {
+  position: relative;
+}
+
+.pos-abs {
+  position: absolute;
+}
+
+.r0 {
+  right: 0;
+}
+
+.l0 {
+  left: 0;
+}
+
 /*--- flone preloader ---*/
 .flone-preloader-wrapper {
   position: fixed;
@@ -7988,6 +8004,7 @@ button:disabled {
 }
 .offcanvas-menu-close:hover i {
   transform: rotate(-90deg);
+  color: #3d34b8;
 }
 
 .offcanvas-wrapper {
@@ -21394,7 +21411,7 @@ h3.cart-page-title {
   color: #000;
   content: "\f107";
   display: inline-block;
-  font-family: "FontAwesome";
+  font-family: "Font Awesome 6 Free";
   font-size: 16px;
   position: absolute;
   right: 10px;

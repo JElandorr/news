@@ -27,7 +27,7 @@ import CreateArticleCategories from "./CreateArticleCategories.js";
 
 const CreateArticle = () => {
     const [article, setArticle] = useState(articleIni);
-    const [categories, setCategories] = useState(categoriesIni);
+    const [categories, setCategories] = useState(categoriesIni.map((category) => category.name));
     // const [selectedCategories, setSelectedCategories] = useState([]);
     const [newImageUrl, setNewImageUrl] = useState("");
 
