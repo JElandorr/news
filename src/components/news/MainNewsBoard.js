@@ -16,6 +16,7 @@ import { categoriesIni } from "../dateStructures/categoriesIni";
 
 const MainNewsBoard = () => {
     const [articles, setArticles] = useState(null);
+    const [currentCategory, setCurrentCategory] = useState(null);
     const { pathname } = useLocation();
     const { documents, collectionError, isLoading } = useCollection("articles");
     const { user } = useAuthContext();
@@ -25,46 +26,49 @@ const MainNewsBoard = () => {
         let news = [];
         if (documents) {
             news = [...documents];
-            console.log("news1", news);
-            news.sort((a, b) => b.createdAt - a.createdAt);
-            console.log("news2", news);
-            if (
-                categoriesIni.filter((category) => category.path === pathname) &&
-                categoriesIni.filter((category) => category.path === pathname).length > 0
-            ) {
-                const categoryIni = categoriesIni.filter((category) => {
-                    console.log("category", category);
-                    console.log("category.path", category.path);
-                    console.log("pathname", pathname);
-                    return category.path === pathname})[0];
-                console.log("categoryIni", categoryIni);
-                news.filter((article) => article.categories.includes(categoryIni.name));
-                console.log("news3", news);
-            }
             setArticles(news);
         }
         return () => {
             setArticles(null);
         };
-    }, [documents, pathname]);
+    }, [documents]);
 
     useEffect(() => {
+        let currentCat;
         if (documents) {
             let filteredArticles = [];
             if (user) {
-                if (pathname === "/my-articles") {
-                    filteredArticles = documents.filter((article) => article.owner_Id === user.uid);
-                } else {
-                    filteredArticles = documents;
+                switch (pathname) {
+                    case "/my-articles":
+                        filteredArticles = documents.filter((article) => article.owner_Id === user.uid);
+                        break;
+                    case "/":
+                        filteredArticles = [...documents];
+                        break;
+                    default:
+                        currentCat = categoriesIni.find((category) => category.path === pathname);
+                        filteredArticles = documents.filter((article) => article.categories.includes(currentCat.name));
+                        filteredArticles = sortArticlesArrayByDate(filteredArticles);
+                        break;
                 }
             } else {
-                if (pathname === "/my-articles") {
-                    navigate("/login");
-                } else {
-                    filteredArticles = documents;
+                switch (pathname) {
+                    case "/my-articles":
+                        navigate("/login");
+                        break;
+                    case "/":
+                        filteredArticles = [...documents];
+                        break;
+                    default:
+                        currentCat = categoriesIni.find((category) => category.path === pathname);
+                        filteredArticles = documents.filter((article) => article.categories.includes(currentCat.name));
+                        filteredArticles = sortArticlesArrayByDate(filteredArticles);
+                        break;
                 }
             }
+
             setArticles(filteredArticles);
+            setCurrentCategory(currentCat);
         }
         return () => {
             setArticles(null);
@@ -75,8 +79,30 @@ const MainNewsBoard = () => {
         return <p>{collectionError}</p>;
     }
 
-    console.log("pathname", pathname);
-    console.log("articles", articles);
+    function sortArticlesArrayByDate(array) {
+        return array.sort((a, b) => {
+            return b.createdAt.seconds - a.createdAt.seconds;
+        });
+    }
+
+    // console.log("pathname", pathname);
+    // console.log("articles", articles);
+
+    let breadcrumbPages = [];
+
+    if (pathname === "/") {
+        breadcrumbPages = [{ label: "NEWS", path: process.env.PUBLIC_URL + "/" }];
+    } else if (pathname === "/my-articles") {
+        breadcrumbPages = [
+            { label: "NEWS", path: process.env.PUBLIC_URL + "/" },
+            { label: "My Articles", path: process.env.PUBLIC_URL + "/my-articles" },
+        ];
+    } else {
+        breadcrumbPages = [
+            { label: "NEWS", path: process.env.PUBLIC_URL + "/" },
+            { label: currentCategory?.name, path: process.env.PUBLIC_URL + currentCategory?.path },
+        ];
+    }
 
     return (
         <>
@@ -85,12 +111,7 @@ const MainNewsBoard = () => {
             ) : (
                 <Fragment>
                     <SEO title="ProjectNews" titleTemplate="NewsBoard" description="NewsBoard - ProjectNews" />
-                    <BreadcrumbWrap
-                        pages={[
-                            { label: "Home", path: process.env.PUBLIC_URL + "/" },
-                            { label: "NewsBoard", path: process.env.PUBLIC_URL + "/news" },
-                        ]}
-                    />
+                    <BreadcrumbWrap pages={breadcrumbPages} />
                     <div className="blog-area pt-100 pb-100">
                         <div className="container">
                             <div className="row">
@@ -99,7 +120,7 @@ const MainNewsBoard = () => {
                                         <div className="row">
                                             <NewsList articles={articles} />
                                         </div>
-                                        {articles && articles.length > 0 ? <NewsPagination /> : null}
+                                        {articles && articles.length > 12 ? <NewsPagination /> : null}
                                     </div>
                                 </div>
                                 <div className="col-lg-2">
