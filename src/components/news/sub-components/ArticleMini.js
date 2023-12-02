@@ -26,7 +26,7 @@ const ArticleMini = ({ article }) => {
                         <ul>
                             <li>{formattedDate}</li>
                             <li>
-                                <Link to={process.env.PUBLIC_URL + "news/" + article.slug}>
+                                <Link to={process.env.PUBLIC_URL + "/news/" + article.slug}>
                                     {article.comments?.length && article.comments.length}{" "}
                                     <FontAwesomeIcon icon={faCommentAlt} />
                                 </Link>
@@ -34,12 +34,12 @@ const ArticleMini = ({ article }) => {
                         </ul>
                     </div>
                     <h4>
-                        <Link to={process.env.PUBLIC_URL + "news/" + article.slug}>{article.title}</Link>
+                        <Link to={process.env.PUBLIC_URL + "/news/" + article.slug}>{article.title}</Link>
                     </h4>
                     <p>{article.description}</p>
                     <div className="blog-share-comment">
                         <div className="blog-btn-2">
-                            <Link to={process.env.PUBLIC_URL + "news/" + article.slug}>read more</Link>
+                            <Link to={process.env.PUBLIC_URL + "/news/" + article.slug}>read more</Link>
                         </div>
                         <div className="blog-share">
                             <span>share :</span>

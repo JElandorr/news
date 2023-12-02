@@ -26,6 +26,7 @@ function App() {
                         {/* News */}
                         <Route path="/news" element={<Home />} />
                         <Route path="/news/:article" element={<ArticlePage />} />
+                        <Route path="/news/category/:category" element={<Home />} />
 
                         {/* Articles */}
                         <Route path="/create-new-article" element={user ? <CreateArticlePage /> : <LoginPage />} />
