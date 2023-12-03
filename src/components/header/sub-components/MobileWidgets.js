@@ -1,33 +1,55 @@
+import React from "react";
+import { Link } from "react-router-dom";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faComment, faCommentAlt } from "@fortawesome/free-solid-svg-icons";
+import { faXTwitter } from "@fortawesome/free-brands-svg-icons";
+
 const MobileWidgets = () => {
     return (
         <div className="offcanvas-widget-area">
-            <div className="off-canvas-contact-widget">
-                <div className="header-contact-info">
-                    <ul className="header-contact-info__list">
-                        <li>
-                            <i className="fa fa-phone"></i> <a href="tel://12452456012">(1245) 2456 012 </a>
-                        </li>
-                        <li>
-                            <i className="fa fa-envelope"></i>{" "}
-                            <a href="mailto:info@yourdomain.com">info@yourdomain.com</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
             {/*Off Canvas Widget Social Start*/}
-            <div className="off-canvas-widget-social">
-                <a href="//twitter.com" title="Twitter">
-                    <i className="fa fa-twitter"></i>
-                </a>
-                <a href="//instagram.com" title="Instagram">
-                    <i className="fa fa-instagram"></i>
-                </a>
-                <a href="//facebook.com" title="Facebook">
-                    <i className="fa fa-facebook"></i>
-                </a>
-                <a href="//pinterest.com" title="Pinterest">
-                    <i className="fa fa-pinterest"></i>
-                </a>
+            <div className="blog-wrap-2-mobile">
+                <div className="off-canvas-contact-widget">
+                    <div className="header-contact-info">
+                        <ul className="header-contact-info__list">
+                        <span>Contact us:</span>
+                            <li>
+                                <i className="fa fa-phone"></i> <a href="tel://12452456012">(123) 3456-7890 </a>
+                            </li>
+                            <li>
+                                <i className="fa fa-envelope"></i>{" "}
+                                <a href="mailto:info@yourdomain.com">project_news@elandorr.com</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="blog-content-2">
+                    <div className="blog-share-comment">
+                        <div className="blog-share">
+                            <span>share :</span>
+                            <div className="share-social">
+                                <ul>
+                                    <li>
+                                        <Link className="facebook" to="//facebook.com" target="_blank">
+                                            <i className="fa-brands fa-facebook-f"></i>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link className="twitter" to="//twitter.com" target="_blank">
+                                            <FontAwesomeIcon icon={faXTwitter} />
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link className="instagram" to="//instagram.com" target="_blank">
+                                            <i className="fa-brands fa-instagram"></i>
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             {/*Off Canvas Widget Social End*/}
         </div>
