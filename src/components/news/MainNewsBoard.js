@@ -125,12 +125,12 @@ const MainNewsBoard = () => {
                         <div className="container">
                             <div className="row">
                                 <div className="col-lg-10">
-                                    <div className="mr-20">
+                                    {/* <div className="mr-20"> */}
                                         <div className="row">
                                             <NewsList articles={articles} />
                                         </div>
                                         {articles && articles.length > 12 ? <NewsPagination /> : null}
-                                    </div>
+                                    {/* </div> */}
                                 </div>
                                 <div className="col-lg-2">
                                     <NewsSidebar />

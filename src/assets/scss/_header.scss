@@ -95,12 +95,12 @@
     height: 80px;
     margin-top: 10px;
     margin-bottom: 10px;
-    
-    img{
+
+    img {
         width: 100%;
         height: 100%;
     }
-    
+
     @media #{$xx-layout} {
         width: 80px;
         height: 80px;
@@ -179,7 +179,7 @@
 
                 display: inline-block;
 
-                padding: 0 15px;
+                padding: 0 10px;
                 ul.submenu {
                     position: absolute;
                     z-index: 999;
@@ -376,8 +376,10 @@
                     padding: 0 10px;
                 }
                 > a {
-                    font-size: 15px;
-                    font-weight: 500;
+                    line-height: 32px;
+                    vertical-align: middle;
+                    font-size: 17px;
+                    font-weight: 600;
                     line-height: 94px;
 
                     display: inline-block;
@@ -402,6 +404,8 @@
                 }
                 &:hover a {
                     color: $theme-color;
+                    font-size: 18px;
+                    font-weight: 700;
                 }
             }
         }
