@@ -20519,6 +20519,10 @@ h3.cart-page-title {
 .billing-info-wrap .billing-select .danger {
   border: 1px solid red;
 }
+.billing-info-wrap .billing-info .warning,
+.billing-info-wrap .billing-select .warning {
+  color: red;
+}
 .billing-info-wrap .billing-info .add-image-btn,
 .billing-info-wrap .billing-select .add-image-btn {
   text-align: center;
@@ -20704,6 +20708,9 @@ h3.cart-page-title {
   color: #333;
   border: 1px solid #e6e6e6;
   background: transparent none repeat scroll 0 0;
+}
+.billing-info-wrap .additional-info-wrap .danger {
+  border: 1px solid red;
 }
 .billing-info-wrap .different-address {
   display: none;
