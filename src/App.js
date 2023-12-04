@@ -12,6 +12,7 @@ import LogoutPage from "./components/pages/LogoutPage";
 import CreateArticlePage from "./components/pages/CreateArticlePage";
 
 import Admin from "./components/pages/Admin/Admin";
+import MyArticlesPage from "./components/pages/MyArticlesPage";
 
 function App() {
     const { user, authIsReady } = useAuthContext();
@@ -30,7 +31,7 @@ function App() {
 
                         {/* Articles */}
                         <Route path="/create-new-article" element={user ? <CreateArticlePage /> : <LoginPage />} />
-                        <Route path="/my-articles" element={<Home />} />
+                        <Route path="/my-articles" element={user ? <MyArticlesPage /> : <LoginPage />} />
 
                         {/* Login and Register */}
                         <Route path="/login" element={!user ? <LoginPage /> : <Navigate to="/" />} />

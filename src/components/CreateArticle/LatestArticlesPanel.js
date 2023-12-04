@@ -13,13 +13,9 @@ import { useFirestore } from "../../hooks/useFirestore.js";
 
 const LatestArticlesPanel = ({ spaceTopClass, spaceBottomClass }) => {
     const { user } = useAuthContext();
-    const { documents, collectionError, isLoading } = useCollection("articles");
+    const { documents, collectionError, isLoading } = useCollection("articles", ["owner_Id", "==", user.uid]);
 
-    const myArticles = documents
-        ?.sort((a, b) => b.createdAt - a.createdAt)
-        .filter((article) => article.owner_Id === user?.uid);
-
-    const myLastThreeArticles = myArticles?.slice(0, 3);
+    const myLastThreeArticles = documents?.slice(0, 3);
 
     // console.log("user", user);
     // console.log("myArticles", myArticles);
@@ -35,7 +31,7 @@ const LatestArticlesPanel = ({ spaceTopClass, spaceBottomClass }) => {
                             <LatestArticlesSingle article={article} />
                         </div>
                     ))}
-                    {myArticles?.length === 0 && (
+                    {myLastThreeArticles?.length === 0 && (
                         <div className="col-lg-12 col-xs-12">
                             <p className="text-center pb-20 pt20">You have no articles yet.</p>
                         </div>

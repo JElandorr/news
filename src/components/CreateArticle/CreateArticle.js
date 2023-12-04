@@ -30,22 +30,13 @@ const CreateArticle = () => {
     const [categories, setCategories] = useState(categoriesIni.map((category) => category.name));
     // const [selectedCategories, setSelectedCategories] = useState([]);
     const [newImageUrl, setNewImageUrl] = useState("");
-
+    
     // const [warnings, setWarnings] = useState({}); // ["warning1", "warning2"
-
-    const { addDocument, response } = useFirestore("articles");
-    const { user } = useAuthContext();
-
-    // const { user } = useContext(AuthContext);
-    const navigate = useNavigate();
-
-    // useEffect(() => {
-    //     if (!user) {
-    //         navigate("/login");
-    //     }
-    // }, [user]);
-
+    
     let { pathname } = useLocation();
+    const { user } = useAuthContext();
+    const { addDocument, response } = useFirestore("articles");
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;

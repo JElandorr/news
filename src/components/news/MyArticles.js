@@ -14,10 +14,12 @@ import Preloader from "../preloader/Preloader";
 
 import { categoriesIni } from "../dateStructures/categoriesIni";
 
-const MainNewsBoard = () => {
+const MyArticles = () => {
     const [articles, setArticles] = useState(null);
     const { pathname } = useLocation();
-    const { documents, collectionError, isLoading } = useCollection("articles");
+    const { user } = useAuthContext();
+    const { documents, collectionError, isLoading } = useCollection("articles", ["owner_Id", "==", user.uid]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         let news = [];
@@ -31,8 +33,14 @@ const MainNewsBoard = () => {
                 categoriesIni.filter((category) => category.path === pathname).length > 0
             ) {
                 const categoryIni = categoriesIni.filter((category) => {
-                    return category.path === pathname})[0];
+                    // console.log("category", category);
+                    // console.log("category.path", category.path);
+                    // console.log("pathname", pathname);
+                    return category.path === pathname;
+                })[0];
+                // console.log("categoryIni", categoryIni);
                 news.filter((article) => article.categories.includes(categoryIni.name));
+                // console.log("news3", news);
             }
             setArticles(news);
         }
@@ -45,6 +53,10 @@ const MainNewsBoard = () => {
         return <p>{collectionError}</p>;
     }
 
+    // console.log("pathname", pathname);
+    // console.log("articles", articles);
+    // console.log("user", user);
+
     return (
         <>
             {isLoading ? (
@@ -54,8 +66,8 @@ const MainNewsBoard = () => {
                     <SEO title="ProjectNews" titleTemplate="NewsBoard" description="NewsBoard - ProjectNews" />
                     <BreadcrumbWrap
                         pages={[
-                            { label: "Home", path: process.env.PUBLIC_URL + "/" },
-                            { label: "NewsBoard", path: process.env.PUBLIC_URL + "/news" },
+                            { label: "News", path: process.env.PUBLIC_URL + "/" },
+                            { label: `${user.displayName}'s Articles`, path: process.env.PUBLIC_URL + "/news" },
                         ]}
                     />
                     <div className="blog-area pt-100 pb-100">
@@ -80,4 +92,4 @@ const MainNewsBoard = () => {
         </>
     );
 };
-export default MainNewsBoard;
+export default MyArticles;
