@@ -15,9 +15,23 @@ import Preloader from "../preloader/Preloader";
 import { categoriesIni } from "../dateStructures/categoriesIni";
 
 const MainNewsBoard = () => {
+    const [queryParams, setQueryParams] = useState(null);
     const [articles, setArticles] = useState(null);
     const [currentCategory, setCurrentCategory] = useState(null);
     const { pathname } = useLocation();
+
+    // useEffect(() => {
+    //     if (pathname !== "/") {
+    //         const category = categoriesIni.filter((category) => {
+    //             if (category.path === pathname) {
+    //                 console.log("category", category);
+    //                 return category;
+    //             }
+    //         });
+    //         setQueryParams(category ? ["categories", "array-contains", category[0].name] : null);
+    //     }
+    // }, [pathname]);
+
     const { documents, collectionError, isLoading } = useCollection("articles");
 
     useEffect(() => {
@@ -25,22 +39,23 @@ const MainNewsBoard = () => {
         if (documents) {
             news = [...documents];
             // console.log("news1", news);
-            news.sort((a, b) => b.createdAt - a.createdAt);
+            news = sortArticlesArrayByDate(news);
             // console.log("news2", news);
-            if (
-                categoriesIni.filter((category) => category.path === pathname) &&
-                categoriesIni.filter((category) => category.path === pathname).length > 0
-            ) {
+            if (categoriesIni.filter((category) => category.path === pathname).length > 0) {
                 const categoryIni = categoriesIni.filter((category) => {
-                    return category.path === pathname})[0];
-                news.filter((article) => article.categories.includes(categoryIni.name));
+                    return category.path === pathname;
+                })[0];
+                console.log("categoryIni", categoryIni);
+                console.log("categoryIni", typeof categoryIni.name);
+                news = news.filter((article) => article.categories.includes(categoryIni.name));
+                setCurrentCategory(categoryIni);
             }
             setArticles(news);
         }
         return () => {
             setArticles(null);
         };
-    }, [documents]);
+    }, [documents, pathname]);
 
     if (collectionError) {
         return <p>{collectionError}</p>;
@@ -53,7 +68,10 @@ const MainNewsBoard = () => {
     }
 
     // console.log("pathname", pathname);
-    // console.log("articles", articles);
+    console.log("articles", articles);
+
+    console.log("documents", documents);
+    console.log("queryParams", queryParams);
 
     let breadcrumbPages = [];
 
@@ -91,10 +109,10 @@ const MainNewsBoard = () => {
                             <div className="row">
                                 <div className="col-lg-10">
                                     {/* <div className="mr-20"> */}
-                                        <div className="row">
-                                            <NewsList articles={articles} />
-                                        </div>
-                                        {articles && articles.length > 12 ? <NewsPagination /> : null}
+                                    <div className="row">
+                                        <NewsList articles={articles} />
+                                    </div>
+                                    {articles && articles.length > 12 ? <NewsPagination /> : null}
                                     {/* </div> */}
                                 </div>
                                 <div className="col-lg-2">
