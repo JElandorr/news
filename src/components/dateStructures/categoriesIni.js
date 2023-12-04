@@ -1,5 +1,6 @@
 export const categoriesIni = [
     {
+        id: 1,
         name: "България",
         path: "/news/category/bulgaria",
         primary: true,
@@ -7,6 +8,7 @@ export const categoriesIni = [
         important: true,
     },
     {
+        id: 2,
         name: "Свят",
         path: "/news/category/world",
         primary: true,
@@ -14,6 +16,7 @@ export const categoriesIni = [
         important: true,
     },
     {
+        id: 3,
         name: "Политика",
         path: "/news/category/politics",
         primary: true,
@@ -21,6 +24,7 @@ export const categoriesIni = [
         important: true,
     },
     {
+        id: 4,
         name: "Икономика",
         path: "/news/category/economy",
         primary: true,
@@ -28,6 +32,7 @@ export const categoriesIni = [
         important: true,
     },
     {
+        id: 5,
         name: "Криминални",
         path: "/news/category/crime",
         primary: true,
@@ -35,6 +40,7 @@ export const categoriesIni = [
         important: true,
     },
     {
+        id: 6,
         name: "Спорт",
         path: "/news/category/sport",
         primary: true,
@@ -42,6 +48,7 @@ export const categoriesIni = [
         important: true,
     },
     {
+        id: 7,
         name: "Авто",
         path: "/news/category/auto",
         primary: false,
@@ -49,6 +56,7 @@ export const categoriesIni = [
         important: false,
     },
     {
+        id: 8,
         name: "Технологии",
         path: "/news/category/technology",
         primary: false,
@@ -56,6 +64,7 @@ export const categoriesIni = [
         important: false,
     },
     {
+        id: 9,
         name: "Наука",
         path: "/news/category/science",
         primary: false,
@@ -63,6 +72,7 @@ export const categoriesIni = [
         important: false,
     },
     {
+        id: 10,
         name: "Анализи",
         path: "/news/category/analysis",
         primary: false,
@@ -70,6 +80,7 @@ export const categoriesIni = [
         important: false,
     },
     {
+        id: 11,
         name: "Интервюта",
         path: "/news/category/interview",
         primary: false,
@@ -77,6 +88,7 @@ export const categoriesIni = [
         important: false,
     },
     {
+        id: 12,
         name: "Мнения",
         path: "/news/category/opinion",
         primary: false,
@@ -84,6 +96,7 @@ export const categoriesIni = [
         important: false,
     },
     {
+        id: 13,
         name: "Култура",
         path: "/news/category/culture",
         primary: false,
@@ -91,6 +104,7 @@ export const categoriesIni = [
         important: false,
     },
     {
+        id: 14,
         name: "Образование",
         path: "/news/category/education",
         primary: false,
@@ -98,6 +112,7 @@ export const categoriesIni = [
         important: false,
     },
     {
+        id: 15,
         name: "Семейство",
         path: "/news/category/family",
         primary: false,
@@ -105,6 +120,7 @@ export const categoriesIni = [
         important: false,
     },
     {
+        id: 16,
         name: "Любопитно",
         path: "/news/category/love",
         primary: false,

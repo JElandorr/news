@@ -346,6 +346,115 @@
   }
 }
 
+.blog-wrap-2-mobile {
+    position: relative;
+  box-shadow: 0 3px 5px rgba(85, 85, 85, 0.2);
+  height: 140px;
+  .blog-content-2 {
+    padding: 25px 30px 34px;
+    @media #{$lg-layout} {
+      padding: 25px 20px 34px;
+    }
+    @media #{$md-layout} {
+      padding: 25px 20px 34px;
+    }
+    @media #{$xs-layout} {
+      padding: 20px 15px 29px;
+    }
+
+
+
+    .blog-share-comment {
+        position: absolute;
+        bottom: 10px; /* Position at the bottom */
+        width: 100%; /* Occupy the full width of the parent */
+      margin: 22px 0 0;
+      @media #{$xs-layout} {
+        margin: 14px 0 0;
+      }
+
+      .blog-share {
+        span {
+          font-size: 15px;
+
+          display: inline-block;
+          float: left;
+
+          margin-top: 3px;
+          margin-right: 12px;
+
+          text-transform: capitalize;
+
+          color: #333;
+        }
+        .share-social {
+          display: inline-block;
+          float: left;
+          @media #{$xs-layout} {
+            margin-top: 4px;
+          }
+          ul {
+            li {
+              display: inline-block;
+
+              margin-right: 5px;
+              &:last-child {
+                margin-right: 0;
+              }
+              a {
+                font-size: 14px;
+                line-height: 28px;
+
+                display: inline-block;
+
+                width: 30px;
+                height: 30px;
+
+                text-align: center;
+
+                color: #fff;
+                border-radius: 50px;
+                @media #{$xs-layout} {
+                  font-size: 12px;
+                  line-height: 23px;
+
+                  width: 25px;
+                  height: 25px;
+                }
+                &.facebook {
+                  border: 1px solid #3b5998;
+                  background-color: #3b5998;
+                  &:hover {
+                    color: #3b5998;
+                    background-color: transparent;
+                  }
+                }
+                &.twitter {
+                  border: 1px solid #0f1419;
+                  background-color: #0f1419;
+                  &:hover {
+                    color: #0f1419;
+                    background-color: transparent;
+                  }
+                }
+                &.instagram {
+                  border: 1px solid #c32aa3;
+                  background-color: #c32aa3;
+                  &:hover {
+                    color: #c32aa3;
+                    background-color: transparent;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+}
+
 .nav-style-4.owl-carousel {
   .owl-nav {
     div {

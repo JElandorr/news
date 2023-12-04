@@ -11,7 +11,7 @@ const NewsList = ({ articles }) => {
             {articles === null ||
                 (articles.length <= 0 && (
                     <p className="text-center" style={{ fontSize: "24px" }}>
-                        No articles to display!
+                        В този раздел още няма статии!
                     </p>
                 ))}
             {articles?.map((article) => (

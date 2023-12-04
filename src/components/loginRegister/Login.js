@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { useLogin } from "../../hooks/useLogin";
@@ -15,6 +15,16 @@ const Login = ({ validateNewUserInput, clearInputData }) => {
     const { login, loginError, isLoading } = useLogin();
     const [errors, setErrors] = useState(loginError);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        return () => {
+            setErrors((state) => null);
+            setUserInputData({
+                password: "",
+                email: "",
+            });
+        };
+    }, []);
 
     const handleUserInputDataChange = (e) => {
         const targetName = e.target.name;
@@ -46,7 +56,7 @@ const Login = ({ validateNewUserInput, clearInputData }) => {
             setErrors((state) => null);
         }
         const loggedUser = await login(userInputData.email, userInputData.password);
-        console.log("loggedUser", loggedUser);
+        // console.log("loggedUser", loggedUser);
         clearInputData();
     };
 
@@ -67,7 +77,7 @@ const Login = ({ validateNewUserInput, clearInputData }) => {
         });
     }
 
-    console.log("userInputData", userInputData);
+    // console.log("userInputData", userInputData);
 
     return (
         <>
