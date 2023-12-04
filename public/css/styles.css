@@ -6018,15 +6018,44 @@ button:disabled {
 }
 
 .logo {
-  margin-top: 32px;
+  width: 80px;
+  height: 80px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.logo img {
+  width: 100%;
+  height: 100%;
+}
+@media only screen and (min-width: 1366px) and (max-width: 1600px) {
+  .logo {
+    width: 80px;
+    height: 80px;
+  }
+}
+@media only screen and (min-width: 1200px) and (max-width: 1365px) {
+  .logo {
+    width: 80px;
+    height: 80px;
+  }
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .logo {
+    width: 60px;
+    height: 60px;
+  }
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .logo {
+    width: 60px;
+    height: 60px;
     margin-top: 0;
   }
 }
 @media only screen and (max-width: 767px) {
   .logo {
+    width: 60px;
+    height: 60px;
     margin-top: 0;
   }
 }
@@ -6077,7 +6106,7 @@ button:disabled {
 .main-menu nav ul li {
   position: relative;
   display: inline-block;
-  padding: 0 15px;
+  padding: 0 10px;
 }
 .main-menu nav ul li ul.submenu {
   position: absolute;
@@ -6246,9 +6275,11 @@ button:disabled {
   }
 }
 .main-menu nav ul li > a {
-  font-size: 15px;
-  font-weight: 500;
+  line-height: 32px;
+  vertical-align: middle;
+  font-weight: 600;
   line-height: 94px;
+  font-size: 17px;
   display: inline-block;
   letter-spacing: 0.8px;
   color: #555252;
@@ -6259,18 +6290,50 @@ button:disabled {
   top: 0;
   margin-left: 1px;
 }
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
+@media only screen and (min-width: 1366px) and (max-width: 1600px) {
   .main-menu nav ul li > a {
-    font-size: 12px;
+    font-size: 17px;
   }
 }
 @media only screen and (min-width: 1200px) and (max-width: 1365px) {
   .main-menu nav ul li > a {
+    font-size: 15px;
+  }
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .main-menu nav ul li > a {
     font-size: 13px;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .main-menu nav ul li > a {
+    font-size: 15px;
   }
 }
 .main-menu nav ul li:hover a {
   color: #3d34b8;
+  font-size: 18px;
+  font-weight: 700;
+}
+@media only screen and (min-width: 1366px) and (max-width: 1600px) {
+  .main-menu nav ul li:hover a {
+    font-size: 18px;
+  }
+}
+@media only screen and (min-width: 1200px) and (max-width: 1365px) {
+  .main-menu nav ul li:hover a {
+    font-size: 16px;
+  }
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .main-menu nav ul li:hover a {
+    font-size: 14px;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .main-menu nav ul li:hover a {
+    font-size: 16px;
+  }
 }
 .main-menu.menu-white nav ul {
   text-align: left;
@@ -7927,7 +7990,8 @@ button:disabled {
 }
 
 .off-canvas-contact-widget {
-  margin-bottom: 20px;
+  padding-top: 20px;
+  margin: 20px;
 }
 .off-canvas-contact-widget .header-contact-info {
   flex-basis: 33.33%;
@@ -15412,6 +15476,108 @@ button:disabled {
   transform: scale(1.1);
 }
 
+.blog-wrap-2-mobile {
+  position: relative;
+  box-shadow: 0 3px 5px rgba(85, 85, 85, 0.2);
+  height: 140px;
+}
+.blog-wrap-2-mobile .blog-content-2 {
+  padding: 25px 30px 34px;
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .blog-wrap-2-mobile .blog-content-2 {
+    padding: 25px 20px 34px;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .blog-wrap-2-mobile .blog-content-2 {
+    padding: 25px 20px 34px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .blog-wrap-2-mobile .blog-content-2 {
+    padding: 20px 15px 29px;
+  }
+}
+.blog-wrap-2-mobile .blog-content-2 .blog-share-comment {
+  position: absolute;
+  bottom: 10px; /* Position at the bottom */
+  width: 100%; /* Occupy the full width of the parent */
+  margin: 22px 0 0;
+}
+@media only screen and (max-width: 767px) {
+  .blog-wrap-2-mobile .blog-content-2 .blog-share-comment {
+    margin: 14px 0 0;
+  }
+}
+.blog-wrap-2-mobile .blog-content-2 .blog-share-comment .blog-share span {
+  font-size: 15px;
+  display: inline-block;
+  float: left;
+  margin-top: 3px;
+  margin-right: 12px;
+  text-transform: capitalize;
+  color: #333;
+}
+.blog-wrap-2-mobile .blog-content-2 .blog-share-comment .blog-share .share-social {
+  display: inline-block;
+  float: left;
+}
+@media only screen and (max-width: 767px) {
+  .blog-wrap-2-mobile .blog-content-2 .blog-share-comment .blog-share .share-social {
+    margin-top: 4px;
+  }
+}
+.blog-wrap-2-mobile .blog-content-2 .blog-share-comment .blog-share .share-social ul li {
+  display: inline-block;
+  margin-right: 5px;
+}
+.blog-wrap-2-mobile .blog-content-2 .blog-share-comment .blog-share .share-social ul li:last-child {
+  margin-right: 0;
+}
+.blog-wrap-2-mobile .blog-content-2 .blog-share-comment .blog-share .share-social ul li a {
+  font-size: 14px;
+  line-height: 28px;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  color: #fff;
+  border-radius: 50px;
+}
+@media only screen and (max-width: 767px) {
+  .blog-wrap-2-mobile .blog-content-2 .blog-share-comment .blog-share .share-social ul li a {
+    font-size: 12px;
+    line-height: 23px;
+    width: 25px;
+    height: 25px;
+  }
+}
+.blog-wrap-2-mobile .blog-content-2 .blog-share-comment .blog-share .share-social ul li a.facebook {
+  border: 1px solid #3b5998;
+  background-color: #3b5998;
+}
+.blog-wrap-2-mobile .blog-content-2 .blog-share-comment .blog-share .share-social ul li a.facebook:hover {
+  color: #3b5998;
+  background-color: transparent;
+}
+.blog-wrap-2-mobile .blog-content-2 .blog-share-comment .blog-share .share-social ul li a.twitter {
+  border: 1px solid #0f1419;
+  background-color: #0f1419;
+}
+.blog-wrap-2-mobile .blog-content-2 .blog-share-comment .blog-share .share-social ul li a.twitter:hover {
+  color: #0f1419;
+  background-color: transparent;
+}
+.blog-wrap-2-mobile .blog-content-2 .blog-share-comment .blog-share .share-social ul li a.instagram {
+  border: 1px solid #c32aa3;
+  background-color: #c32aa3;
+}
+.blog-wrap-2-mobile .blog-content-2 .blog-share-comment .blog-share .share-social ul li a.instagram:hover {
+  color: #c32aa3;
+  background-color: transparent;
+}
+
 .nav-style-4.owl-carousel .owl-nav div {
   font-size: 20px;
   line-height: 35px;
@@ -20348,6 +20514,10 @@ h3.cart-page-title {
   color: #333;
   border: none;
   background: transparent none repeat scroll 0 0;
+}
+.billing-info-wrap .billing-info .danger,
+.billing-info-wrap .billing-select .danger {
+  border: 1px solid red;
 }
 .billing-info-wrap .billing-info .add-image-btn,
 .billing-info-wrap .billing-select .add-image-btn {

@@ -1,11 +1,11 @@
 import React from "react";
 
-const CreateArticleCategories = ({ categories, articleCategories, toggleSelectCategory }) => {
+const CreateArticleCategories = ({ categories, articleCategories, toggleSelectCategory, articleWarnings }) => {
     return (
         <div className="billing-info mb-20">
             <label>Article Categories</label>
             {categories && (
-                <div className="row">
+                <div className={`row ${articleWarnings?.categories && "danger"}`}>
                     {categories?.map((category, key) => {
                         const isSelected = articleCategories.includes(category);
                         // console.log(category);

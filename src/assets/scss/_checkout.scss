@@ -42,6 +42,14 @@
             background: transparent none repeat scroll 0 0;
         }
 
+        .danger {
+            border: 1px solid red;
+        }
+
+        .warning{
+            color: red;
+        }
+
         .add-image-btn {
             text-align: center;
             display: flex;
@@ -263,7 +271,15 @@
                 background: transparent none repeat scroll 0 0;
             }
         }
+
+        .danger {
+            border: 1px solid red;
+        }
+
     }
+
+
+
     .different-address {
         display: none;
     }

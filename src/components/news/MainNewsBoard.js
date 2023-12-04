@@ -45,8 +45,8 @@ const MainNewsBoard = () => {
                 const categoryIni = categoriesIni.filter((category) => {
                     return category.path === pathname;
                 })[0];
-                console.log("categoryIni", categoryIni);
-                console.log("categoryIni", typeof categoryIni.name);
+                // console.log("categoryIni", categoryIni);
+                // console.log("categoryIni", typeof categoryIni.name);
                 news = news.filter((article) => article.categories.includes(categoryIni.name));
                 setCurrentCategory(categoryIni);
             }
@@ -68,10 +68,10 @@ const MainNewsBoard = () => {
     }
 
     // console.log("pathname", pathname);
-    console.log("articles", articles);
+    // console.log("articles", articles);
 
-    console.log("documents", documents);
-    console.log("queryParams", queryParams);
+    // console.log("documents", documents);
+    // console.log("queryParams", queryParams);
 
     let breadcrumbPages = [];
 

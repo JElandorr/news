@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 
 import { useCollection } from "../../hooks/useCollection.js";
 import { useAuthContext } from "../../hooks/useAuthContext";
@@ -8,12 +8,11 @@ import clsx from "clsx";
 
 import LatestArticlesSingle from "./LatestArticlesSingle";
 import SectionTitle from "../common/SectionTitle";
-
-import { useFirestore } from "../../hooks/useFirestore.js";
+import Preloader from "../preloader/Preloader.js";
 
 const LatestArticlesPanel = ({ spaceTopClass, spaceBottomClass }) => {
     const { user } = useAuthContext();
-    const { documents, collectionError, isLoading } = useCollection("articles", ["owner_Id", "==", user.uid]);
+    const { documents, isLoading } = useCollection("articles", ["owner_Id", "==", user.uid]);
 
     const myLastThreeArticles = documents?.slice(0, 3);
 
@@ -22,27 +21,33 @@ const LatestArticlesPanel = ({ spaceTopClass, spaceBottomClass }) => {
     // console.log("documents", documents);
 
     return (
-        <div className={clsx("blog-area", spaceTopClass, spaceBottomClass)}>
-            <div className="container">
-                <SectionTitle titleText="My Latest Articles" positionClass="text-center" spaceClass="mb-55" />
-                <div className="row">
-                    {myLastThreeArticles?.map((article) => (
-                        <div className="col-lg-4 col-xs-6" key={article.id}>
-                            <LatestArticlesSingle article={article} />
+        <>
+            {isLoading ? (
+                <Preloader />
+            ) : (
+                <div className={clsx("blog-area", spaceTopClass, spaceBottomClass)}>
+                    <div className="container">
+                        <SectionTitle titleText="My Latest Articles" positionClass="text-center" spaceClass="mb-55" />
+                        <div className="row">
+                            {myLastThreeArticles?.map((article) => (
+                                <div className="col-lg-4 col-xs-6" key={article.id}>
+                                    <LatestArticlesSingle article={article} />
+                                </div>
+                            ))}
+                            {myLastThreeArticles?.length === 0 && (
+                                <div className="col-lg-12 col-xs-12">
+                                    <p className="text-center pb-20 pt20">You have no articles yet.</p>
+                                </div>
+                            )}
                         </div>
-                    ))}
-                    {myLastThreeArticles?.length === 0 && (
-                        <div className="col-lg-12 col-xs-12">
-                            <p className="text-center pb-20 pt20">You have no articles yet.</p>
-                        </div>
-                    )}
-                </div>
-                {/* <div className="pos-rel">
+                        {/* <div className="pos-rel">
                     <button className="btn btn-primary">&#60;&#60; Prev</button>
                     <button className="btn btn-primary pos-abs r0">Next &#62;&#62;</button>
                 </div> */}
-            </div>
-        </div>
+                    </div>
+                </div>
+            )}
+        </>
     );
 };
 
