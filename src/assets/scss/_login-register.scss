@@ -137,7 +137,25 @@
                             background-color: red;
                             color: #fff;
                         }
+
+                        @media #{$md-layout} {
+                            background-color: red;
+                            color: #fff;
+                        }
+
+                        @media #{$sm-layout} {
+                            background-color: red;
+                            color: #fff;
+                        }
+
+                        @media #{$xs-layout} {
+                            background-color: red;
+                            color: #fff;
+                        }
+
                     }
+
+
                 }
 
                 .button-box.no {
@@ -153,6 +171,21 @@
                         text-transform: uppercase;
                         transition: all 0.3s ease 0s;
                         &:hover {
+                            background-color: green;
+                            color: #fff;
+                        }
+
+                        @media #{$md-layout} {
+                            background-color: green;
+                            color: #fff;
+                        }
+
+                        @media #{$sm-layout} {
+                            background-color: green;
+                            color: #fff;
+                        }
+
+                        @media #{$xs-layout} {
                             background-color: green;
                             color: #fff;
                         }

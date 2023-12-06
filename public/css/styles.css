@@ -21516,6 +21516,24 @@ h3.cart-page-title {
   background-color: red;
   color: #fff;
 }
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .login-register-wrapper .login-form-container .login-register-form form .button-box.yes button {
+    background-color: red;
+    color: #fff;
+  }
+}
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+  .login-register-wrapper .login-form-container .login-register-form form .button-box.yes button {
+    background-color: red;
+    color: #fff;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .login-register-wrapper .login-form-container .login-register-form form .button-box.yes button {
+    background-color: red;
+    color: #fff;
+  }
+}
 .login-register-wrapper .login-form-container .login-register-form form .button-box.no button {
   background-color: #f2f2f2;
   border: medium none;
@@ -21531,6 +21549,24 @@ h3.cart-page-title {
 .login-register-wrapper .login-form-container .login-register-form form .button-box.no button:hover {
   background-color: green;
   color: #fff;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .login-register-wrapper .login-form-container .login-register-form form .button-box.no button {
+    background-color: green;
+    color: #fff;
+  }
+}
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+  .login-register-wrapper .login-form-container .login-register-form form .button-box.no button {
+    background-color: green;
+    color: #fff;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .login-register-wrapper .login-form-container .login-register-form form .button-box.no button {
+    background-color: green;
+    color: #fff;
+  }
 }
 .login-register-wrapper .login-form-container .login-register-form form .error {
   color: red;

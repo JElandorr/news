@@ -1,18 +1,24 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 
 import clsx from "clsx";
+import IconGroupUserDropdownMenu from "./IconGroupUserDropdownMenu";
 
 const IconGroup = ({ iconWhiteClass }) => {
+    const [showUserDropdownMenuDesktop, setShowUserDropdownMenuDesktop] = useState(false);
+    const [showUserDropdownMenuMobile, setShowUserDropdownMenuMobile] = useState(false);
     const { user } = useAuthContext();
 
-    const handleUserIconClick = (e) => {
-        e.currentTarget.nextSibling.classList.toggle("active");
-        if (document.querySelector(".search-content").classList.contains("active")) {
-            document.querySelector(".search-content").classList.remove("active");
-        }
+    const handleUserIconClickDesktop = (e) => {
+        e.preventDefault();
+        setShowUserDropdownMenuDesktop((OldState) => !OldState);
+    };
+
+    const handleUserIconClickMobile = (e) => {
+        e.preventDefault();
+        setShowUserDropdownMenuMobile((OldState) => !OldState);
     };
 
     const handleSearchIconClick = (e) => {
@@ -50,46 +56,31 @@ const IconGroup = ({ iconWhiteClass }) => {
                 </div>
             </div>
             <div className="same-style account-setting d-none d-lg-block">
-                <button className="account-setting-active" onClick={(e) => handleUserIconClick(e)}>
+                <button className="account-setting-active" onClick={(e) => handleUserIconClickDesktop(e)}>
                     {user ? <i className="fa-solid fa-user"></i> : <i className="fa-regular fa-user"></i>}
-                    {/* <i className="fa-regular fa-user"></i> */}
                 </button>
-                <div className="account-dropdown">
-                    <ul>
-                        {user ? (
-                            <>
-                                <p onClick={handleGetUser}>Hello, {user.displayName}</p>
-                                {/* <p onClick={handleGetUser}>Hello, {user.email}</p> */}
-                                <li>
-                                    <Link to={process.env.PUBLIC_URL + "/my-account"}>My account</Link>
-                                </li>
-                                <li>
-                                    <Link to={process.env.PUBLIC_URL + "/my-articles"}>My articles</Link>
-                                </li>
-                                <li>
-                                    <Link to={process.env.PUBLIC_URL + "/create-new-article"}>Create Article</Link>
-                                </li>
-                                <li>
-                                    <Link to={process.env.PUBLIC_URL + "/logout"}>Logout</Link>
-                                </li>
-                            </>
-                        ) : (
-                            <>
-                                <li>
-                                    <Link to={process.env.PUBLIC_URL + "/login"}>Login</Link>
-                                </li>
-                                <li>
-                                    <Link to={process.env.PUBLIC_URL + "/register"}>Register</Link>
-                                </li>
-                            </>
-                        )}
-                    </ul>
-                </div>
+                {showUserDropdownMenuDesktop && (
+                    <IconGroupUserDropdownMenu
+                        user={user}
+                        handleGetUser={handleGetUser}
+                        showUserDropdownMenuDesktop={showUserDropdownMenuDesktop}
+                    />
+                )}
             </div>
             <div className="same-style mobile-off-canvas d-block d-lg-none">
                 <button className="mobile-aside-button" onClick={() => triggerMobileMenu()}>
                     <i className="fa-solid fa-bars fa-lg"></i>
                 </button>
+                <button className="account-setting-active" onClick={(e) => handleUserIconClickMobile(e)}>
+                    {user ? <i className="fa-solid fa-user"></i> : <i className="fa-regular fa-user"></i>}
+                </button>
+                {showUserDropdownMenuMobile && (
+                    <IconGroupUserDropdownMenu
+                        user={user}
+                        handleGetUser={handleGetUser}
+                        showUserDropdownMenuMobile={showUserDropdownMenuMobile}
+                    />
+                )}
             </div>
         </div>
     );
