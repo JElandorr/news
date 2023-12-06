@@ -42,7 +42,7 @@ const IconGroup = ({ iconWhiteClass }) => {
 
     return (
         <div className={clsx("header-right-wrap", iconWhiteClass)}>
-            <div className="same-style header-search d-none d-lg-block">
+            <div className="same-style same-style-desktop header-search d-none d-lg-block">
                 <button className="search-active" onClick={(e) => handleSearchIconClick(e)}>
                     <i className="fa fa-magnifying-glass"></i>
                 </button>
@@ -55,7 +55,7 @@ const IconGroup = ({ iconWhiteClass }) => {
                     </form>
                 </div>
             </div>
-            <div className="same-style account-setting d-none d-lg-block">
+            <div className="same-style same-style-desktop account-setting d-none d-lg-block">
                 <button className="account-setting-active" onClick={(e) => handleUserIconClickDesktop(e)}>
                     {user ? <i className="fa-solid fa-user"></i> : <i className="fa-regular fa-user"></i>}
                 </button>
@@ -67,12 +67,13 @@ const IconGroup = ({ iconWhiteClass }) => {
                     />
                 )}
             </div>
-            <div className="same-style mobile-off-canvas d-block d-lg-none">
-                <button className="mobile-aside-button" onClick={() => triggerMobileMenu()}>
-                    <i className="fa-solid fa-bars fa-lg"></i>
-                </button>
+            <div className="same-style same-style-mobile mobile-off-canvas d-block d-lg-none">
                 <button className="account-setting-active" onClick={(e) => handleUserIconClickMobile(e)}>
-                    {user ? <i className="fa-solid fa-user"></i> : <i className="fa-regular fa-user"></i>}
+                    {user ? <i className="fa-solid fa-user fa-xl"></i> : <i className="fa-regular fa-user fa-xl"></i>}
+                </button>
+                <div className="mr-20"/>
+                <button className="mobile-aside-button" onClick={() => triggerMobileMenu()}>
+                    <i className="fa-solid fa-bars fa-2xl"></i>
                 </button>
                 {showUserDropdownMenuMobile && (
                     <IconGroupUserDropdownMenu

@@ -6021,7 +6021,6 @@ button:disabled {
   width: 80px;
   height: 80px;
   margin-top: 10px;
-  margin-bottom: 10px;
 }
 .logo img {
   width: 100%;
@@ -6415,6 +6414,8 @@ button:disabled {
 }
 
 .header-right-wrap {
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: flex-end;
   margin-top: 32px;
@@ -6426,7 +6427,7 @@ button:disabled {
 }
 @media only screen and (max-width: 767px) {
   .header-right-wrap {
-    margin-top: 2px;
+    margin-top: 0;
   }
 }
 .header-right-wrap .same-style {
@@ -6517,6 +6518,60 @@ button:disabled {
 .header-right-wrap .same-style .account-dropdown ul li a:hover {
   padding-left: 5px;
   color: #3d34b8;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .header-right-wrap .same-style-desktop {
+    display: none !important;
+  }
+}
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+  .header-right-wrap .same-style-desktop {
+    display: none !important;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .header-right-wrap .same-style-desktop {
+    display: none !important;
+  }
+}
+@media only screen and (min-width: 1366px) and (max-width: 1600px) {
+  .header-right-wrap .same-style-mobile {
+    display: none !important;
+  }
+}
+@media only screen and (min-width: 1200px) and (max-width: 1365px) {
+  .header-right-wrap .same-style-mobile {
+    display: none !important;
+  }
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .header-right-wrap .same-style-mobile {
+    display: none !important;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .header-right-wrap .same-style-mobile {
+    display: flex !important;
+    align-items: center;
+  }
+}
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+  .header-right-wrap .same-style-mobile {
+    display: flex !important;
+    align-items: center;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .header-right-wrap .same-style-mobile {
+    display: flex !important;
+    align-items: center;
+  }
+}
+@media only screen and (min-width: 320px) and (max-width: 479px) {
+  .header-right-wrap .same-style-mobile {
+    display: flex !important;
+    align-items: center;
+  }
 }
 .header-right-wrap .same-style.account-setting > a,
 .header-right-wrap .same-style.account-setting button {
