@@ -239,9 +239,11 @@
     border-top: 1px solid #f1f1f1;
 
     .edit-delete-btn-holder {
+        width: 100%;
         display: flex;
         justify-content: space-between;
         a.edit {
+            width: 100%;
             text-align: center;
             padding: 10px 20px;
             margin-left: 10px;
@@ -270,6 +272,7 @@
         }
 
         a.delete {
+            width: 100%;
             text-align: center;
             padding: 10px 20px;
             margin-left: 10px;

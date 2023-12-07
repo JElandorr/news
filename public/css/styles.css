@@ -21296,10 +21296,12 @@ h3.cart-page-title {
   border-top: 1px solid #f1f1f1;
 }
 .edit-delete-article .edit-delete-btn-holder {
+  width: 100%;
   display: flex;
   justify-content: space-between;
 }
 .edit-delete-article .edit-delete-btn-holder a.edit {
+  width: 100%;
   text-align: center;
   padding: 10px 20px;
   margin-left: 10px;
@@ -21329,6 +21331,7 @@ h3.cart-page-title {
   background-color: #3d34b8;
 }
 .edit-delete-article .edit-delete-btn-holder a.delete {
+  width: 100%;
   text-align: center;
   padding: 10px 20px;
   margin-left: 10px;
