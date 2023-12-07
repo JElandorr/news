@@ -53,7 +53,7 @@ const CreateArticle = () => {
         if (newImageUrl === "") return;
         setArticle({ ...article, images: [...article.images, newImageUrl] });
         setNewImageUrl("");
-        setArticleWarnings({ ...articleWarnings, image: false });
+        setArticleWarnings({ ...articleWarnings, images: false });
     };
 
     const handleImageDelete = (e, image) => {
@@ -80,8 +80,8 @@ const CreateArticle = () => {
 
     const createArticle = async () => {
         const validatedArticle = validateArticle(article);
-
-        if (Object.keys(validatedArticle).length > 0) {
+        const allValuesFalse = Object.values(validatedArticle).every((value) => value === false);
+        if (!allValuesFalse) {
             setArticleWarnings(validatedArticle);
             return;
         } else {
@@ -130,7 +130,7 @@ const CreateArticle = () => {
     // console.log(user);
     // console.log(response);
     // console.log("newImageUrl", newImageUrl);
-    console.log("articleWarnings", articleWarnings);
+    // console.log("articleWarnings", articleWarnings);
 
     return (
         <Fragment>
