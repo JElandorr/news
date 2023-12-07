@@ -3,14 +3,14 @@ import React from "react";
 const CreateArticleMainBody = ({ articleText, handleChange, articleWarnings }) => {
     return (
         <div className="additional-info-wrap">
-            <label>Article Main Body</label>
+            <label>Основен текст на статията</label>
             <div className={`additional-info ${articleWarnings?.text && "danger"}`}>
                 <textarea
                     id="text"
                     // className={`${articleWarnings?.text && "danger"}`}
                     type="text"
                     name="text"
-                    placeholder="Article Text"
+                    placeholder="Текст на статията"
                     value={articleText}
                     onChange={handleChange}
                 />

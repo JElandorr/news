@@ -3,7 +3,7 @@ import React from "react";
 const CreateArticleCategories = ({ categories, articleCategories, toggleSelectCategory, articleWarnings }) => {
     return (
         <div className="billing-info mb-20">
-            <label>Article Categories</label>
+            <label>Изберете Категории</label>
             {categories && (
                 <div className={`row ${articleWarnings?.categories && "danger"}`}>
                     {categories?.map((category, key) => {

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 
 import clsx from "clsx";
-import IconGroupUserDropdownMenu from "./IconGroupUserDropdownMenu";
 
-const IconGroup = ({ iconWhiteClass, handleShowMobileMenu }) => {
+const IconGroup = ({ iconWhiteClass, handleShowMobileMenu, handleSearchIconClick, showSearchMenu }) => {
     const [showUserDropdownMenuDesktop, setShowUserDropdownMenuDesktop] = useState(false);
     const [showUserDropdownMenuMobile, setShowUserDropdownMenuMobile] = useState(false);
     const { user } = useAuthContext();
@@ -18,13 +18,6 @@ const IconGroup = ({ iconWhiteClass, handleShowMobileMenu }) => {
     const handleUserIconClickMobile = (e) => {
         e.preventDefault();
         setShowUserDropdownMenuMobile((OldState) => !OldState);
-    };
-
-    const handleSearchIconClick = (e) => {
-        e.currentTarget.nextSibling.classList.toggle("active");
-        if (document.querySelector(".account-dropdown").classList.contains("active")) {
-            document.querySelector(".account-dropdown").classList.remove("active");
-        }
     };
 
     const handleGetUser = async (e) => {
@@ -40,7 +33,7 @@ const IconGroup = ({ iconWhiteClass, handleShowMobileMenu }) => {
                 <button className="search-active" onClick={(e) => handleSearchIconClick(e)}>
                     <i className="fa fa-magnifying-glass"></i>
                 </button>
-                <div className="search-content">
+                <div className={`search-content ${showSearchMenu ? "active" : ""}`}>
                     <form action="#">
                         <input type="text" placeholder="Search" />
                         <button className="button-search">
@@ -53,13 +46,41 @@ const IconGroup = ({ iconWhiteClass, handleShowMobileMenu }) => {
                 <button className="account-setting-active" onClick={(e) => handleUserIconClickDesktop(e)}>
                     {user ? <i className="fa-solid fa-user"></i> : <i className="fa-regular fa-user"></i>}
                 </button>
-                {showUserDropdownMenuDesktop && (
-                    <IconGroupUserDropdownMenu
-                        user={user}
-                        handleGetUser={handleGetUser}
-                        showUserDropdownMenuDesktop={showUserDropdownMenuDesktop}
-                    />
-                )}
+                <div
+                    className={`account-dropdown ${
+                        showUserDropdownMenuDesktop || showUserDropdownMenuMobile ? "active" : ""
+                    }`}
+                >
+                    <ul>
+                        {user ? (
+                            <>
+                                <p onClick={handleGetUser}>Hello, {user.displayName}</p>
+                                {/* <p onClick={handleGetUser}>Hello, {user.email}</p> */}
+                                <li>
+                                    <Link to={process.env.PUBLIC_URL + "/my-account"}>My account</Link>
+                                </li>
+                                <li>
+                                    <Link to={process.env.PUBLIC_URL + "/my-articles"}>My articles</Link>
+                                </li>
+                                <li>
+                                    <Link to={process.env.PUBLIC_URL + "/create-new-article"}>Create Article</Link>
+                                </li>
+                                <li>
+                                    <Link to={process.env.PUBLIC_URL + "/logout"}>Logout</Link>
+                                </li>
+                            </>
+                        ) : (
+                            <>
+                                <li>
+                                    <Link to={process.env.PUBLIC_URL + "/login"}>Login</Link>
+                                </li>
+                                <li>
+                                    <Link to={process.env.PUBLIC_URL + "/register"}>Register</Link>
+                                </li>
+                            </>
+                        )}
+                    </ul>
+                </div>
             </div>
             <div className="same-style same-style-mobile mobile-off-canvas d-block d-lg-none">
                 <button className="account-setting-active" onClick={(e) => handleUserIconClickMobile(e)}>
@@ -69,13 +90,41 @@ const IconGroup = ({ iconWhiteClass, handleShowMobileMenu }) => {
                 <button className="mobile-aside-button" onClick={(e) => handleShowMobileMenu(e)}>
                     <i className="fa-solid fa-bars fa-2xl"></i>
                 </button>
-                {showUserDropdownMenuMobile && (
-                    <IconGroupUserDropdownMenu
-                        user={user}
-                        handleGetUser={handleGetUser}
-                        showUserDropdownMenuMobile={showUserDropdownMenuMobile}
-                    />
-                )}
+                <div
+                    className={`account-dropdown ${
+                        showUserDropdownMenuDesktop || showUserDropdownMenuMobile ? "active" : ""
+                    }`}
+                >
+                    <ul>
+                        {user ? (
+                            <>
+                                <p onClick={handleGetUser}>Hello, {user.displayName}</p>
+                                {/* <p onClick={handleGetUser}>Hello, {user.email}</p> */}
+                                <li>
+                                    <Link to={process.env.PUBLIC_URL + "/my-account"}>My account</Link>
+                                </li>
+                                <li>
+                                    <Link to={process.env.PUBLIC_URL + "/my-articles"}>My articles</Link>
+                                </li>
+                                <li>
+                                    <Link to={process.env.PUBLIC_URL + "/create-new-article"}>Create Article</Link>
+                                </li>
+                                <li>
+                                    <Link to={process.env.PUBLIC_URL + "/logout"}>Logout</Link>
+                                </li>
+                            </>
+                        ) : (
+                            <>
+                                <li>
+                                    <Link to={process.env.PUBLIC_URL + "/login"}>Login</Link>
+                                </li>
+                                <li>
+                                    <Link to={process.env.PUBLIC_URL + "/register"}>Register</Link>
+                                </li>
+                            </>
+                        )}
+                    </ul>
+                </div>
             </div>
         </div>
     );

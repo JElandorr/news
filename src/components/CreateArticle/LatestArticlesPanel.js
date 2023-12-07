@@ -18,7 +18,6 @@ const LatestArticlesPanel = ({ spaceTopClass, spaceBottomClass }) => {
         return b.createdAt.seconds - a.createdAt.seconds;
     });
 
-
     // console.log("user", user);
     // console.log("myArticles", myArticles);
 
@@ -29,7 +28,7 @@ const LatestArticlesPanel = ({ spaceTopClass, spaceBottomClass }) => {
             ) : (
                 <div className={clsx("blog-area", spaceTopClass, spaceBottomClass)}>
                     <div className="container">
-                        <SectionTitle titleText="My Latest Articles" positionClass="text-center" spaceClass="mb-55" />
+                        <SectionTitle titleText="Моите последни статии  " positionClass="text-center" spaceClass="mb-55" />
                         <div className="row">
                             {myLastThreeArticles?.map((article) => (
                                 <div className="col-lg-4 col-xs-6" key={article.id}>
@@ -38,7 +37,7 @@ const LatestArticlesPanel = ({ spaceTopClass, spaceBottomClass }) => {
                             ))}
                             {myLastThreeArticles?.length === 0 && (
                                 <div className="col-lg-12 col-xs-12">
-                                    <p className="text-center pb-20 pt20">You have no articles yet.</p>
+                                    <p className="text-center pb-20 pt20">Все още не сте публикували никакви статии.</p>
                                 </div>
                             )}
                         </div>

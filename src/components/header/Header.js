@@ -9,6 +9,7 @@ import MobileMenu from "./sub-components/MobileMenu";
 
 const Header = ({ layout, top, borderStyle, headerPaddingClass, headerPositionClass, headerBgClass }) => {
     const [showMobileMenu, setShowMobileMenu] = useState(false);
+    const [showSearchMenu, setShowSearchMenu] = useState(false);
     const [scroll, setScroll] = useState(0);
     const [headerTop, setHeaderTop] = useState(0);
 
@@ -33,6 +34,12 @@ const Header = ({ layout, top, borderStyle, headerPaddingClass, headerPositionCl
     const handleCloseMobileMenu = (e) => {
         e.preventDefault();
         setShowMobileMenu(false);
+    };
+
+    const handleSearchIconClick = (e) => {
+        console.log("handleSearchIconClick");
+        e.preventDefault();
+        setShowSearchMenu((OldState) => !OldState);
     };
 
     return (
@@ -69,7 +76,11 @@ const Header = ({ layout, top, borderStyle, headerPaddingClass, headerPositionCl
                         </div>
                         <div className="col-xl-2 col-lg-2 col-md-6 col-8">
                             {/* Icon group */}
-                            <IconGroup handleShowMobileMenu={handleShowMobileMenu} />
+                            <IconGroup
+                                showSearchMenu={showSearchMenu}
+                                handleShowMobileMenu={handleShowMobileMenu}
+                                handleSearchIconClick={handleSearchIconClick}
+                            />
                         </div>
                     </div>
                 </div>

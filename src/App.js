@@ -31,6 +31,7 @@ function App() {
 
                         {/* Articles */}
                         <Route path="/create-new-article" element={user ? <CreateArticlePage /> : <LoginPage />} />
+                        <Route path="/update-article/:article" element={user ? <CreateArticlePage /> : <LoginPage />} />
                         <Route path="/my-articles" element={user ? <MyArticlesPage /> : <LoginPage />} />
 
                         {/* Login and Register */}

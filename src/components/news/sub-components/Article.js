@@ -8,6 +8,7 @@ import { Autoplay } from "swiper/modules";
 // Import Swiper styles
 import "swiper/css";
 
+import { useAuthContext } from "../../../hooks/useAuthContext";
 import { useCollection } from "../../../hooks/useCollection";
 
 import Preloader from "../../preloader/Preloader";
@@ -22,8 +23,13 @@ const Article = () => {
     const [currentCategories, setCurrentCategories] = useState(null);
     const [nextArticleSlug, setNextArticleSlug] = useState(null);
     const [previousArticleSlug, setPreviousArticleSlug] = useState(null);
+
+    const [deleteConfirmation, setDeleteConfirmation] = useState(false);
+
+    const { user } = useAuthContext();
     const { article } = useParams();
     const { documents, collectionError, isLoading } = useCollection("articles");
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -72,8 +78,16 @@ const Article = () => {
     if (articleData) {
         formattedDate = dateTimeFormatterFromSeconds(articleData.createdAt, true, "long");
     }
-    
+
     window.scrollTo(0, 0);
+
+    const handleDeleteArticle = (e, bool) => {
+        e.preventDefault();
+        setDeleteConfirmation(bool);
+    };
+
+    // console.log("user.uid", user.uid);
+    // console.log("articleData?.owner_Id", articleData?.owner_Id);
 
     return (
         <>
@@ -107,6 +121,58 @@ const Article = () => {
                                         alt={"Article Image"}
                                     />
                                 </div>
+                            )}
+                        </div>
+                        <div className="edit-delete-article">
+                            {user && user.uid === articleData?.owner_Id && (
+                                <>
+                                    {!deleteConfirmation ? (
+                                        <div className="edit-delete-btn-holder">
+                                            <Link
+                                                className="edit"
+                                                to={`/update-article/${articleData.slug}`}
+                                            >
+                                                update article
+                                            </Link>
+                                            <Link
+                                                className="delete"
+                                                to={`#`}
+                                                onClick={(e) => handleDeleteArticle(e, true)}
+                                            >
+                                                delete article
+                                            </Link>
+                                        </div>
+                                    ) : (
+                                        <div className="edit-delete-btn-holder">
+                                            <Link className="edit" to={`#`}>
+                                                delete
+                                            </Link>
+                                            <Link
+                                                className="delete"
+                                                to={`#`}
+                                                onClick={(e) => handleDeleteArticle(e, false)}
+                                            >
+                                                cancel
+                                            </Link>
+                                        </div>
+                                    )}
+                                </>
+                            )}
+                        </div>
+                        <div className="next-previous-post">
+                            {previousArticleSlug ? (
+                                <Link to={process.env.PUBLIC_URL + `/news/${previousArticleSlug}`}>
+                                    <i className="fa fa-angle-left" /> prev post
+                                </Link>
+                            ) : (
+                                <Link to={process.env.PUBLIC_URL + "/"}>News</Link>
+                            )}
+                            {nextArticleSlug ? (
+                                <Link to={process.env.PUBLIC_URL + `/news/${nextArticleSlug}`}>
+                                    next post <i className="fa fa-angle-right" />
+                                </Link>
+                            ) : (
+                                <Link to={process.env.PUBLIC_URL + "/"}>News</Link>
                             )}
                         </div>
                         <div className="blog-details-content">

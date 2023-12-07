@@ -9,7 +9,7 @@ const CreateArticleTitle = ({ title, handleChange, articleWarnings }) => {
                     className={`${articleWarnings?.title && "danger"}`}
                     type="text"
                     name="title"
-                    placeholder="Article Title"
+                    placeholder="Заглавие на статията"
                     value={title}
                     onChange={handleChange}
                 />

@@ -81,6 +81,10 @@ const CreateArticle = () => {
     const createArticle = async () => {
         const validatedArticle = validateArticle(article);
         const allValuesFalse = Object.values(validatedArticle).every((value) => value === false);
+
+        console.log(validatedArticle);
+        console.log(allValuesFalse);
+        
         if (!allValuesFalse) {
             setArticleWarnings(validatedArticle);
             return;
@@ -132,6 +136,7 @@ const CreateArticle = () => {
     // console.log("newImageUrl", newImageUrl);
     // console.log("articleWarnings", articleWarnings);
 
+
     return (
         <Fragment>
             <SEO title="ProjectNews" titleTemplate="Create Article" description="Create Your Inspiring Stories Here." />
@@ -147,7 +152,7 @@ const CreateArticle = () => {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="billing-info-wrap">
-                                <h3>Create Article Form</h3>
+                                <h3>Създай нова статия</h3>
                                 <div className="row">
                                     <CreateArticleTitle
                                         title={article.title}
@@ -173,7 +178,7 @@ const CreateArticle = () => {
                                         />
                                         <div className="billing-info mb-20">
                                             <label>
-                                                Article Pictures &nbsp;&nbsp;
+                                                Изображения към статията &nbsp;&nbsp;
                                                 {articleWarnings.images && (
                                                     <span className="warning">{articleWarnings.images}</span>
                                                 )}
@@ -181,8 +186,6 @@ const CreateArticle = () => {
                                             {article?.images && (
                                                 <div className="row">
                                                     {article?.images?.map((image, key) => {
-                                                        console.log(image);
-                                                        // console.log(key);
                                                         return (
                                                             <div
                                                                 className={`col-lg-3 col-md-4 col-sm-6 col-xxs-12 image-holder`}
@@ -219,7 +222,7 @@ const CreateArticle = () => {
                                                         id="images"
                                                         type="text"
                                                         name="images"
-                                                        placeholder="Article Images"
+                                                        placeholder="Изображение - адрес"
                                                         value={newImageUrl}
                                                         onChange={handleImageInputChange}
                                                     />
@@ -228,7 +231,7 @@ const CreateArticle = () => {
                                                     className="col-lg-2 col-md-2 add-image-btn"
                                                     onClick={handleImageSubmit}
                                                 >
-                                                    Add Image
+                                                    Добави изображение
                                                 </div>
                                             </div>
                                         </div>
@@ -245,7 +248,7 @@ const CreateArticle = () => {
                                                 />
                                             </div> */}
                                             <div className="col-lg-2 col-md-2 add-article-btn" onClick={createArticle}>
-                                                Add Article
+                                                Създай статия
                                             </div>
                                         </div>
                                     </div>
