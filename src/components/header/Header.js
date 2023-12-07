@@ -8,6 +8,7 @@ import MobileMenu from "./sub-components/MobileMenu";
 // import HeaderTop from "../../components/header/HeaderTop";
 
 const Header = ({ layout, top, borderStyle, headerPaddingClass, headerPositionClass, headerBgClass }) => {
+    const [showMobileMenu, setShowMobileMenu] = useState(false);
     const [scroll, setScroll] = useState(0);
     const [headerTop, setHeaderTop] = useState(0);
 
@@ -22,6 +23,16 @@ const Header = ({ layout, top, borderStyle, headerPaddingClass, headerPositionCl
 
     const handleScroll = () => {
         setScroll(window.scrollY);
+    };
+
+    const handleShowMobileMenu = (e) => {
+        e.preventDefault();
+        setShowMobileMenu(true);
+    };
+
+    const handleCloseMobileMenu = (e) => {
+        e.preventDefault();
+        setShowMobileMenu(false);
     };
 
     return (
@@ -58,12 +69,12 @@ const Header = ({ layout, top, borderStyle, headerPaddingClass, headerPositionCl
                         </div>
                         <div className="col-xl-2 col-lg-2 col-md-6 col-8">
                             {/* Icon group */}
-                            <IconGroup />
+                            <IconGroup handleShowMobileMenu={handleShowMobileMenu} />
                         </div>
                     </div>
                 </div>
                 {/* mobile menu */}
-                <MobileMenu />
+                <MobileMenu showMobileMenu={showMobileMenu} handleCloseMobileMenu={handleCloseMobileMenu} />
             </div>
         </header>
     );

@@ -3,44 +3,10 @@ import MobileMenuSearch from "./MobileSearch";
 import MobileNavMenu from "./MobileNavMenu";
 import MobileWidgets from "./MobileWidgets";
 
-const MobileMenu = () => {
-    useEffect(() => {
-        const offCanvasNav = document.querySelector("#offcanvas-navigation");
-        const offCanvasNavSubMenu = offCanvasNav.querySelectorAll(".sub-menu");
-        const anchorLinks = offCanvasNav.querySelectorAll("a");
-
-        for (let i = 0; i < offCanvasNavSubMenu.length; i++) {
-            offCanvasNavSubMenu[i].insertAdjacentHTML("beforebegin", "<span class='menu-expand'><i></i></span>");
-        }
-
-        const menuExpand = offCanvasNav.querySelectorAll(".menu-expand");
-        const numMenuExpand = menuExpand.length;
-
-        for (let i = 0; i < numMenuExpand; i++) {
-            menuExpand[i].addEventListener("click", (e) => {
-                sideMenuExpand(e);
-            });
-        }
-
-        for (let i = 0; i < anchorLinks.length; i++) {
-            anchorLinks[i].addEventListener("click", () => {
-                closeMobileMenu();
-            });
-        }
-    });
-
-    const sideMenuExpand = (e) => {
-        e.currentTarget.parentElement.classList.toggle("active");
-    };
-
-    const closeMobileMenu = () => {
-        const offcanvasMobileMenu = document.querySelector("#offcanvas-mobile-menu");
-        offcanvasMobileMenu.classList.remove("active");
-    };
-
+const MobileMenu = ({ showMobileMenu, handleCloseMobileMenu }) => {
     return (
-        <div className="offcanvas-mobile-menu" id="offcanvas-mobile-menu">
-            <button className="offcanvas-menu-close" id="mobile-menu-close-trigger" onClick={() => closeMobileMenu()}>
+        <div className={`offcanvas-mobile-menu ${showMobileMenu ? "active" : ""}`} id="offcanvas-mobile-menu">
+            <button className="offcanvas-menu-close" id="mobile-menu-close-trigger" onClick={(e) => handleCloseMobileMenu(e)}>
                 <i className="fa-solid fa-xmark"></i>
             </button>
             <div className="offcanvas-wrapper">
@@ -49,7 +15,7 @@ const MobileMenu = () => {
                     <MobileMenuSearch />
 
                     {/* mobile nav menu */}
-                    <MobileNavMenu />
+                    <MobileNavMenu handleCloseMobileMenu={handleCloseMobileMenu} />
 
                     {/* mobile widgets */}
                     <MobileWidgets />

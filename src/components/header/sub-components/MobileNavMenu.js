@@ -3,23 +3,24 @@ import { Link } from "react-router-dom";
 
 import { categoriesIni } from "../../dateStructures/categoriesIni.js";
 
-const MobileNavMenu = () => {
+const MobileNavMenu = ({ handleCloseMobileMenu }) => {
     const [secondaryCategories, setSecondaryCategories] = useState(false);
 
-    function handleSecondaryCategories() {
+    function handleSecondaryCategories(e) {
+        e.preventDefault();
         setSecondaryCategories(!secondaryCategories);
     }
     return (
         <nav className="offcanvas-navigation" id="offcanvas-navigation">
             <ul>
-                <li>
+                <li onClick={handleCloseMobileMenu}>
                     <Link to={process.env.PUBLIC_URL + "/"}>News</Link>
                 </li>
                 {!secondaryCategories &&
                     categoriesIni.map((category, index) => {
                         if (category.primary) {
                             return (
-                                <li key={index}>
+                                <li key={index} onClick={handleCloseMobileMenu}>
                                     <Link to={process.env.PUBLIC_URL + category.path}>{category.name}</Link>
                                 </li>
                             );
@@ -29,18 +30,18 @@ const MobileNavMenu = () => {
                 {secondaryCategories &&
                     categoriesIni.map((category, index) => {
                         return (
-                            <li key={index}>
+                            <li key={index} onClick={handleCloseMobileMenu}>
                                 <Link to={process.env.PUBLIC_URL + category.path}>{category.name}</Link>
                             </li>
                         );
                     })}
-                <li onClick={handleSecondaryCategories}>
+                <li>
                     {!secondaryCategories ? (
-                        <Link to="#">
+                        <Link to="#" onClick={(e) => handleSecondaryCategories(e)}>
                             Още <i className="fa fa-angle-down" />
                         </Link>
                     ) : (
-                        <Link to="#">
+                        <Link to="#" onClick={(e) => handleSecondaryCategories(e)}>
                             Основни <i className="fa fa-angle-up" />
                         </Link>
                     )}

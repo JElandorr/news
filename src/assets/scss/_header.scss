@@ -482,7 +482,7 @@
 }
 .stick .header-right-wrap .same-style.cart-wrap .shopping-cart-content,
 .stick .header-right-wrap .same-style .account-dropdown {
-    top: 160%;
+    top: 60%;
     @media #{$xs-layout} {
         top: 100%;
 
@@ -541,7 +541,7 @@
         .account-dropdown {
             position: absolute;
             z-index: 220;
-            top: 190%;
+            top: 60%;
             right: 0;
 
             visibility: hidden;
@@ -575,10 +575,10 @@
                 margin-top: 14px;
             }
             @media #{$lg-layout} {
-                left: -40px;
+                // left: -40px;
             }
             @media #{$xl-layout} {
-                left: -34px;
+                // left: -34px;
             }
             ul {
                 li {
@@ -934,7 +934,7 @@
         .search-content {
             position: absolute;
             z-index: 99;
-            top: 193%;
+            top: 60%;
             right: 0;
 
             visibility: hidden;

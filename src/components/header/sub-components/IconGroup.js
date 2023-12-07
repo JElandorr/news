@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 
 import clsx from "clsx";
 import IconGroupUserDropdownMenu from "./IconGroupUserDropdownMenu";
 
-const IconGroup = ({ iconWhiteClass }) => {
+const IconGroup = ({ iconWhiteClass, handleShowMobileMenu }) => {
     const [showUserDropdownMenuDesktop, setShowUserDropdownMenuDesktop] = useState(false);
     const [showUserDropdownMenuMobile, setShowUserDropdownMenuMobile] = useState(false);
     const { user } = useAuthContext();
@@ -26,11 +25,6 @@ const IconGroup = ({ iconWhiteClass }) => {
         if (document.querySelector(".account-dropdown").classList.contains("active")) {
             document.querySelector(".account-dropdown").classList.remove("active");
         }
-    };
-
-    const triggerMobileMenu = () => {
-        const offcanvasMobileMenu = document.querySelector("#offcanvas-mobile-menu");
-        offcanvasMobileMenu.classList.add("active");
     };
 
     const handleGetUser = async (e) => {
@@ -71,8 +65,8 @@ const IconGroup = ({ iconWhiteClass }) => {
                 <button className="account-setting-active" onClick={(e) => handleUserIconClickMobile(e)}>
                     {user ? <i className="fa-solid fa-user fa-xl"></i> : <i className="fa-regular fa-user fa-xl"></i>}
                 </button>
-                <div className="mr-20"/>
-                <button className="mobile-aside-button" onClick={() => triggerMobileMenu()}>
+                <div className="mr-20" />
+                <button className="mobile-aside-button" onClick={(e) => handleShowMobileMenu(e)}>
                     <i className="fa-solid fa-bars fa-2xl"></i>
                 </button>
                 {showUserDropdownMenuMobile && (
