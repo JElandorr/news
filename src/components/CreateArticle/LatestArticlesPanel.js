@@ -14,11 +14,13 @@ const LatestArticlesPanel = ({ spaceTopClass, spaceBottomClass }) => {
     const { user } = useAuthContext();
     const { documents, isLoading } = useCollection("articles", ["owner_Id", "==", user.uid]);
 
-    const myLastThreeArticles = documents?.slice(0, 3);
+    const myLastThreeArticles = documents?.slice(0, 3).sort((a, b) => {
+        return b.createdAt.seconds - a.createdAt.seconds;
+    });
+
 
     // console.log("user", user);
     // console.log("myArticles", myArticles);
-    // console.log("documents", documents);
 
     return (
         <>
