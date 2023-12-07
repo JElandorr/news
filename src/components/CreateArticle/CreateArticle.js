@@ -1,5 +1,8 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+
+import { projectNewsFirestore } from "../../firebase/config";
+import { doc, updateDoc } from "firebase/firestore";
 
 import { useFirestore } from "../../hooks/useFirestore.js";
 
@@ -31,7 +34,19 @@ const CreateArticle = () => {
     const [categories, setCategories] = useState(categoriesIni.map((category) => category.name));
     const [newImageUrl, setNewImageUrl] = useState("");
 
-    let { pathname } = useLocation();
+    const [updateMode, setUpdateMode] = useState(false);
+
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (location.state) {
+            setArticle(location.state.article);
+            setCategories(location.state.categories);
+            setUpdateMode(true);
+        }
+    }, [location.state]);
+
     const { user } = useAuthContext();
     const { addDocument, response } = useFirestore("articles");
 
@@ -82,9 +97,6 @@ const CreateArticle = () => {
         const validatedArticle = validateArticle(article);
         const allValuesFalse = Object.values(validatedArticle).every((value) => value === false);
 
-        console.log(validatedArticle);
-        console.log(allValuesFalse);
-        
         if (!allValuesFalse) {
             setArticleWarnings(validatedArticle);
             return;
@@ -93,6 +105,24 @@ const CreateArticle = () => {
             setArticle(articleIni);
             window.scrollTo({ top: 0, behavior: "smooth" });
             setArticleWarnings({});
+        }
+    };
+
+    const updateArticle = async () => {
+        const validatedArticle = validateArticle(article);
+        const allValuesFalse = Object.values(validatedArticle).every((value) => value === false);
+
+        if (!allValuesFalse) {
+            setArticleWarnings(validatedArticle);
+            return;
+        } else {
+            const ref = doc(projectNewsFirestore, "articles", article.id);
+            await updateDoc(ref, { ...article, slug: createSlug(article.title) });
+            setArticle(articleIni);
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            setArticleWarnings({});
+            setUpdateMode(false);
+            navigate("/my-articles");
         }
     };
 
@@ -130,12 +160,11 @@ const CreateArticle = () => {
         return articleWarnings;
     }
 
-    // console.log(article);
+    console.log(location);
     // console.log(user);
     // console.log(response);
     // console.log("newImageUrl", newImageUrl);
     // console.log("articleWarnings", articleWarnings);
-
 
     return (
         <Fragment>
@@ -144,7 +173,7 @@ const CreateArticle = () => {
             <BreadcrumbWrap
                 pages={[
                     { label: "News", path: process.env.PUBLIC_URL + "/" },
-                    { label: "Create Article", path: process.env.PUBLIC_URL + pathname },
+                    { label: "Create Article", path: process.env.PUBLIC_URL + location.pathname },
                 ]}
             />
             <div className="checkout-area pt-95 pb-100">
@@ -247,6 +276,21 @@ const CreateArticle = () => {
                                                     onChange={handleImageInputChange}
                                                 />
                                             </div> */}
+                                            {updateMode ? (
+                                                <div
+                                                    className="col-lg-2 col-md-2 add-article-btn"
+                                                    onClick={updateArticle}
+                                                >
+                                                    Обнови статия
+                                                </div>
+                                            ) : (
+                                                <div
+                                                    className="col-lg-2 col-md-2 add-article-btn"
+                                                    onClick={createArticle}
+                                                >
+                                                    Създай статия
+                                                </div>
+                                            )}
                                             <div className="col-lg-2 col-md-2 add-article-btn" onClick={createArticle}>
                                                 Създай статия
                                             </div>

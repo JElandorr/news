@@ -1,6 +1,9 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 
+import { projectNewsFirestore } from "../../../firebase/config";
+import { doc, deleteDoc } from "firebase/firestore";
+
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
@@ -25,6 +28,8 @@ const Article = () => {
     const [previousArticleSlug, setPreviousArticleSlug] = useState(null);
 
     const [deleteConfirmation, setDeleteConfirmation] = useState(false);
+    const [deleteError, setDeleteError] = useState(null);
+    const [isDeleting, setIsDeleting] = useState(false);
 
     const { user } = useAuthContext();
     const { article } = useParams();
@@ -86,153 +91,188 @@ const Article = () => {
         setDeleteConfirmation(bool);
     };
 
+    const handleDeleteArticleConfirm = async (e) => {
+        e.preventDefault();
+        setIsDeleting(true);
+        const ref = doc(projectNewsFirestore, "articles", articleData.id);
+        console.log("ref", ref);
+        await deleteDoc(ref)
+            .then(() => {
+                setIsDeleting(false);
+                navigate("/my-articles");
+            })
+            .catch((error) => {
+                console.log("error", error);
+                setDeleteError(error.message);
+                setIsDeleting(false);
+            });
+    };
+
     // console.log("user.uid", user.uid);
-    // console.log("articleData?.owner_Id", articleData?.owner_Id);
+    console.log("articleData", articleData);
+    // // console.log("articleData?.owner_Id", articleData?.owner_Id);
 
     return (
         <>
-            {isLoading ? (
+            {isLoading || isDeleting ? (
                 <Preloader />
             ) : (
                 <Fragment>
-                    <div className="blog-details-top">
-                        <div className="blog-details-img">
-                            {/* <img alt="" src={`${articleData?.images[0]}`} /> */}
-                            {articleData?.images.length > 1 ? (
-                                <Swiper
-                                    modules={[Autoplay]}
-                                    autoplay={true}
-                                    loop={articleData?.images.length > 0 ? true : false}
-                                    spaceBetween={50}
-                                    slidesPerView={1}
-                                >
-                                    {articleData.images.map((link, index) => (
-                                        <SwiperSlide key={index}>
-                                            <div className="article-image-holder">
-                                                <img src={link} alt={`Slide ${index + 1}`} />
-                                            </div>
-                                        </SwiperSlide>
-                                    ))}
-                                </Swiper>
-                            ) : (
-                                <div className="article-image-holder">
-                                    <img
-                                        src={articleData?.images[0] ? articleData.images[0] : ""}
-                                        alt={"Article Image"}
-                                    />
-                                </div>
-                            )}
-                        </div>
-                        <div className="edit-delete-article">
-                            {user && user.uid === articleData?.owner_Id && (
-                                <>
-                                    {!deleteConfirmation ? (
-                                        <div className="edit-delete-btn-holder">
-                                            <Link
-                                                className="edit"
-                                                to={`/update-article/${articleData.slug}`}
-                                            >
-                                                update article
-                                            </Link>
-                                            <Link
-                                                className="delete"
-                                                to={`#`}
-                                                onClick={(e) => handleDeleteArticle(e, true)}
-                                            >
-                                                delete article
-                                            </Link>
-                                        </div>
+                    {collectionError && <p>{collectionError}</p>}
+                    {deleteError && <p>{deleteError}</p>}
+                    {(!collectionError || !deleteError) && (
+                        <>
+                            <div className="blog-details-top">
+                                <div className="blog-details-img">
+                                    {/* <img alt="" src={`${articleData?.images[0]}`} /> */}
+                                    {articleData?.images.length > 1 ? (
+                                        <Swiper
+                                            modules={[Autoplay]}
+                                            autoplay={true}
+                                            loop={articleData?.images.length > 0 ? true : false}
+                                            spaceBetween={50}
+                                            slidesPerView={1}
+                                        >
+                                            {articleData.images.map((link, index) => (
+                                                <SwiperSlide key={index}>
+                                                    <div className="article-image-holder">
+                                                        <img src={link} alt={`Slide ${index + 1}`} />
+                                                    </div>
+                                                </SwiperSlide>
+                                            ))}
+                                        </Swiper>
                                     ) : (
-                                        <div className="edit-delete-btn-holder">
-                                            <Link className="edit" to={`#`}>
-                                                delete
-                                            </Link>
-                                            <Link
-                                                className="delete"
-                                                to={`#`}
-                                                onClick={(e) => handleDeleteArticle(e, false)}
-                                            >
-                                                cancel
-                                            </Link>
+                                        <div className="article-image-holder">
+                                            <img
+                                                src={articleData?.images[0] ? articleData.images[0] : ""}
+                                                alt={"Article Image"}
+                                            />
                                         </div>
                                     )}
-                                </>
-                            )}
-                        </div>
-                        <div className="next-previous-post">
-                            {previousArticleSlug ? (
-                                <Link to={process.env.PUBLIC_URL + `/news/${previousArticleSlug}`}>
-                                    <i className="fa fa-angle-left" /> prev post
-                                </Link>
-                            ) : (
-                                <Link to={process.env.PUBLIC_URL + "/"}>News</Link>
-                            )}
-                            {nextArticleSlug ? (
-                                <Link to={process.env.PUBLIC_URL + `/news/${nextArticleSlug}`}>
-                                    next post <i className="fa fa-angle-right" />
-                                </Link>
-                            ) : (
-                                <Link to={process.env.PUBLIC_URL + "/"}>News</Link>
-                            )}
-                        </div>
-                        <div className="blog-details-content">
-                            <div className="blog-meta-2">
-                                <ul>
-                                    <li>{formattedDate ? formattedDate : ""}</li>
-                                    <li>
-                                        {/* <Link to={process.env.PUBLIC_URL + "/blog-details-standard"}>
+                                </div>
+                                <div className="edit-delete-article">
+                                    {user && user.uid === articleData?.owner_Id && (
+                                        <>
+                                            {!deleteConfirmation ? (
+                                                <div className="edit-delete-btn-holder">
+                                                    <Link
+                                                        className="edit"
+                                                        to={`/update-article/${articleData.slug}`}
+                                                        state={{ article: articleData }}
+                                                    >
+                                                        update article
+                                                    </Link>
+                                                    <Link
+                                                        className="delete"
+                                                        to={`#`}
+                                                        onClick={(e) => handleDeleteArticle(e, true)}
+                                                    >
+                                                        delete article
+                                                    </Link>
+                                                </div>
+                                            ) : (
+                                                <div className="edit-delete-btn-holder">
+                                                    <Link
+                                                        className="delete"
+                                                        to={`#`}
+                                                        onClick={(e) => handleDeleteArticleConfirm(e)}
+                                                    >
+                                                        delete
+                                                    </Link>
+                                                    <Link
+                                                        className="edit"
+                                                        to={`#`}
+                                                        onClick={(e) => handleDeleteArticle(e, false)}
+                                                    >
+                                                        cancel
+                                                    </Link>
+                                                </div>
+                                            )}
+                                        </>
+                                    )}
+                                </div>
+                                <div className="next-previous-post">
+                                    {previousArticleSlug ? (
+                                        <Link to={process.env.PUBLIC_URL + `/news/${previousArticleSlug}`}>
+                                            <i className="fa fa-angle-left" /> prev post
+                                        </Link>
+                                    ) : (
+                                        <Link to={process.env.PUBLIC_URL + "/"}>News</Link>
+                                    )}
+                                    {nextArticleSlug ? (
+                                        <Link to={process.env.PUBLIC_URL + `/news/${nextArticleSlug}`}>
+                                            next post <i className="fa fa-angle-right" />
+                                        </Link>
+                                    ) : (
+                                        <Link to={process.env.PUBLIC_URL + "/"}>News</Link>
+                                    )}
+                                </div>
+                                <div className="blog-details-content">
+                                    <div className="blog-meta-2">
+                                        <ul>
+                                            <li>{formattedDate ? formattedDate : ""}</li>
+                                            <li>
+                                                {/* <Link to={process.env.PUBLIC_URL + "/blog-details-standard"}>
                                             {articleData?.comments} <i className="fa fa-comments-o" />
                                         </Link> */}
-                                    </li>
-                                </ul>
-                            </div>
-                            <h3>{articleData?.title}</h3>
-                            <p>{articleData?.subtitle}</p>
-                        </div>
-                    </div>
-                    <div className="dec-img-wrapper">
-                        <div className="row">
-                            <div className="col-md-6">
-                                <div className="dec-img mb-50">
-                                    <img alt="" src={process.env.PUBLIC_URL + "/assets/img/blog/blog-details.jpg"} />
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <h3>{articleData?.title}</h3>
+                                    <p>{articleData?.subtitle}</p>
                                 </div>
                             </div>
-                            <div className="col-md-6">
-                                <div className="dec-img mb-50">
-                                    <img alt="" src={process.env.PUBLIC_URL + "/assets/img/blog/blog-details-2.jpg"} />
+                            <div className="dec-img-wrapper">
+                                <div className="row">
+                                    <div className="col-md-6">
+                                        <div className="dec-img mb-50">
+                                            <img
+                                                alt=""
+                                                src={process.env.PUBLIC_URL + "/assets/img/blog/blog-details.jpg"}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="col-md-6">
+                                        <div className="dec-img mb-50">
+                                            <img
+                                                alt=""
+                                                src={process.env.PUBLIC_URL + "/assets/img/blog/blog-details-2.jpg"}
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
+                                {articleData?.text.split("\n").map((item, key) => {
+                                    const paragraph = item.trim();
+                                    return (
+                                        <p key={key}>
+                                            {paragraph.length > 0 ? paragraph : null}
+                                            <br />
+                                        </p>
+                                    );
+                                })}
                             </div>
-                        </div>
-                        {articleData?.text.split("\n").map((item, key) => {
-                            const paragraph = item.trim();
-                            return (
-                                <p key={key}>
-                                    {paragraph.length > 0 ? paragraph : null}
-                                    <br />
-                                </p>
-                            );
-                        })}
-                    </div>
-                    <div className="tag-share">
-                        <div className="dec-tag">
-                            <ul>
-                                {currentCategories?.map((category) => (
-                                    <li key={category.id}>
-                                        <Link to={process.env.PUBLIC_URL + `${category.path}`}>{category.name}</Link>
-                                    </li>
-                                ))}
-                                {/* <li>
+                            <div className="tag-share">
+                                <div className="dec-tag">
+                                    <ul>
+                                        {currentCategories?.map((category) => (
+                                            <li key={category.id}>
+                                                <Link to={process.env.PUBLIC_URL + `${category.path}`}>
+                                                    {category.name}
+                                                </Link>
+                                            </li>
+                                        ))}
+                                        {/* <li>
                                     <Link to={process.env.PUBLIC_URL + "/blog-standard"}>lifestyle ,</Link>
                                 </li> */}
-                                {/* <li>
+                                        {/* <li>
                                     <Link to={process.env.PUBLIC_URL + "/blog-standard"}>interior ,</Link>
                                 </li>
                                 <li>
                                     <Link to={process.env.PUBLIC_URL + "/blog-standard"}>outdoor</Link>
                                 </li> */}
-                            </ul>
-                        </div>
-                        {/* <div className="blog-share">
+                                    </ul>
+                                </div>
+                                {/* <div className="blog-share">
                             <span>share :</span>
                             <div className="share-social">
                                 <ul>
@@ -254,23 +294,25 @@ const Article = () => {
                                 </ul>
                             </div>
                         </div> */}
-                    </div>
-                    <div className="next-previous-post">
-                        {previousArticleSlug ? (
-                            <Link to={process.env.PUBLIC_URL + `/news/${previousArticleSlug}`}>
-                                <i className="fa fa-angle-left" /> prev post
-                            </Link>
-                        ) : (
-                            <Link to={process.env.PUBLIC_URL + "/"}>News</Link>
-                        )}
-                        {nextArticleSlug ? (
-                            <Link to={process.env.PUBLIC_URL + `/news/${nextArticleSlug}`}>
-                                next post <i className="fa fa-angle-right" />
-                            </Link>
-                        ) : (
-                            <Link to={process.env.PUBLIC_URL + "/"}>News</Link>
-                        )}
-                    </div>
+                            </div>
+                            <div className="next-previous-post">
+                                {previousArticleSlug ? (
+                                    <Link to={process.env.PUBLIC_URL + `/news/${previousArticleSlug}`}>
+                                        <i className="fa fa-angle-left" /> prev post
+                                    </Link>
+                                ) : (
+                                    <Link to={process.env.PUBLIC_URL + "/"}>News</Link>
+                                )}
+                                {nextArticleSlug ? (
+                                    <Link to={process.env.PUBLIC_URL + `/news/${nextArticleSlug}`}>
+                                        next post <i className="fa fa-angle-right" />
+                                    </Link>
+                                ) : (
+                                    <Link to={process.env.PUBLIC_URL + "/"}>News</Link>
+                                )}
+                            </div>
+                        </>
+                    )}
                 </Fragment>
             )}
         </>
