@@ -6396,7 +6396,7 @@ button:disabled {
 
 .stick .header-right-wrap .same-style.cart-wrap .shopping-cart-content,
 .stick .header-right-wrap .same-style .account-dropdown {
-  top: 160%;
+  top: 60%;
 }
 @media only screen and (max-width: 767px) {
   .stick .header-right-wrap .same-style.cart-wrap .shopping-cart-content,
@@ -6467,7 +6467,7 @@ button:disabled {
 .header-right-wrap .same-style .account-dropdown {
   position: absolute;
   z-index: 220;
-  top: 190%;
+  top: 60%;
   right: 0;
   visibility: hidden;
   width: 125px;
@@ -6495,16 +6495,6 @@ button:disabled {
   .header-right-wrap .same-style .account-dropdown {
     top: 100%;
     margin-top: 14px;
-  }
-}
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
-  .header-right-wrap .same-style .account-dropdown {
-    left: -40px;
-  }
-}
-@media only screen and (min-width: 1200px) and (max-width: 1365px) {
-  .header-right-wrap .same-style .account-dropdown {
-    left: -34px;
   }
 }
 .header-right-wrap .same-style .account-dropdown ul li a {
@@ -6861,7 +6851,7 @@ button:disabled {
 .header-right-wrap .same-style.header-search .search-content {
   position: absolute;
   z-index: 99;
-  top: 193%;
+  top: 60%;
   right: 0;
   visibility: hidden;
   min-width: 300px;
@@ -21294,6 +21284,47 @@ h3.cart-page-title {
   border-bottom: 1px solid #f1f1f1;
 }
 .next-previous-post a {
+  font-size: 15px;
+  text-transform: capitalize;
+}
+
+.edit-delete-article {
+  margin: 0 20px 0;
+  display: flex;
+  flex-direction: column;
+  padding: 18px 0 17px;
+  border-top: 1px solid #f1f1f1;
+}
+.edit-delete-article .edit-delete-btn-holder {
+  align-self: center;
+}
+.edit-delete-article .edit-delete-btn-holder a.edit {
+  padding: 10px 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: #b6b6b6;
+  color: white;
+  font-size: 15px;
+  text-transform: uppercase;
+  transition: background-color 0.4s ease-in-out 0s;
+}
+.edit-delete-article .edit-delete-btn-holder a.edit:hover {
+  background-color: #3d34b8;
+}
+.edit-delete-article .edit-delete-btn-holder a.delete {
+  padding: 10px 20px;
+  background-color: #b6b6b6;
+  color: white;
+  font-size: 15px;
+  text-transform: uppercase;
+  transition: background-color 0.4s ease-in-out 0s;
+}
+.edit-delete-article .edit-delete-btn-holder a.delete:hover {
+  background-color: red;
+}
+.edit-delete-article a {
+  background-color: black;
+  color: white;
   font-size: 15px;
   text-transform: capitalize;
 }
