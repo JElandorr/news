@@ -239,8 +239,10 @@
     border-top: 1px solid #f1f1f1;
 
     .edit-delete-btn-holder {
-        align-self: center;
+        display: flex;
+        justify-content: space-between;
         a.edit {
+            text-align: center;
             padding: 10px 20px;
             margin-left: 10px;
             margin-right: 10px;
@@ -249,18 +251,46 @@
             font-size: 15px;
             text-transform: uppercase;
             transition: background-color 0.4s ease-in-out 0s;
+
+            @media #{$md-layout} {
+                background-color: $theme-color;
+            }
+
+            @media #{$sm-layout} {
+                background-color: $theme-color;
+            }
+
+            @media #{$xs-layout} {
+                background-color: $theme-color;
+            }
         }
 
         a.edit:hover {
             background-color: $theme-color;
         }
+
         a.delete {
+            text-align: center;
             padding: 10px 20px;
+            margin-left: 10px;
+            margin-right: 10px;
             background-color: #b6b6b6;
             color: white;
             font-size: 15px;
             text-transform: uppercase;
             transition: background-color 0.4s ease-in-out 0s;
+
+            @media #{$md-layout} {
+                background-color: red;
+            }
+
+            @media #{$sm-layout} {
+                background-color: red;
+            }
+
+            @media #{$xs-layout} {
+                background-color: red;
+            }
         }
 
         a.delete:hover {

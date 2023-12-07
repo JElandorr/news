@@ -21296,9 +21296,11 @@ h3.cart-page-title {
   border-top: 1px solid #f1f1f1;
 }
 .edit-delete-article .edit-delete-btn-holder {
-  align-self: center;
+  display: flex;
+  justify-content: space-between;
 }
 .edit-delete-article .edit-delete-btn-holder a.edit {
+  text-align: center;
   padding: 10px 20px;
   margin-left: 10px;
   margin-right: 10px;
@@ -21308,16 +21310,49 @@ h3.cart-page-title {
   text-transform: uppercase;
   transition: background-color 0.4s ease-in-out 0s;
 }
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .edit-delete-article .edit-delete-btn-holder a.edit {
+    background-color: #3d34b8;
+  }
+}
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+  .edit-delete-article .edit-delete-btn-holder a.edit {
+    background-color: #3d34b8;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .edit-delete-article .edit-delete-btn-holder a.edit {
+    background-color: #3d34b8;
+  }
+}
 .edit-delete-article .edit-delete-btn-holder a.edit:hover {
   background-color: #3d34b8;
 }
 .edit-delete-article .edit-delete-btn-holder a.delete {
+  text-align: center;
   padding: 10px 20px;
+  margin-left: 10px;
+  margin-right: 10px;
   background-color: #b6b6b6;
   color: white;
   font-size: 15px;
   text-transform: uppercase;
   transition: background-color 0.4s ease-in-out 0s;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .edit-delete-article .edit-delete-btn-holder a.delete {
+    background-color: red;
+  }
+}
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+  .edit-delete-article .edit-delete-btn-holder a.delete {
+    background-color: red;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .edit-delete-article .edit-delete-btn-holder a.delete {
+    background-color: red;
+  }
 }
 .edit-delete-article .edit-delete-btn-holder a.delete:hover {
   background-color: red;
