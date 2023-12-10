@@ -1,6 +1,6 @@
 # Project News Site
 
-Welcome to the Project News Site documentation. This project is my submission for the retake exam after completing the SoftUni ReactJS Course. Named "ProjectNews", this dynamic news site allows visitors to browse a wide range of topics and articles. Our news site stands out with its fully responsive design, ensuring a seamless user experience across various devices.
+The "Project News" project is my submission for the retake exam after completing the SoftUni ReactJS Course. This dynamic news site allows visitors to browse a wide range of topics and articles, or add new articles if they register. My aim was to create something as close to a real news site as possible, and because of that, I decided to implement a fully responsive design, which is the modern way to ensure a seamless user experience across various platforms and devices.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -18,9 +18,12 @@ You may also see any lint errors in the console.
 
 ## Deployment
 
-This project is deployed using Firebase Hosting services and is accessible over the Internet. 
-You can visit the live site at: 
-[https://project-news-2ea55.web.app](https://project-news-2ea55.web.app).
+This project is deployed using Firebase Hosting services and is accessible over the Internet.
+
+## Project Links
+
+- **GitHub Repository**: [https://github.com/JElandorr/news](https://github.com/JElandorr/news)
+- **Deployed Project**: [https://project-news-2ea55.web.app](https://project-news-2ea55.web.app)
 
 ## Database
 
