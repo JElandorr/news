@@ -1,6 +1,6 @@
 # Project News Site
 
-Welcome to the Project News Site documentation. This platform serves as a dynamic news site where visitors can browse a wide range of topics and articles. Our news site stands out with its fully responsive design, ensuring a seamless user experience across various devices.
+Welcome to the Project News Site documentation. This project is my submission for the retake exam after completing the SoftUni ReactJS Course. Named "ProjectNews", this dynamic news site allows visitors to browse a wide range of topics and articles. Our news site stands out with its fully responsive design, ensuring a seamless user experience across various devices.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -31,6 +31,7 @@ This project uses Firebase for authentication, as well as Firestore for database
 
 ### Reading Articles
 - **Open Access**: All visitors have the ability to read every published article without the need for registration. Articles are displayed in reverse chronological order, from the newest to the older ones.
+- **Categories**: Users can choose which news category they want to explore by selecting the desired category from the Header section of the desktop view, or by clicking on the Mobile menu and examining the right mobile navigation menu.
 
 ### User Registration and Article Management
 - **User Registration**: Users can register through the User Icon located in the Header of the App.
