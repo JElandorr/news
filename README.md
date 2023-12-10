@@ -55,8 +55,7 @@ This project uses Firebase for authentication, as well as Firestore for database
 To get started with the Project News Site, please follow the steps outlined below:
 
 1. Visit our site and explore the diverse range of articles available.
-2. To contribute with your own articles, click on the User Icon in the TopNavBar to register or log in.
-3. Once registered and logged in, navigate to the CreateArticle component to begin crafting your articles.
-4. Manage your articles through the MyArticles page and the My Latest Articles Panel.
+2. To contribute with your own articles, click on the User Icon in the Header Section to register or log in.
+3. Once registered and logged in, navigate to the Create Article option after clicking the User Icon on the Header Section of the website to begin crafting your articles.
+4. Manage your articles through the My Latest Articles Panel emmediately after creating new article, or through MyArticles page on a later stage.
 
-Thank you for being a part of our news community. Your engagement and contributions make the Project News Site a vibrant hub for news and information.
