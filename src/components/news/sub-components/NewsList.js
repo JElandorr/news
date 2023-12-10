@@ -5,7 +5,7 @@ import ArticleMini from "./ArticleMini";
 // import { articles } from "../../dataStructures/examples/articles_example";
 
 const NewsList = ({ articles }) => {
-    // console.log("articles", articles);
+
     return (
         <>
             {articles === null ||

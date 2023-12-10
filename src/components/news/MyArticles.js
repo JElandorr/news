@@ -18,29 +18,23 @@ const MyArticles = () => {
     const [articles, setArticles] = useState(null);
     const { pathname } = useLocation();
     const { user } = useAuthContext();
-    const { documents, collectionError, isLoading } = useCollection("articles", ["owner_Id", "==", user.uid]);
-    const navigate = useNavigate();
+    const { documents, collectionError, isLoading } = useCollection("articles", {
+        where: ["owner_Id", "==", user.uid],
+        orderBy: { field: "createdAt", direction: "desc" },
+    });
 
     useEffect(() => {
         let news = [];
         if (documents) {
             news = [...documents];
-            // console.log("news1", news);
-            news.sort((a, b) => b.createdAt - a.createdAt);
-            // console.log("news2", news);
             if (
                 categoriesIni.filter((category) => category.path === pathname) &&
                 categoriesIni.filter((category) => category.path === pathname).length > 0
             ) {
                 const categoryIni = categoriesIni.filter((category) => {
-                    // console.log("category", category);
-                    // console.log("category.path", category.path);
-                    // console.log("pathname", pathname);
                     return category.path === pathname;
                 })[0];
-                // console.log("categoryIni", categoryIni);
                 news.filter((article) => article.categories.includes(categoryIni.name));
-                // console.log("news3", news);
             }
             setArticles(news);
         }
@@ -52,10 +46,6 @@ const MyArticles = () => {
     if (collectionError) {
         return <p>{collectionError}</p>;
     }
-
-    // console.log("pathname", pathname);
-    // console.log("articles", articles);
-    // console.log("user", user);
 
     return (
         <>

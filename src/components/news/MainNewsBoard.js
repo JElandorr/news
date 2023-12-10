@@ -18,42 +18,33 @@ const MainNewsBoard = () => {
     const [queryParams, setQueryParams] = useState(null);
     const [articles, setArticles] = useState(null);
     const [currentCategory, setCurrentCategory] = useState(null);
+    const [isFetching, setIsFetching] = useState(false);
     const { pathname } = useLocation();
 
-    // useEffect(() => {
-    //     if (pathname !== "/") {
-    //         const category = categoriesIni.filter((category) => {
-    //             if (category.path === pathname) {
-    //                 console.log("category", category);
-    //                 return category;
-    //             }
-    //         });
-    //         setQueryParams(category ? ["categories", "array-contains", category[0].name] : null);
-    //     }
-    // }, [pathname]);
-
-    const { documents, collectionError, isLoading } = useCollection("articles");
+    const { documents, collectionError, isLoading } = useCollection("articles", {
+        // where: ["categories", "array-contains", "Авто"],
+        orderBy: ["createdAt", "desc"],
+    });
 
     useEffect(() => {
         let news = [];
         if (documents) {
+            setIsFetching(true);
             news = [...documents];
-            // console.log("news1", news);
-            news = sortArticlesArrayByDate(news);
-            // console.log("news2", news);
             if (categoriesIni.filter((category) => category.path === pathname).length > 0) {
                 const categoryIni = categoriesIni.filter((category) => {
                     return category.path === pathname;
                 })[0];
-                // console.log("categoryIni", categoryIni);
-                // console.log("categoryIni", typeof categoryIni.name);
                 news = news.filter((article) => article.categories.includes(categoryIni.name));
                 setCurrentCategory(categoryIni);
             }
             setArticles(news);
+            setIsFetching(false);
         }
         return () => {
-            setArticles(null);
+            if (documents) {
+                setArticles(null);
+            }
         };
     }, [documents, pathname]);
 
@@ -61,17 +52,9 @@ const MainNewsBoard = () => {
         return <p>{collectionError}</p>;
     }
 
-    function sortArticlesArrayByDate(array) {
-        return array.sort((a, b) => {
-            return b.createdAt.seconds - a.createdAt.seconds;
-        });
-    }
+    console.log("articles", articles);
 
-    // console.log("pathname", pathname);
-    // console.log("articles", articles);
-
-    // console.log("documents", documents);
-    // console.log("queryParams", queryParams);
+    console.log("documents", documents);
 
     let breadcrumbPages = [];
 
@@ -107,7 +90,8 @@ const MainNewsBoard = () => {
                     <div className="blog-area pt-100 pb-100">
                         <div className="container">
                             <div className="row">
-                                <div className="col-lg-10">
+                                {/* <div className="col-lg-10"> */}
+                                <div className="col-lg-12">
                                     {/* <div className="mr-20"> */}
                                     <div className="row">
                                         <NewsList articles={articles} />
@@ -115,9 +99,9 @@ const MainNewsBoard = () => {
                                     {articles && articles.length > 12 ? <NewsPagination /> : null}
                                     {/* </div> */}
                                 </div>
-                                <div className="col-lg-2">
+                                {/* <div className="col-lg-2">
                                     <NewsSidebar />
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>
