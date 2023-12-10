@@ -1,4 +1,3 @@
-<<<<<<<<<<<<<<  ✨ Codeium Command ⭐ >>>>>>>>>>>>>>>>
 # Project News Site
 
 Welcome to the Project News Site documentation. This platform serves as a dynamic news site where visitors can immerse themselves in a wide range of articles. Our news site stands out with its fully responsive design, ensuring a seamless user experience across various devices.
