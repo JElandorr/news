@@ -52,9 +52,9 @@ const MainNewsBoard = () => {
         return <p>{collectionError}</p>;
     }
 
-    console.log("articles", articles);
+    // console.log("articles", articles);
 
-    console.log("documents", documents);
+    // console.log("documents", documents);
 
     let breadcrumbPages = [];
 
