@@ -15,10 +15,9 @@ import Preloader from "../preloader/Preloader";
 import { categoriesIni } from "../dateStructures/categoriesIni";
 
 const MainNewsBoard = () => {
-    const [queryParams, setQueryParams] = useState(null);
     const [articles, setArticles] = useState(null);
     const [currentCategory, setCurrentCategory] = useState(null);
-    const [isFetching, setIsFetching] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
     const { pathname } = useLocation();
 
     const { documents, collectionError, isLoading } = useCollection("articles", {
@@ -29,7 +28,6 @@ const MainNewsBoard = () => {
     useEffect(() => {
         let news = [];
         if (documents) {
-            setIsFetching(true);
             news = [...documents];
             if (categoriesIni.filter((category) => category.path === pathname).length > 0) {
                 const categoryIni = categoriesIni.filter((category) => {
@@ -39,7 +37,6 @@ const MainNewsBoard = () => {
                 setCurrentCategory(categoryIni);
             }
             setArticles(news);
-            setIsFetching(false);
         }
         return () => {
             if (documents) {
@@ -75,6 +72,25 @@ const MainNewsBoard = () => {
         ];
     }
 
+    // Add state for current page and items per page
+    const itemsPerPage = 3;
+
+    // Calculate the articles for the current page
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = articles?.slice(indexOfFirstItem, indexOfLastItem);
+
+    // Update the page when a pagination button is clicked
+    const handlePageClick = (e, pageNumber) => {
+        e.preventDefault();
+        setCurrentPage(pageNumber);
+    };
+
+    console.log("currentPage", currentPage);
+    console.log("totalItems", articles?.length);
+    console.log("itemsPerPage", itemsPerPage);
+    console.log("articles", articles);
+
     return (
         <>
             {isLoading ? (
@@ -94,9 +110,16 @@ const MainNewsBoard = () => {
                                 <div className="col-lg-12">
                                     {/* <div className="mr-20"> */}
                                     <div className="row">
-                                        <NewsList articles={articles} />
+                                        <NewsList articles={currentItems} />
                                     </div>
-                                    {articles && articles.length > 12 ? <NewsPagination /> : null}
+                                    {articles && articles?.length > itemsPerPage ? (
+                                        <NewsPagination
+                                            currentPage={currentPage}
+                                            totalItems={articles.length}
+                                            itemsPerPage={itemsPerPage}
+                                            handlePageClick={handlePageClick}
+                                        />
+                                    ) : null}
                                     {/* </div> */}
                                 </div>
                                 {/* <div className="col-lg-2">
