@@ -11,7 +11,9 @@ const FooterCopyright = ({ footerLogo, spaceBottomClass, colorClass }) => {
                 </Link>
             </div>
             <p>
-                &copy; {new Date().getFullYear()} Elandorr Web Projects
+                &copy; {new Date().getFullYear()}
+                <br />
+                Elandorr Web Projects
                 <br /> All Rights Reserved
             </p>
         </div>

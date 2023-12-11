@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
 import FooterCopyright from "./FooterCopyright";
-import FooterNewsletter from "./FooterNewsletter";
 
 const Footer = ({
     backgroundColorClass,
