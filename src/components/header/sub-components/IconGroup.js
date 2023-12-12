@@ -22,7 +22,7 @@ const IconGroup = ({ iconWhiteClass, handleShowMobileMenu, handleSearchIconClick
 
     const handleGetUser = async (e) => {
         e.preventDefault();
-        console.log("handleGetUser");
+        // console.log("handleGetUser");
         // const user = await getUser();
         // console.log("user", user);
     };

@@ -50,7 +50,7 @@ export const requester = async (url, method, data) => {
     try {
         const response = await fetch(url, options);
 
-        console.log(response);
+        // console.log(response);
 
         if (!response.ok) {
             throw new Error(response);

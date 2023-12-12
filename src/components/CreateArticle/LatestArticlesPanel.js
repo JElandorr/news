@@ -12,14 +12,17 @@ import Preloader from "../preloader/Preloader.js";
 
 const LatestArticlesPanel = ({ spaceTopClass, spaceBottomClass }) => {
     const { user } = useAuthContext();
-    const { documents, isLoading } = useCollection("articles", ["owner_Id", "==", user.uid]);
+    const { documents, isLoading } = useCollection("articles", {
+        where: ["owner_Id", "==", user.uid],
+        orderBy: ["createdAt", "desc"],
+    });
 
     const myLastThreeArticles = documents?.slice(0, 3).sort((a, b) => {
         return b.createdAt.seconds - a.createdAt.seconds;
     });
 
     // console.log("user", user);
-    // console.log("myArticles", myArticles);
+    // console.log("documents", documents);
 
     return (
         <>
@@ -28,7 +31,11 @@ const LatestArticlesPanel = ({ spaceTopClass, spaceBottomClass }) => {
             ) : (
                 <div className={clsx("blog-area", spaceTopClass, spaceBottomClass)}>
                     <div className="container">
-                        <SectionTitle titleText="Моите последни статии  " positionClass="text-center" spaceClass="mb-55" />
+                        <SectionTitle
+                            titleText="Моите последни статии  "
+                            positionClass="text-center"
+                            spaceClass="mb-55"
+                        />
                         <div className="row">
                             {myLastThreeArticles?.map((article) => (
                                 <div className="col-lg-4 col-xs-6" key={article.id}>

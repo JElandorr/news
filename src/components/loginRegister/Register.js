@@ -165,7 +165,7 @@ const Register = () => {
                                                             value={userInputData.rePass}
                                                             onChange={handleUserInputDataChange}
                                                         />
-                                                        <div className="button-box">
+                                                        <div className="button-box login">
                                                             {isLoading ? (
                                                                 <button type="submit" disabled>
                                                                     <span>Registering in process...</span>

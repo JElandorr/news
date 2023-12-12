@@ -17,14 +17,15 @@ const Logout = () => {
         navigate("/");
     };
 
+    const handleLogoutCancel = (e) => {
+        e.preventDefault();
+        navigate("/");
+    };
+
     return (
         <>
             <Fragment>
-                <SEO
-                    title="NewsProject"
-                    titleTemplate="Logout"
-                    description="Logout page of Project News."
-                />
+                <SEO title="NewsProject" titleTemplate="Logout" description="Logout page of Project News." />
                 {/* breadcrumb */}
                 <Breadcrumb
                     pages={[
@@ -68,7 +69,10 @@ const Logout = () => {
                                                                         <span>Yes, logout!</span>
                                                                     </button>
                                                                 </div>
-                                                                <div className="button-box no">
+                                                                <div
+                                                                    className="button-box no"
+                                                                    onClick={(e) => handleLogoutCancel(e)}
+                                                                >
                                                                     <button>
                                                                         <span>No, stay onsite!</span>
                                                                     </button>

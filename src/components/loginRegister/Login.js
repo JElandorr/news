@@ -133,7 +133,7 @@ const Login = ({ validateNewUserInput, clearInputData }) => {
                                                             onChange={handleUserInputDataChange}
                                                             onBlur={validateNewUserInput}
                                                         />
-                                                        <div className="button-box">
+                                                        <div className="button-box login">
                                                             {isLoading ? (
                                                                 <button type="submit" disabled>
                                                                     <span>Logging in...</span>

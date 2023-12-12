@@ -14,17 +14,17 @@ export const useCollection = (collectionName, _queryParams) => {
         let ref = collection(projectNewsFirestore, collectionName);
 
         if (queryParams?.where && queryParams?.orderBy && queryParams.where.length > 0) {
-            console.log("queryParams1");
+            // console.log("queryParams1");
             ref = query(
                 ref,
                 where(queryParams.where[0], queryParams.where[1], queryParams.where[2]),
                 orderBy(queryParams.orderBy[0], queryParams.orderBy[1])
             );
         } else if (queryParams?.where && queryParams.where.length > 0 && !queryParams?.orderBy) {
-            console.log("queryParams2");
+            // console.log("queryParams2");
             ref = query(ref, where(queryParams.where[0], queryParams.where[1], queryParams.where[2]));
         } else if (queryParams?.orderBy && queryParams.orderBy.length === 2) {
-            console.log("queryParams3");
+            // console.log("queryParams3");
             ref = query(ref, orderBy(queryParams.orderBy[0], queryParams.orderBy[1]));
         }
 

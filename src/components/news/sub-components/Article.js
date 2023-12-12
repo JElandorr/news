@@ -24,8 +24,6 @@ import { categoriesIni } from "../../dateStructures/categoriesIni";
 const Article = () => {
     const [articleData, setArticleData] = useState(null);
     const [currentCategories, setCurrentCategories] = useState(null);
-    const [nextArticleSlug, setNextArticleSlug] = useState(null);
-    const [previousArticleSlug, setPreviousArticleSlug] = useState(null);
 
     const [deleteConfirmation, setDeleteConfirmation] = useState(false);
     const [deleteError, setDeleteError] = useState(null);
@@ -33,47 +31,30 @@ const Article = () => {
 
     const { user } = useAuthContext();
     const { article } = useParams();
-    const { documents, collectionError, isLoading } = useCollection("articles");
+    const { documents, collectionError, isLoading } = useCollection("articles", {
+        where: ["slug", "==", article],
+        orderBy: ["createdAt", "desc"],
+    });
 
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (documents) {
-            documents.sort((a, b) => b.createdAt - a.createdAt);
-            const currentArticleIndex = documents.findIndex((singleArticle) => singleArticle.slug === article);
-            setArticleData(documents[currentArticleIndex]);
+        if (documents && documents.length > 0) {
+            setArticleData(documents[0]);
             setCurrentCategories(
-                documents[currentArticleIndex].categories.map((category) => {
+                documents[0].categories.map((category) => {
                     const currentCategory = categoriesIni.find((categoryIni) => categoryIni.name === category);
                     return currentCategory;
                 })
             );
-            if (currentArticleIndex > 0) {
-                setPreviousArticleSlug(documents[currentArticleIndex - 1].slug);
-            } else {
-                setPreviousArticleSlug(false);
-            }
-
-            if (currentArticleIndex < documents.length - 1) {
-                setNextArticleSlug(documents[currentArticleIndex + 1].slug);
-            } else {
-                setNextArticleSlug(false);
-            }
             window.scrollTo(0, 0);
         }
 
         return () => {
             setArticleData(null);
-            setNextArticleSlug(null);
-            setPreviousArticleSlug(null);
         };
     }, [documents, article]);
 
-    // console.log("documents", documents);
-    // console.log("articleData", articleData);
-    // console.log("articleData typeof", typeof articleData);
-    // console.log("collectionError", collectionError);
-    // console.log("currentCategories", currentCategories);
     if (collectionError) {
         return <p>{collectionError}</p>;
     }
@@ -95,22 +76,20 @@ const Article = () => {
         e.preventDefault();
         setIsDeleting(true);
         const ref = doc(projectNewsFirestore, "articles", articleData.id);
-        console.log("ref", ref);
+        // console.log("ref", ref);
         await deleteDoc(ref)
             .then(() => {
                 setIsDeleting(false);
                 navigate("/my-articles");
             })
             .catch((error) => {
-                console.log("error", error);
+                // console.log("error", error);
                 setDeleteError(error.message);
                 setIsDeleting(false);
             });
     };
 
-    // console.log("user.uid", user.uid);
-    // console.log("articleData", articleData);
-    // // console.log("articleData?.owner_Id", articleData?.owner_Id);
+    // console.log("documents", documents);
 
     return (
         <>
@@ -124,7 +103,6 @@ const Article = () => {
                         <>
                             <div className="blog-details-top">
                                 <div className="blog-details-img">
-                                    {/* <img alt="" src={`${articleData?.images[0]}`} /> */}
                                     {articleData?.images.length > 1 ? (
                                         <Swiper
                                             modules={[Autoplay]}
@@ -191,22 +169,6 @@ const Article = () => {
                                         </>
                                     )}
                                 </div>
-                                <div className="next-previous-post">
-                                    {previousArticleSlug ? (
-                                        <Link to={process.env.PUBLIC_URL + `/news/${previousArticleSlug}`}>
-                                            <i className="fa fa-angle-left" /> prev post
-                                        </Link>
-                                    ) : (
-                                        <Link to={process.env.PUBLIC_URL + "/"}>News</Link>
-                                    )}
-                                    {nextArticleSlug ? (
-                                        <Link to={process.env.PUBLIC_URL + `/news/${nextArticleSlug}`}>
-                                            next post <i className="fa fa-angle-right" />
-                                        </Link>
-                                    ) : (
-                                        <Link to={process.env.PUBLIC_URL + "/"}>News</Link>
-                                    )}
-                                </div>
                                 <div className="blog-details-content">
                                     <div className="blog-meta-2">
                                         <ul>
@@ -261,55 +223,8 @@ const Article = () => {
                                                 </Link>
                                             </li>
                                         ))}
-                                        {/* <li>
-                                    <Link to={process.env.PUBLIC_URL + "/blog-standard"}>lifestyle ,</Link>
-                                </li> */}
-                                        {/* <li>
-                                    <Link to={process.env.PUBLIC_URL + "/blog-standard"}>interior ,</Link>
-                                </li>
-                                <li>
-                                    <Link to={process.env.PUBLIC_URL + "/blog-standard"}>outdoor</Link>
-                                </li> */}
                                     </ul>
                                 </div>
-                                {/* <div className="blog-share">
-                            <span>share :</span>
-                            <div className="share-social">
-                                <ul>
-                                    <li>
-                                        <a className="facebook" href="//facebook.com">
-                                            <i className="fa fa-facebook" />
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a className="twitter" href="//twitter.com">
-                                            <i className="fa fa-twitter" />
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a className="instagram" href="//instagram.com">
-                                            <i className="fa fa-instagram" />
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div> */}
-                            </div>
-                            <div className="next-previous-post">
-                                {previousArticleSlug ? (
-                                    <Link to={process.env.PUBLIC_URL + `/news/${previousArticleSlug}`}>
-                                        <i className="fa fa-angle-left" /> prev post
-                                    </Link>
-                                ) : (
-                                    <Link to={process.env.PUBLIC_URL + "/"}>News</Link>
-                                )}
-                                {nextArticleSlug ? (
-                                    <Link to={process.env.PUBLIC_URL + `/news/${nextArticleSlug}`}>
-                                        next post <i className="fa fa-angle-right" />
-                                    </Link>
-                                ) : (
-                                    <Link to={process.env.PUBLIC_URL + "/"}>News</Link>
-                                )}
                             </div>
                         </>
                     )}

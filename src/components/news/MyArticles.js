@@ -78,7 +78,7 @@ const MyArticles = () => {
                     <div className="blog-area pt-100 pb-100">
                         <div className="container">
                             <div className="row">
-                                <div className="col-lg-10">
+                                <div className="col-lg-12">
                                     <div className="mr-20">
                                         <div className="row">
                                             <NewsList articles={articles} />
@@ -93,9 +93,9 @@ const MyArticles = () => {
                                         ) : null}
                                     </div>
                                 </div>
-                                <div className="col-lg-2">
+                                {/* <div className="col-lg-2">
                                     <NewsSidebar />
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>

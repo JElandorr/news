@@ -73,7 +73,7 @@ const CreateArticle = () => {
 
     const handleImageDelete = (e, image) => {
         e.preventDefault();
-        console.log(image);
+        // console.log(image);
         setArticle({ ...article, images: article.images.filter((img) => img !== image) });
         setNewImageUrl("");
     };
@@ -160,7 +160,7 @@ const CreateArticle = () => {
         return articleWarnings;
     }
 
-    console.log(location);
+    // console.log(location);
     // console.log(user);
     // console.log(response);
     // console.log("newImageUrl", newImageUrl);
