@@ -13,6 +13,7 @@ import "swiper/css";
 
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { useCollection } from "../../../hooks/useCollection";
+import { useFirestore } from "../../../hooks/useFirestore";
 
 import Preloader from "../../preloader/Preloader";
 import { dateTimeFormatterFromSeconds } from "../../utils/dateFormatter";
@@ -35,6 +36,8 @@ const Article = () => {
         where: ["slug", "==", article],
         orderBy: ["createdAt", "desc"],
     });
+
+    const { deleteDocument, response } = useFirestore("articles");
 
     const navigate = useNavigate();
 
@@ -75,9 +78,8 @@ const Article = () => {
     const handleDeleteArticleConfirm = async (e) => {
         e.preventDefault();
         setIsDeleting(true);
-        const ref = doc(projectNewsFirestore, "articles", articleData.id);
-        // console.log("ref", ref);
-        await deleteDoc(ref)
+
+        await deleteDocument(articleData.id)
             .then(() => {
                 setIsDeleting(false);
                 navigate("/my-articles");
@@ -89,7 +91,7 @@ const Article = () => {
             });
     };
 
-    // console.log("documents", documents);
+    console.log("documents", documents);
 
     return (
         <>

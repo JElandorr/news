@@ -48,7 +48,7 @@ const CreateArticle = () => {
     }, [location.state]);
 
     const { user } = useAuthContext();
-    const { addDocument, response } = useFirestore("articles");
+    const { addDocument, updateDocument, response } = useFirestore("articles");
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -116,8 +116,11 @@ const CreateArticle = () => {
             setArticleWarnings(validatedArticle);
             return;
         } else {
-            const ref = doc(projectNewsFirestore, "articles", article.id);
-            await updateDoc(ref, { ...article, slug: createSlug(article.title) });
+            // const ref = doc(projectNewsFirestore, "articles", article.id);
+            // await updateDoc(ref, { ...article, slug: createSlug(article.title) });
+            
+            await updateDocument(article.id, { ...article, slug: createSlug(article.title) });
+            
             setArticle(articleIni);
             window.scrollTo({ top: 0, behavior: "smooth" });
             setArticleWarnings({});
@@ -164,7 +167,7 @@ const CreateArticle = () => {
     // console.log(user);
     // console.log(response);
     // console.log("newImageUrl", newImageUrl);
-    // console.log("articleWarnings", articleWarnings);
+    console.log("article", article);
 
     return (
         <Fragment>
@@ -291,9 +294,9 @@ const CreateArticle = () => {
                                                     Създай статия
                                                 </div>
                                             )}
-                                            <div className="col-lg-2 col-md-2 add-article-btn" onClick={createArticle}>
+                                            {/* <div className="col-lg-2 col-md-2 add-article-btn" onClick={createArticle}>
                                                 Създай статия
-                                            </div>
+                                            </div> */}
                                         </div>
                                     </div>
                                 </div>
