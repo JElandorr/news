@@ -73,7 +73,7 @@ const MainNewsBoard = () => {
     }
 
     // Add state for current page and items per page
-    const itemsPerPage = 3;
+    const itemsPerPage = 6;
 
     // Calculate the articles for the current page
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -86,10 +86,10 @@ const MainNewsBoard = () => {
         setCurrentPage(pageNumber);
     };
 
-    console.log("currentPage", currentPage);
-    console.log("totalItems", articles?.length);
-    console.log("itemsPerPage", itemsPerPage);
-    console.log("articles", articles);
+    // console.log("currentPage", currentPage);
+    // console.log("totalItems", articles?.length);
+    // console.log("itemsPerPage", itemsPerPage);
+    // console.log("articles", articles);
 
     return (
         <>

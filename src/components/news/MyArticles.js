@@ -15,12 +15,13 @@ import Preloader from "../preloader/Preloader";
 import { categoriesIni } from "../dateStructures/categoriesIni";
 
 const MyArticles = () => {
+    const [currentPage, setCurrentPage] = useState(1);
     const [articles, setArticles] = useState(null);
     const { pathname } = useLocation();
     const { user } = useAuthContext();
     const { documents, collectionError, isLoading } = useCollection("articles", {
         where: ["owner_Id", "==", user.uid],
-        orderBy: { field: "createdAt", direction: "desc" },
+        orderBy: ["createdAt", "desc"],
     });
 
     useEffect(() => {
@@ -47,6 +48,20 @@ const MyArticles = () => {
         return <p>{collectionError}</p>;
     }
 
+    // Add state for current page and items per page
+    const itemsPerPage = 6;
+
+    // Calculate the articles for the current page
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = articles?.slice(indexOfFirstItem, indexOfLastItem);
+
+    // Update the page when a pagination button is clicked
+    const handlePageClick = (e, pageNumber) => {
+        e.preventDefault();
+        setCurrentPage(pageNumber);
+    };
+
     return (
         <>
             {isLoading ? (
@@ -68,7 +83,14 @@ const MyArticles = () => {
                                         <div className="row">
                                             <NewsList articles={articles} />
                                         </div>
-                                        {articles && articles.length > 0 ? <NewsPagination /> : null}
+                                        {articles && articles?.length > itemsPerPage ? (
+                                            <NewsPagination
+                                                currentPage={currentPage}
+                                                totalItems={articles.length}
+                                                itemsPerPage={itemsPerPage}
+                                                handlePageClick={handlePageClick}
+                                            />
+                                        ) : null}
                                     </div>
                                 </div>
                                 <div className="col-lg-2">

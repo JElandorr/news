@@ -15799,22 +15799,35 @@ button:disabled {
 
 /*-------- 8. Footer style  -----*/
 .copyright .footer-logo {
+  display: flex;
+  height: 60px;
   margin-top: 41px;
   margin-bottom: 12px;
 }
 @media only screen and (max-width: 767px) {
   .copyright .footer-logo {
-    margin-top: 0;
+    margin-top: 10px;
   }
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .copyright .footer-logo {
-    margin-top: 0;
+    margin-top: 10px;
   }
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .copyright .footer-logo {
     margin-top: 28px;
+  }
+}
+.copyright .footer-logo a {
+  height: 100%;
+}
+.copyright .footer-logo a img {
+  height: 100%;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .copyright .footer-logo a {
+    align-self: center;
   }
 }
 .copyright p {
@@ -16054,6 +16067,7 @@ button:disabled {
 }
 
 .footer-area {
+  background-color: #e0e0e0;
   position: relative;
 }
 .footer-area.ml-10 {
@@ -19104,6 +19118,28 @@ button:disabled {
   color: #fff;
   background-color: #3d34b8;
 }
+.pro-pagination-style ul li .prev-disabled,
+.pro-pagination-style ul li .next-disabled {
+  cursor: default;
+  font-size: 16px;
+  color: #3d34b8;
+  background: none;
+  box-shadow: none;
+}
+.pro-pagination-style ul li .prev-disabled:hover,
+.pro-pagination-style ul li .next-disabled:hover {
+  color: #a3a3a3;
+  background-color: #cfcfcf;
+}
+.pro-pagination-style ul li .active {
+  cursor: default;
+  color: #fff;
+  background-color: #3d34b8;
+  box-shadow: none;
+}
+.pro-pagination-style ul li .active:hover {
+  background-color: #333;
+}
 .pro-pagination-style ul li a.active {
   color: #fff;
   background-color: #3d34b8;
@@ -19123,6 +19159,18 @@ button:disabled {
 .pro-pagination-style ul li a.next:hover {
   color: #fff;
   background-color: #3d34b8;
+}
+.pro-pagination-style ul li a.prev-disabled,
+.pro-pagination-style ul li a.next-disabled {
+  font-size: 17px;
+  color: #3d34b8;
+  background-color: #cfcfcf;
+  box-shadow: none;
+}
+.pro-pagination-style ul li a.prev-disabled:hover,
+.pro-pagination-style ul li a.next-disabled:hover {
+  color: #000;
+  background-color: #cfcfcf;
 }
 .pro-pagination-style ul li.page-item.active .page-link {
   --bs-pagination-active-color: #ffffff;

@@ -109,7 +109,7 @@ const Article = () => {
     };
 
     // console.log("user.uid", user.uid);
-    console.log("articleData", articleData);
+    // console.log("articleData", articleData);
     // // console.log("articleData?.owner_Id", articleData?.owner_Id);
 
     return (

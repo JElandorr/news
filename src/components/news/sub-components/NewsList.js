@@ -9,7 +9,7 @@ const NewsList = ({ articles }) => {
     return (
         <>
             {articles === null ||
-                (articles.length <= 0 && (
+                (articles?.length <= 0 && (
                     <p className="text-center" style={{ fontSize: "24px" }}>
                         В този раздел още няма статии!
                     </p>
