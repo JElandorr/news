@@ -21740,6 +21740,40 @@ h3.cart-page-title {
     color: #fff;
   }
 }
+.login-register-wrapper .login-form-container .login-register-form form .button-box.login button {
+  background-color: #f2f2f2;
+  border: medium none;
+  color: #333;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  padding: 11px 30px;
+  text-transform: uppercase;
+  transition: all 0.3s ease 0s;
+}
+.login-register-wrapper .login-form-container .login-register-form form .button-box.login button:hover {
+  background-color: #3d34b8;
+  color: #fff;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .login-register-wrapper .login-form-container .login-register-form form .button-box.login button {
+    background-color: #3d34b8;
+    color: #fff;
+  }
+}
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+  .login-register-wrapper .login-form-container .login-register-form form .button-box.login button {
+    background-color: #3d34b8;
+    color: #fff;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .login-register-wrapper .login-form-container .login-register-form form .button-box.login button {
+    background-color: #3d34b8;
+    color: #fff;
+  }
+}
 .login-register-wrapper .login-form-container .login-register-form form .error {
   color: red;
   font-size: 18px;
