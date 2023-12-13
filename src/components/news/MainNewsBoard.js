@@ -108,6 +108,7 @@ const MainNewsBoard = () => {
                             <div className="row">
                                 {/* <div className="col-lg-10"> */}
                                 <div className="col-lg-12">
+                                    {collectionError && <p>{collectionError}</p>}
                                     {/* <div className="mr-20"> */}
                                     <div className="row">
                                         <NewsList articles={currentItems} />

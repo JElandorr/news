@@ -136,14 +136,14 @@ const Article = () => {
                                             {!deleteConfirmation ? (
                                                 <div className="row edit-delete-btn-holder">
                                                     <Link
-                                                        className="col-lg-4 col-md-4 col-sm-4 col-xs-12 edit"
+                                                        className="col-lg-2 col-md-3 col-sm-4 col-xs-12 edit"
                                                         to={`/update-article/${articleData.slug}`}
                                                         state={{ article: articleData }}
                                                     >
                                                         update article
                                                     </Link>
                                                     <Link
-                                                        className="col-lg-4 col-md-4 col-sm-4 col-xs-12  delete"
+                                                        className="col-lg-2 col-md-3 col-sm-4 col-xs-12  delete"
                                                         to={`#`}
                                                         onClick={(e) => handleDeleteArticle(e, true)}
                                                     >
@@ -153,14 +153,14 @@ const Article = () => {
                                             ) : (
                                                 <div className="row edit-delete-btn-holder">
                                                     <Link
-                                                        className="col-lg-4 col-md-4 col-sm-4 col-xs-12  delete"
+                                                        className="col-lg-2 col-md-3 col-sm-4 col-xs-12  delete"
                                                         to={`#`}
                                                         onClick={(e) => handleDeleteArticleConfirm(e)}
                                                     >
                                                         delete
                                                     </Link>
                                                     <Link
-                                                        className="col-lg-4 col-md-4 col-sm-4 col-xs-12  edit"
+                                                        className="col-lg-2 col-md-3 col-sm-4 col-xs-12  edit"
                                                         to={`#`}
                                                         onClick={(e) => handleDeleteArticle(e, false)}
                                                     >
