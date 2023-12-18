@@ -6,6 +6,7 @@ const BlogPagination = ({ currentPage, totalItems, itemsPerPage, handlePageClick
     }
 
     const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
+    const pagesOffset = 2;
 
     return (
         <div className="pro-pagination-style text-center mt-20">
@@ -21,15 +22,25 @@ const BlogPagination = ({ currentPage, totalItems, itemsPerPage, handlePageClick
                         </button>
                     )}
                 </li>
-                {pages.map((page) => (
-                    <li key={page}>
-                        {currentPage === page ? (
-                            <button className="active">{page}</button>
-                        ) : (
-                            <button onClick={(e) => handlePageClick(e, page)}>{page}</button>
-                        )}
-                    </li>
-                ))}
+                {pages.map((page) => {
+                    if (page === currentPage) {
+                        return (
+                            <li key={page}>
+                                <button className="active">{page}</button>
+                            </li>
+                        );
+                    }
+
+                    if (page < currentPage + pagesOffset + 1 && page > currentPage - pagesOffset - 1) {
+                        return (
+                            <li key={page}>
+                                <button onClick={(e) => handlePageClick(e, page)}>{page}</button>
+                            </li>
+                        );
+                    }
+
+                    return null;
+                })}
                 <li>
                     {currentPage === totalPages ? (
                         <button className="next-disabled">

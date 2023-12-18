@@ -49,7 +49,7 @@ const MyArticles = () => {
     }
 
     // Add state for current page and items per page
-    const itemsPerPage = 6;
+    const itemsPerPage = 3;
 
     // Calculate the articles for the current page
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -81,7 +81,7 @@ const MyArticles = () => {
                                 <div className="col-lg-12">
                                     <div className="mr-20">
                                         <div className="row">
-                                            <NewsList articles={articles} />
+                                            <NewsList articles={currentItems    } />
                                         </div>
                                         {articles && articles?.length > itemsPerPage ? (
                                             <NewsPagination

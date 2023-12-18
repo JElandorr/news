@@ -18,6 +18,7 @@ const MainNewsBoard = () => {
     const [articles, setArticles] = useState(null);
     const [currentCategory, setCurrentCategory] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
+    const [currentPathname, setCurrentPathname] = useState("");
     const { pathname } = useLocation();
 
     const { documents, collectionError, isLoading } = useCollection("articles", {
@@ -38,6 +39,11 @@ const MainNewsBoard = () => {
             }
             setArticles(news);
         }
+        if (pathname !== currentPathname) {
+            setCurrentPage(1);
+            setCurrentPathname(pathname);
+        }
+
         return () => {
             if (documents) {
                 setArticles(null);
@@ -48,10 +54,6 @@ const MainNewsBoard = () => {
     if (collectionError) {
         return <p>{collectionError}</p>;
     }
-
-    // console.log("articles", articles);
-
-    // console.log("documents", documents);
 
     let breadcrumbPages = [];
 
@@ -73,7 +75,7 @@ const MainNewsBoard = () => {
     }
 
     // Add state for current page and items per page
-    const itemsPerPage = 6;
+    const itemsPerPage = 3;
 
     // Calculate the articles for the current page
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -85,11 +87,6 @@ const MainNewsBoard = () => {
         e.preventDefault();
         setCurrentPage(pageNumber);
     };
-
-    // console.log("currentPage", currentPage);
-    // console.log("totalItems", articles?.length);
-    // console.log("itemsPerPage", itemsPerPage);
-    // console.log("articles", articles);
 
     return (
         <>
