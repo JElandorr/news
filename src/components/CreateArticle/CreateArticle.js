@@ -116,16 +116,32 @@ const CreateArticle = () => {
             setArticleWarnings(validatedArticle);
             return;
         } else {
-            // const ref = doc(projectNewsFirestore, "articles", article.id);
-            // await updateDoc(ref, { ...article, slug: createSlug(article.title) });
-            
-            await updateDocument(article.id, { ...article, slug: createSlug(article.title) });
-            
-            setArticle(articleIni);
-            window.scrollTo({ top: 0, behavior: "smooth" });
-            setArticleWarnings({});
-            setUpdateMode(false);
-            navigate("/my-articles");
+            const ref = doc(projectNewsFirestore, "articles", article.id);
+            await updateDoc(ref, { ...article, slug: createSlug(article.title) })
+                .then((res) => {
+                    console.log(res);
+                    setArticle(articleIni);
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                    setArticleWarnings({});
+                    setUpdateMode(false);
+                    navigate("/my-articles");
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+
+            // await updateDocument(article.id, { ...article, slug: createSlug(article.title) })
+            //     .then((res) => {
+            //         console.log(res);
+            //         setArticle(articleIni);
+            //         window.scrollTo({ top: 0, behavior: "smooth" });
+            //         setArticleWarnings({});
+            //         setUpdateMode(false);
+            //         navigate("/my-articles");
+            //     })
+            //     .catch((error) => {
+            //         console.log(error);
+            //     });
         }
     };
 
