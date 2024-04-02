@@ -183,7 +183,7 @@ const CreateArticle = () => {
     // console.log(user);
     // console.log(response);
     // console.log("newImageUrl", newImageUrl);
-    console.log("article", article);
+    // console.log("article", article);
 
     return (
         <Fragment>

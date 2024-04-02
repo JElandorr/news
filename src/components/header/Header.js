@@ -37,7 +37,7 @@ const Header = ({ layout, top, borderStyle, headerPaddingClass, headerPositionCl
     };
 
     const handleSearchIconClick = (e) => {
-        console.log("handleSearchIconClick");
+        // console.log("handleSearchIconClick");
         e.preventDefault();
         setShowSearchMenu((OldState) => !OldState);
     };

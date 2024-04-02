@@ -12,7 +12,7 @@ const Logout = () => {
 
     const handleLogoutSubmit = async (e) => {
         e.preventDefault();
-        console.log("handleLogoutSubmit");
+        // console.log("handleLogoutSubmit");
         logout();
         navigate("/");
     };
